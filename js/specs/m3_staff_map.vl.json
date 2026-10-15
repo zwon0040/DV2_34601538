@@ -295,8 +295,7 @@
         {
           "mark": {
             "type": "line",
-            "color": "#5E4FA2",
-            "clip": true
+            "color": "#5E4FA2"
           },
           "encoding": {
             "x": {
@@ -320,22 +319,7 @@
               "type": "quantitative",
               "title": "Staff compared with 2014 (2014 = 100)",
               "scale": {
-                "domain": [
-                  0,
-                  250
-                ],
-                "nice": false
-              },
-              "axis": {
-                "values": [
-                  0,
-                  50,
-                  100,
-                  150,
-                  200,
-                  250
-                ],
-                "grid": true
+                "zero": false
               }
             },
             "detail": {
@@ -372,8 +356,7 @@
             "filled": true,
             "fill": "#EDE1E5",
             "stroke": "#1F2933",
-            "strokeWidth": 1.5,
-            "clip": true
+            "strokeWidth": 1.5
           },
           "encoding": {
             "x": {
@@ -402,10 +385,10 @@
         {
           "transform": [
             {
-              "filter": "datum.year === 2020 && datum.name === 'Perak'"
+              "filter": "datum.year === 2020 && (datum.name === 'Perlis' || datum.name === 'Perak')"
             },
             {
-              "calculate": "'Perak: 11,995 \u2192 6,566'",
+              "calculate": "datum.name + (datum.name === 'Perlis' ? ': 1,994 \u2192 10,665' : ': 11,995 \u2192 6,566')",
               "as": "lab"
             }
           ],
@@ -425,37 +408,6 @@
             "y": {
               "field": "index",
               "type": "quantitative"
-            },
-            "text": {
-              "field": "lab"
-            }
-          }
-        },
-        {
-          "data": {
-            "values": [
-              {
-                "x": 2020,
-                "lab": "\u25b2 Perlis 2020: 1,994 \u2192 10,665 (nurses 914 \u2192 9,465), off the scale"
-              }
-            ]
-          },
-          "mark": {
-            "type": "text",
-            "align": "right",
-            "dx": 14,
-            "dy": 0,
-            "fontSize": 12,
-            "fontWeight": 600,
-            "color": "#1F2933"
-          },
-          "encoding": {
-            "x": {
-              "field": "x",
-              "type": "quantitative"
-            },
-            "y": {
-              "value": 9
             },
             "text": {
               "field": "lab"

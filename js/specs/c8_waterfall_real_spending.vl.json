@@ -193,7 +193,7 @@
           "as": "step"
         },
         {
-          "calculate": "(datum.change >= 0 ? '+' : '\u2212') + format(abs(datum.change), '.1f')",
+          "calculate": "(datum.change >= 0 ? '+' : '−') + format(abs(datum.change), '.1f')",
           "as": "label"
         },
         {
@@ -232,9 +232,11 @@
                 ]
               },
               "legend": {
-                "orient": "top-left",
+                "orient": "top",
+                "direction": "horizontal",
                 "symbolType": "square",
-                "symbolSize": 160
+                "symbolSize": 160,
+                "title": null
               }
             },
             "tooltip": [
@@ -266,73 +268,6 @@
             },
             "text": {
               "field": "label"
-            }
-          }
-        }
-      ]
-    },
-    {
-      "data": {
-        "values": [
-          {
-            "step": "2020",
-            "t": "COVID-19 years"
-          },
-          {
-            "step": "2022",
-            "t": "The only fall"
-          }
-        ]
-      },
-      "layer": [
-        {
-          "transform": [
-            {
-              "filter": "datum.step === '2020'"
-            }
-          ],
-          "mark": {
-            "type": "text",
-            "dx": 42,
-            "fontSize": 12,
-            "fontWeight": 700,
-            "color": "#1F2933"
-          },
-          "encoding": {
-            "x": {
-              "field": "step",
-              "type": "nominal"
-            },
-            "y": {
-              "value": 32
-            },
-            "text": {
-              "field": "t"
-            }
-          }
-        },
-        {
-          "transform": [
-            {
-              "filter": "datum.step === '2022'"
-            }
-          ],
-          "mark": {
-            "type": "text",
-            "fontSize": 12,
-            "fontWeight": 700,
-            "color": "#1F2933"
-          },
-          "encoding": {
-            "x": {
-              "field": "step",
-              "type": "nominal"
-            },
-            "y": {
-              "value": 32
-            },
-            "text": {
-              "field": "t"
             }
           }
         }
