@@ -1,0 +1,342 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "C8. Waterfall: how Malaysia's total health spending changed year by year from 2019 to 2024, in constant 2024 ringgit. Increases and the 2022 fall both appear.",
+  "width": 590,
+  "height": 330,
+  "data": {
+    "url": "data/mnha_national_2011_2024.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "year": "number",
+        "teh_constant_2024_rm_mil": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.year >= 2019"
+    },
+    {
+      "calculate": "datum.teh_constant_2024_rm_mil / 1000",
+      "as": "bn"
+    },
+    {
+      "window": [
+        {
+          "op": "lag",
+          "field": "bn",
+          "as": "prev"
+        },
+        {
+          "op": "first_value",
+          "field": "bn",
+          "as": "start"
+        }
+      ],
+      "sort": [
+        {
+          "field": "year"
+        }
+      ],
+      "frame": [
+        null,
+        null
+      ]
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "step",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "2019 total",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2024 total"
+      ],
+      "axis": {
+        "labelAngle": 0,
+        "domain": false,
+        "ticks": false,
+        "labelExpr": "split(datum.value, ' ')"
+      }
+    }
+  },
+  "layer": [
+    {
+      "transform": [
+        {
+          "filter": "datum.year === 2019 || datum.year === 2024"
+        },
+        {
+          "calculate": "datum.year + ' total'",
+          "as": "step"
+        },
+        {
+          "calculate": "0",
+          "as": "bottom"
+        },
+        {
+          "calculate": "datum.bn",
+          "as": "top"
+        },
+        {
+          "calculate": "'RM' + format(datum.bn, '.1f') + ' bn'",
+          "as": "label"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "bar",
+            "color": "#3A5FCD",
+            "width": {
+              "band": 0.7
+            }
+          },
+          "encoding": {
+            "y": {
+              "field": "bottom",
+              "type": "quantitative",
+              "title": "Total health spending (RM billion, 2024 prices)",
+              "scale": {
+                "domain": [
+                  0,
+                  100
+                ]
+              }
+            },
+            "y2": {
+              "field": "top"
+            },
+            "tooltip": [
+              {
+                "field": "step",
+                "type": "nominal",
+                "title": "Total"
+              },
+              {
+                "field": "bn",
+                "type": "quantitative",
+                "title": "RM billion (2024 prices)",
+                "format": ".1f"
+              }
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "dy": -8,
+            "fontSize": 12,
+            "fontWeight": 600,
+            "color": "#1F2933"
+          },
+          "encoding": {
+            "y": {
+              "field": "top",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "label"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year >= 2020"
+        },
+        {
+          "calculate": "datum.bn - datum.prev",
+          "as": "change"
+        },
+        {
+          "calculate": "datum.change >= 0 ? 'Increase' : 'Decrease'",
+          "as": "direction"
+        },
+        {
+          "window": [
+            {
+              "op": "sum",
+              "field": "change",
+              "as": "running"
+            }
+          ],
+          "sort": [
+            {
+              "field": "year"
+            }
+          ],
+          "frame": [
+            null,
+            0
+          ]
+        },
+        {
+          "calculate": "datum.start + datum.running",
+          "as": "top"
+        },
+        {
+          "calculate": "datum.top - datum.change",
+          "as": "bottom"
+        },
+        {
+          "calculate": "'' + datum.year",
+          "as": "step"
+        },
+        {
+          "calculate": "(datum.change >= 0 ? '+' : '\u2212') + format(abs(datum.change), '.1f')",
+          "as": "label"
+        },
+        {
+          "calculate": "max(datum.top, datum.bottom)",
+          "as": "high"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "bar",
+            "width": {
+              "band": 0.7
+            }
+          },
+          "encoding": {
+            "y": {
+              "field": "bottom",
+              "type": "quantitative"
+            },
+            "y2": {
+              "field": "top"
+            },
+            "color": {
+              "field": "direction",
+              "type": "nominal",
+              "title": "Change in the year",
+              "scale": {
+                "domain": [
+                  "Increase",
+                  "Decrease"
+                ],
+                "range": [
+                  "#A8BAEC",
+                  "#52606D"
+                ]
+              },
+              "legend": {
+                "orient": "top-left",
+                "symbolType": "square",
+                "symbolSize": 160
+              }
+            },
+            "tooltip": [
+              {
+                "field": "step",
+                "type": "nominal",
+                "title": "Year"
+              },
+              {
+                "field": "change",
+                "type": "quantitative",
+                "title": "Change (RM bn, 2024 prices)",
+                "format": "+.1f"
+              }
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "dy": -8,
+            "fontSize": 12,
+            "color": "#1F2933"
+          },
+          "encoding": {
+            "y": {
+              "field": "high",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "label"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "step": "2020",
+            "t": "COVID-19 years"
+          },
+          {
+            "step": "2022",
+            "t": "The only fall"
+          }
+        ]
+      },
+      "layer": [
+        {
+          "transform": [
+            {
+              "filter": "datum.step === '2020'"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "dx": 42,
+            "fontSize": 12,
+            "fontWeight": 700,
+            "color": "#1F2933"
+          },
+          "encoding": {
+            "x": {
+              "field": "step",
+              "type": "nominal"
+            },
+            "y": {
+              "value": 32
+            },
+            "text": {
+              "field": "t"
+            }
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": "datum.step === '2022'"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "fontSize": 12,
+            "fontWeight": 700,
+            "color": "#1F2933"
+          },
+          "encoding": {
+            "x": {
+              "field": "step",
+              "type": "nominal"
+            },
+            "y": {
+              "value": 32
+            },
+            "text": {
+              "field": "t"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

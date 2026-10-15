@@ -1,0 +1,275 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "C11. Marimekko chart, 2024. Column width = share of all health spending at each type of provider. Column height is split into the share paid by the public sector (government) and by the private sector (households, insurers, employers).",
+  "width": 580,
+  "height": 300,
+  "data": {
+    "url": "data/mnha_providers_2011_2024.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "year": "number",
+        "total_rm_mil": "number",
+        "public_rm_mil": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.year === 2024 && indexof(['Nursing homes', 'Overseas providers', 'Labs, imaging, ambulance'], datum.short_label) < 0"
+    },
+    {
+      "calculate": "datum.short_label === 'Administration and insurers' ? 'Admin and insurers' : datum.short_label === 'Pharmacies and medical shops' ? 'Pharmacies' : datum.short_label === 'Public health programmes' ? 'Public health' : datum.short_label",
+      "as": "name"
+    },
+    {
+      "calculate": "datum.total_rm_mil - datum.public_rm_mil",
+      "as": "private_rm_mil"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "sum",
+          "field": "total_rm_mil",
+          "as": "all"
+        }
+      ]
+    },
+    {
+      "window": [
+        {
+          "op": "sum",
+          "field": "total_rm_mil",
+          "as": "cum"
+        }
+      ],
+      "sort": [
+        {
+          "field": "total_rm_mil",
+          "order": "descending"
+        }
+      ],
+      "frame": [
+        null,
+        0
+      ]
+    },
+    {
+      "calculate": "(datum.cum - datum.total_rm_mil) / datum.all",
+      "as": "x0"
+    },
+    {
+      "calculate": "datum.cum / datum.all",
+      "as": "x1"
+    },
+    {
+      "calculate": "datum.public_rm_mil / datum.total_rm_mil",
+      "as": "public_share"
+    },
+    {
+      "fold": [
+        "public_rm_mil",
+        "private_rm_mil"
+      ],
+      "as": [
+        "payer_key",
+        "rm_mil"
+      ]
+    },
+    {
+      "calculate": "datum.payer_key === 'public_rm_mil' ? 'Public (government)' : 'Private (households, insurers, employers)'",
+      "as": "payer"
+    },
+    {
+      "calculate": "datum.payer_key === 'public_rm_mil' ? 0 : datum.public_share",
+      "as": "y0"
+    },
+    {
+      "calculate": "datum.payer_key === 'public_rm_mil' ? datum.public_share : 1",
+      "as": "y1"
+    },
+    {
+      "calculate": "datum.rm_mil / datum.total_rm_mil",
+      "as": "share"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "#EDE1E5",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "x0",
+          "type": "quantitative",
+          "title": "Column width = share of all health spending, 2024",
+          "scale": {
+            "domain": [
+              0,
+              1
+            ]
+          },
+          "axis": {
+            "orient": "top",
+            "format": ".0%",
+            "values": [
+              0,
+              0.2,
+              0.4,
+              0.6,
+              0.8,
+              1
+            ],
+            "labels": true,
+            "ticks": true,
+            "domain": true,
+            "grid": false,
+            "titleFontWeight": 600,
+            "labelFlush": true
+          }
+        },
+        "x2": {
+          "field": "x1"
+        },
+        "y": {
+          "field": "y0",
+          "type": "quantitative",
+          "title": "Share paid",
+          "scale": {
+            "domain": [
+              0,
+              1
+            ]
+          },
+          "axis": {
+            "format": ".0%",
+            "tickCount": 5,
+            "grid": false
+          }
+        },
+        "y2": {
+          "field": "y1"
+        },
+        "color": {
+          "field": "payer",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Public (government)",
+              "Private (households, insurers, employers)"
+            ],
+            "range": [
+              "#007A5E",
+              "#A69A8E"
+            ]
+          },
+          "legend": {
+            "orient": "top",
+            "direction": "horizontal",
+            "symbolType": "square",
+            "symbolSize": 160,
+            "labelLimit": 300
+          }
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "type": "nominal",
+            "title": "Where money was spent"
+          },
+          {
+            "field": "payer",
+            "type": "nominal",
+            "title": "Paid by"
+          },
+          {
+            "field": "rm_mil",
+            "type": "quantitative",
+            "title": "RM million",
+            "format": ",.0f"
+          },
+          {
+            "field": "share",
+            "type": "quantitative",
+            "title": "Share of this column",
+            "format": ".0%"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.payer_key === 'public_rm_mil'"
+        },
+        {
+          "calculate": "(datum.x0 + datum.x1) / 2",
+          "as": "xm"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "angle": 300,
+        "align": "right",
+        "baseline": "middle",
+        "dx": 2,
+        "fontSize": 11,
+        "fontWeight": 700,
+        "color": "#1F2933"
+      },
+      "encoding": {
+        "x": {
+          "field": "xm",
+          "type": "quantitative"
+        },
+        "y": {
+          "value": 312
+        },
+        "text": {
+          "field": "name"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.x1 - datum.x0 > 0.07"
+        },
+        {
+          "calculate": "(datum.x0 + datum.x1) / 2",
+          "as": "xm"
+        },
+        {
+          "calculate": "(datum.y0 + datum.y1) / 2",
+          "as": "ym"
+        },
+        {
+          "calculate": "format(datum.share, '.0%')",
+          "as": "pct"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 13,
+        "fontWeight": 700,
+        "color": "#FFFFFF"
+      },
+      "encoding": {
+        "x": {
+          "field": "xm",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "ym",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "pct"
+        }
+      }
+    }
+  ]
+}

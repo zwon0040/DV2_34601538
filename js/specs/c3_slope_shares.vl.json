@@ -1,0 +1,232 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "C3. Slope chart: each payer's share of total health spending, 2011 vs 2024.",
+  "width": 340,
+  "height": 320,
+  "data": {
+    "url": "data/mnha_financing_sources_2011_2024.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "year": "number",
+        "rm_mil": "number",
+        "pct_teh": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.year === 2011 || datum.year === 2024"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "sum",
+          "field": "pct_teh",
+          "as": "share"
+        }
+      ],
+      "groupby": [
+        "year",
+        "payer_group"
+      ]
+    },
+    {
+      "calculate": "datum.year === 2024 && datum.payer_group === 'Private insurance' ? 0.9 : datum.year === 2024 && datum.payer_group === 'Other government' ? -0.9 : 0",
+      "as": "nudge"
+    },
+    {
+      "calculate": "datum.share + datum.nudge",
+      "as": "label_y"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "title": null,
+      "scale": {
+        "padding": 0.1
+      },
+      "axis": {
+        "labelFontSize": 13,
+        "labelFontWeight": 600,
+        "domain": false,
+        "ticks": false,
+        "orient": "top",
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "share",
+      "type": "quantitative",
+      "title": null,
+      "scale": {
+        "domain": [
+          0,
+          50
+        ]
+      },
+      "axis": null
+    },
+    "color": {
+      "field": "payer_group",
+      "type": "nominal",
+      "legend": null,
+      "scale": {
+        "domain": [
+          "Ministry of Health",
+          "Other government",
+          "Households (out of pocket)",
+          "Private insurance",
+          "Employers and others"
+        ],
+        "range": [
+          "#007A5E",
+          "#3DB58F",
+          "#E69F00",
+          "#C065A6",
+          "#7D3C6E"
+        ]
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2.5
+      },
+      "encoding": {
+        "detail": {
+          "field": "payer_group"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 70,
+        "opacity": 1
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "payer_group",
+            "type": "nominal",
+            "title": "Paid by"
+          },
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "share",
+            "type": "quantitative",
+            "title": "Share (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year === 2024"
+        },
+        {
+          "calculate": "format(datum.share, '.1f') + '%  ' + datum.payer_group",
+          "as": "label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "fontSize": 12,
+        "color": "#1F2933"
+      },
+      "encoding": {
+        "text": {
+          "field": "label"
+        },
+        "color": {
+          "value": "#1F2933"
+        },
+        "y": {
+          "field": "label_y",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year === 2011"
+        },
+        {
+          "calculate": "format(datum.share, '.1f') + '%'",
+          "as": "label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -10,
+        "fontSize": 12,
+        "color": "#1F2933"
+      },
+      "encoding": {
+        "text": {
+          "field": "label"
+        },
+        "color": {
+          "value": "#1F2933"
+        },
+        "y": {
+          "field": "label_y",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "year": 2024,
+            "share": 35.35,
+            "t": "+6.9 points"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "dx": -150,
+        "dy": -14,
+        "fontSize": 13,
+        "fontWeight": 700,
+        "color": "#1F2933",
+        "angle": -9
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "share",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "t"
+        },
+        "color": {
+          "value": "#1F2933"
+        }
+      }
+    }
+  ]
+}

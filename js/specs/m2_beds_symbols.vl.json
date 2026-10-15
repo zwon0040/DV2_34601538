@@ -1,0 +1,279 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Proportional symbol map of public-sector hospital beds by state in 2022. Circle area shows the number of beds.",
+  "width": 560,
+  "height": 270,
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "geo/malaysia_states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "states"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#CAD6E2",
+        "stroke": "#EDE1E5",
+        "strokeWidth": 1
+      }
+    },
+    {
+      "data": {
+        "url": "data/hospital_beds_state.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "beds": "number",
+            "date": "date"
+          }
+        }
+      },
+      "transform": [
+        {
+          "filter": "utcyear(datum.date) === 2022 && datum.state !== 'Malaysia'"
+        },
+        {
+          "pivot": "type",
+          "value": "beds",
+          "groupby": [
+            "state"
+          ]
+        },
+        {
+          "calculate": "datum.all - datum.hospital_non_moh",
+          "as": "moh_beds"
+        },
+        {
+          "lookup": "state",
+          "from": {
+            "data": {
+              "url": "geo/malaysia_state_label_points.csv",
+              "format": {
+                "type": "csv",
+                "parse": {
+                  "longitude": "number",
+                  "latitude": "number"
+                }
+              }
+            },
+            "key": "state",
+            "fields": [
+              "longitude",
+              "latitude"
+            ]
+          }
+        },
+        {
+          "lookup": "state",
+          "from": {
+            "data": {
+              "url": "data/population_state_2022.csv",
+              "format": {
+                "type": "csv",
+                "parse": {
+                  "population_thousands": "number"
+                }
+              }
+            },
+            "key": "state",
+            "fields": [
+              "population_thousands"
+            ]
+          }
+        },
+        {
+          "calculate": "datum.all / datum.population_thousands * 10",
+          "as": "per_10k"
+        },
+        {
+          "calculate": "replace(datum.state, 'W.P. ', '')",
+          "as": "name"
+        },
+        {
+          "calculate": "datum.per_10k < 12 ? 'Under 12' : datum.per_10k < 15 ? '12 to 15' : datum.per_10k < 20 ? '15 to 20' : '20 or more'",
+          "as": "rate_class"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "circle",
+            "opacity": 0.9,
+            "stroke": "#EDE1E5",
+            "strokeWidth": 1.5
+          },
+          "encoding": {
+            "longitude": {
+              "field": "longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "latitude",
+              "type": "quantitative"
+            },
+            "size": {
+              "field": "all",
+              "type": "quantitative",
+              "title": "Public hospital beds",
+              "scale": {
+                "domain": [
+                  0,
+                  8000
+                ],
+                "range": [
+                  0,
+                  1400
+                ]
+              },
+              "legend": {
+                "orient": "none",
+                "legendX": 455,
+                "legendY": 128,
+                "direction": "vertical",
+                "values": [
+                  1000,
+                  5000
+                ],
+                "symbolFillColor": "#9AA5B1",
+                "symbolOpacity": 0.85,
+                "symbolStrokeColor": "#EDE1E5",
+                "titleFontSize": 11,
+                "labelFontSize": 11,
+                "rowPadding": 2
+              }
+            },
+            "order": {
+              "field": "all",
+              "sort": "descending"
+            },
+            "tooltip": [
+              {
+                "field": "name",
+                "type": "nominal",
+                "title": "State"
+              },
+              {
+                "field": "all",
+                "type": "quantitative",
+                "title": "Public hospital beds",
+                "format": ","
+              },
+              {
+                "field": "moh_beds",
+                "type": "quantitative",
+                "title": "of which Ministry of Health",
+                "format": ","
+              },
+              {
+                "field": "per_10k",
+                "type": "quantitative",
+                "title": "Beds per 10,000 people",
+                "format": ".1f"
+              }
+            ],
+            "color": {
+              "field": "rate_class",
+              "type": "ordinal",
+              "title": "Beds per 10,000 people",
+              "scale": {
+                "domain": [
+                  "Under 12",
+                  "12 to 15",
+                  "15 to 20",
+                  "20 or more"
+                ],
+                "range": [
+                  "#A6DCC8",
+                  "#5DBE9C",
+                  "#1E9573",
+                  "#00614A"
+                ]
+              },
+              "legend": {
+                "orient": "none",
+                "legendX": 455,
+                "legendY": 200,
+                "direction": "vertical",
+                "symbolType": "circle",
+                "symbolSize": 90,
+                "titleFontSize": 11,
+                "labelFontSize": 11,
+                "rowPadding": 1
+              }
+            }
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": "datum.name === 'Selangor'"
+            },
+            {
+              "calculate": "datum.name + ': ' + format(datum.all, ',') + ' beds, ' + format(datum.per_10k, '.1f') + ' per 10,000 people'",
+              "as": "label"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "dx": 26,
+            "fontSize": 12,
+            "fontWeight": 600,
+            "color": "#1F2933"
+          },
+          "encoding": {
+            "longitude": {
+              "field": "longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "latitude",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "label"
+            }
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": "datum.name === 'Labuan'"
+            },
+            {
+              "calculate": "datum.name + ': ' + format(datum.all, ',') + ' beds, ' + format(datum.per_10k, '.1f') + ' per 10,000 people'",
+              "as": "label"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "align": "right",
+            "dx": -12,
+            "fontSize": 12,
+            "fontWeight": 600,
+            "color": "#1F2933",
+            "dy": 18
+          },
+          "encoding": {
+            "longitude": {
+              "field": "longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "latitude",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "label"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

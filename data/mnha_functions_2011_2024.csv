@@ -1,0 +1,155 @@
+year,code,function,plain_label,total_rm_mil,pct_teh,public_rm_mil
+2011,MHC.1,Curative care,Treating illness,23238,64.63,12950
+2012,MHC.1,Curative care,Treating illness,26172,66.35,15021
+2013,MHC.1,Curative care,Treating illness,27191,65.29,15013
+2014,MHC.1,Curative care,Treating illness,31405,67.13,17719
+2015,MHC.1,Curative care,Treating illness,32947,65.81,18722
+2016,MHC.1,Curative care,Treating illness,34656,66.94,19143
+2017,MHC.1,Curative care,Treating illness,37882,67.43,20752
+2018,MHC.1,Curative care,Treating illness,40416,67.04,22395
+2019,MHC.1,Curative care,Treating illness,42665,66.58,23093
+2020,MHC.1,Curative care,Treating illness,42675,62.53,22260
+2021,MHC.1,Curative care,Treating illness,45002,57.25,23709
+2022,MHC.1,Curative care,Treating illness,50167,64.44,25441
+2023,MHC.1,Curative care,Treating illness,52068,62.85,25404
+2024,MHC.1,Curative care,Treating illness,56554,62.96,27270
+2011,MHC.2,Rehabilitative care,Rehabilitation,1,0.0,0
+2012,MHC.2,Rehabilitative care,Rehabilitation,,0.0,0
+2013,MHC.2,Rehabilitative care,Rehabilitation,,,0
+2014,MHC.2,Rehabilitative care,Rehabilitation,,,0
+2015,MHC.2,Rehabilitative care,Rehabilitation,,,0
+2016,MHC.2,Rehabilitative care,Rehabilitation,,,0
+2017,MHC.2,Rehabilitative care,Rehabilitation,,,0
+2018,MHC.2,Rehabilitative care,Rehabilitation,,,0
+2019,MHC.2,Rehabilitative care,Rehabilitation,,,0
+2020,MHC.2,Rehabilitative care,Rehabilitation,,,0
+2021,MHC.2,Rehabilitative care,Rehabilitation,,,0
+2022,MHC.2,Rehabilitative care,Rehabilitation,115,0.15,115
+2023,MHC.2,Rehabilitative care,Rehabilitation,193,0.23,193
+2024,MHC.2,Rehabilitative care,Rehabilitation,182,0.2,182
+2011,MHC.3,Long-term care,Long-term care,33,0.09,19
+2012,MHC.3,Long-term care,Long-term care,41,0.1,23
+2013,MHC.3,Long-term care,Long-term care,26,0.06,25
+2014,MHC.3,Long-term care,Long-term care,44,0.09,43
+2015,MHC.3,Long-term care,Long-term care,40,0.08,40
+2016,MHC.3,Long-term care,Long-term care,46,0.09,42
+2017,MHC.3,Long-term care,Long-term care,45,0.08,45
+2018,MHC.3,Long-term care,Long-term care,50,0.08,47
+2019,MHC.3,Long-term care,Long-term care,49,0.08,49
+2020,MHC.3,Long-term care,Long-term care,52,0.08,48
+2021,MHC.3,Long-term care,Long-term care,49,0.06,49
+2022,MHC.3,Long-term care,Long-term care,52,0.07,49
+2023,MHC.3,Long-term care,Long-term care,69,0.08,63
+2024,MHC.3,Long-term care,Long-term care,70,0.08,62
+2011,MHC.4,Ancillary services to health care,"Lab tests, imaging, ambulance",296,0.82,224
+2012,MHC.4,Ancillary services to health care,"Lab tests, imaging, ambulance",314,0.8,228
+2013,MHC.4,Ancillary services to health care,"Lab tests, imaging, ambulance",407,0.98,310
+2014,MHC.4,Ancillary services to health care,"Lab tests, imaging, ambulance",380,0.81,268
+2015,MHC.4,Ancillary services to health care,"Lab tests, imaging, ambulance",359,0.72,281
+2016,MHC.4,Ancillary services to health care,"Lab tests, imaging, ambulance",313,0.6,265
+2017,MHC.4,Ancillary services to health care,"Lab tests, imaging, ambulance",339,0.6,287
+2018,MHC.4,Ancillary services to health care,"Lab tests, imaging, ambulance",343,0.57,291
+2019,MHC.4,Ancillary services to health care,"Lab tests, imaging, ambulance",361,0.56,246
+2020,MHC.4,Ancillary services to health care,"Lab tests, imaging, ambulance",311,0.46,249
+2021,MHC.4,Ancillary services to health care,"Lab tests, imaging, ambulance",228,0.29,180
+2022,MHC.4,Ancillary services to health care,"Lab tests, imaging, ambulance",327,0.42,273
+2023,MHC.4,Ancillary services to health care,"Lab tests, imaging, ambulance",344,0.42,289
+2024,MHC.4,Ancillary services to health care,"Lab tests, imaging, ambulance",252,0.28,194
+2011,MHC.5,Medical goods,Medicines and medical goods,2242,6.24,107
+2012,MHC.5,Medical goods,Medicines and medical goods,2477,6.28,138
+2013,MHC.5,Medical goods,Medicines and medical goods,2730,6.56,169
+2014,MHC.5,Medical goods,Medicines and medical goods,3298,7.05,183
+2015,MHC.5,Medical goods,Medicines and medical goods,3927,7.84,287
+2016,MHC.5,Medical goods,Medicines and medical goods,4191,8.09,283
+2017,MHC.5,Medical goods,Medicines and medical goods,4404,7.84,304
+2018,MHC.5,Medical goods,Medicines and medical goods,5039,8.36,183
+2019,MHC.5,Medical goods,Medicines and medical goods,4572,7.13,172
+2020,MHC.5,Medical goods,Medicines and medical goods,4621,6.77,148
+2021,MHC.5,Medical goods,Medicines and medical goods,5455,6.94,236
+2022,MHC.5,Medical goods,Medicines and medical goods,6482,8.33,292
+2023,MHC.5,Medical goods,Medicines and medical goods,7837,9.46,335
+2024,MHC.5,Medical goods,Medicines and medical goods,8560,9.53,443
+2011,MHC.6,Preventive care,Prevention,1224,3.4,912
+2012,MHC.6,Preventive care,Prevention,1535,3.89,1104
+2013,MHC.6,Preventive care,Prevention,2375,5.7,1870
+2014,MHC.6,Preventive care,Prevention,2304,4.92,1729
+2015,MHC.6,Preventive care,Prevention,2860,5.71,1941
+2016,MHC.6,Preventive care,Prevention,2876,5.55,2004
+2017,MHC.6,Preventive care,Prevention,2971,5.29,2147
+2018,MHC.6,Preventive care,Prevention,3212,5.33,2347
+2019,MHC.6,Preventive care,Prevention,3980,6.21,3319
+2020,MHC.6,Preventive care,Prevention,5178,7.59,4521
+2021,MHC.6,Preventive care,Prevention,10932,13.91,10273
+2022,MHC.6,Preventive care,Prevention,5394,6.93,5083
+2023,MHC.6,Preventive care,Prevention,4717,5.69,4337
+2024,MHC.6,Preventive care,Prevention,5067,5.64,4612
+2011,MHC.7,Governance and health system and financing administration,Administration,3614,10.05,2147
+2012,MHC.7,Governance and health system and financing administration,Administration,3523,8.93,1894
+2013,MHC.7,Governance and health system and financing administration,Administration,3561,8.55,2217
+2014,MHC.7,Governance and health system and financing administration,Administration,4205,8.99,2894
+2015,MHC.7,Governance and health system and financing administration,Administration,4347,8.68,2776
+2016,MHC.7,Governance and health system and financing administration,Administration,3720,7.18,2004
+2017,MHC.7,Governance and health system and financing administration,Administration,4670,8.31,2964
+2018,MHC.7,Governance and health system and financing administration,Administration,4311,7.15,2734
+2019,MHC.7,Governance and health system and financing administration,Administration,5077,7.92,3614
+2020,MHC.7,Governance and health system and financing administration,Administration,5725,8.39,3875
+2021,MHC.7,Governance and health system and financing administration,Administration,6277,7.99,3792
+2022,MHC.7,Governance and health system and financing administration,Administration,5601,7.19,4152
+2023,MHC.7,Governance and health system and financing administration,Administration,7273,8.78,5768
+2024,MHC.7,Governance and health system and financing administration,Administration,7211,8.03,5433
+2011,MHR.1,Gross capital formation,Buildings and equipment,2430,6.76,2179
+2012,MHR.1,Gross capital formation,Buildings and equipment,2355,5.97,2038
+2013,MHR.1,Gross capital formation,Buildings and equipment,2089,5.02,1817
+2014,MHR.1,Gross capital formation,Buildings and equipment,1831,3.92,1488
+2015,MHR.1,Gross capital formation,Buildings and equipment,2173,4.34,1455
+2016,MHR.1,Gross capital formation,Buildings and equipment,2402,4.64,1433
+2017,MHR.1,Gross capital formation,Buildings and equipment,2405,4.28,1376
+2018,MHR.1,Gross capital formation,Buildings and equipment,3181,5.28,1656
+2019,MHR.1,Gross capital formation,Buildings and equipment,3884,6.06,1967
+2020,MHR.1,Gross capital formation,Buildings and equipment,6216,9.11,3932
+2021,MHR.1,Gross capital formation,Buildings and equipment,7755,9.87,5449
+2022,MHR.1,Gross capital formation,Buildings and equipment,6731,8.65,4718
+2023,MHR.1,Gross capital formation,Buildings and equipment,7162,8.64,4931
+2024,MHR.1,Gross capital formation,Buildings and equipment,8475,9.43,6023
+2011,MHR.2,Education and training of health personnel,Training health workers,2463,6.85,1584
+2012,MHR.2,Education and training of health personnel,Training health workers,2560,6.49,1407
+2013,MHR.2,Education and training of health personnel,Training health workers,2749,6.6,1288
+2014,MHR.2,Education and training of health personnel,Training health workers,2758,5.9,1430
+2015,MHR.2,Education and training of health personnel,Training health workers,2833,5.66,1413
+2016,MHR.2,Education and training of health personnel,Training health workers,2971,5.74,1464
+2017,MHR.2,Education and training of health personnel,Training health workers,2856,5.08,1308
+2018,MHR.2,Education and training of health personnel,Training health workers,3112,5.16,1615
+2019,MHR.2,Education and training of health personnel,Training health workers,3086,4.82,1549
+2020,MHR.2,Education and training of health personnel,Training health workers,2921,4.28,1327
+2021,MHR.2,Education and training of health personnel,Training health workers,2273,2.89,888
+2022,MHR.2,Education and training of health personnel,Training health workers,2414,3.1,880
+2023,MHR.2,Education and training of health personnel,Training health workers,2538,3.06,907
+2024,MHR.2,Education and training of health personnel,Training health workers,2784,3.1,974
+2011,MHR.3,Research and development in health,Research,58,0.16,46
+2012,MHR.3,Research and development in health,Research,81,0.21,56
+2013,MHR.3,Research and development in health,Research,90,0.22,67
+2014,MHR.3,Research and development in health,Research,87,0.19,58
+2015,MHR.3,Research and development in health,Research,98,0.2,59
+2016,MHR.3,Research and development in health,Research,75,0.14,51
+2017,MHR.3,Research and development in health,Research,70,0.12,52
+2018,MHR.3,Research and development in health,Research,93,0.15,57
+2019,MHR.3,Research and development in health,Research,147,0.23,138
+2020,MHR.3,Research and development in health,Research,274,0.4,237
+2021,MHR.3,Research and development in health,Research,364,0.46,325
+2022,MHR.3,Research and development in health,Research,287,0.37,246
+2023,MHR.3,Research and development in health,Research,330,0.4,281
+2024,MHR.3,Research and development in health,Research,325,0.36,276
+2011,MHR.4,Drinking water intervention,Clean drinking water,353,0.98,84
+2012,MHR.4,Drinking water intervention,Clean drinking water,390,0.99,97
+2013,MHR.4,Drinking water intervention,Clean drinking water,429,1.03,91
+2014,MHR.4,Drinking water intervention,Clean drinking water,467,1.0,109
+2015,MHR.4,Drinking water intervention,Clean drinking water,481,0.96,73
+2016,MHR.4,Drinking water intervention,Clean drinking water,527,1.02,84
+2017,MHR.4,Drinking water intervention,Clean drinking water,539,0.96,72
+2018,MHR.4,Drinking water intervention,Clean drinking water,527,0.87,73
+2019,MHR.4,Drinking water intervention,Clean drinking water,264,0.41,71
+2020,MHR.4,Drinking water intervention,Clean drinking water,279,0.41,61
+2021,MHR.4,Drinking water intervention,Clean drinking water,270,0.34,60
+2022,MHR.4,Drinking water intervention,Clean drinking water,281,0.36,61
+2023,MHR.4,Drinking water intervention,Clean drinking water,316,0.38,72
+2024,MHR.4,Drinking water intervention,Clean drinking water,348,0.39,110

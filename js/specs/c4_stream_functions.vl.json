@@ -1,0 +1,239 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "C4. Streamgraph of Malaysia's health spending by service, 2011 to 2024, in RM billion. Band thickness shows how much was spent; the stack is centred so each band's shape is easy to follow.",
+  "width": 600,
+  "height": 330,
+  "data": {
+    "url": "data/mnha_functions_2011_2024.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "year": "number",
+        "total_rm_mil": "number",
+        "pct_teh": "number",
+        "public_rm_mil": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "calculate": "indexof(['Treating illness','Medicines and medical goods','Buildings and equipment','Administration','Prevention','Training health workers'], datum.plain_label) >= 0 ? datum.plain_label : 'Everything else'",
+      "as": "group"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "sum",
+          "field": "total_rm_mil",
+          "as": "rm_mil"
+        },
+        {
+          "op": "sum",
+          "field": "pct_teh",
+          "as": "share"
+        }
+      ],
+      "groupby": [
+        "year",
+        "group"
+      ]
+    },
+    {
+      "calculate": "datum.rm_mil / 1000",
+      "as": "rm_bn"
+    },
+    {
+      "calculate": "indexof(['Training health workers', 'Administration', 'Treating illness', 'Buildings and equipment', 'Medicines and medical goods', 'Prevention', 'Everything else'], datum.group)",
+      "as": "stack_order"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "quantitative",
+      "title": null,
+      "axis": {
+        "format": "d",
+        "values": [
+          2011,
+          2012,
+          2013,
+          2014,
+          2015,
+          2016,
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "grid": false,
+        "labelFontSize": 11
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "area",
+        "interpolate": "monotone",
+        "stroke": "#FFFFFF",
+        "strokeWidth": 0.8
+      },
+      "encoding": {
+        "y": {
+          "field": "rm_bn",
+          "type": "quantitative",
+          "stack": "center",
+          "title": null,
+          "axis": null,
+          "scale": {
+            "domain": [
+              -6,
+              104
+            ],
+            "nice": false
+          }
+        },
+        "order": {
+          "field": "stack_order",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "group",
+          "type": "nominal",
+          "title": "Service",
+          "scale": {
+            "domain": [
+              "Treating illness",
+              "Administration",
+              "Training health workers",
+              "Everything else",
+              "Buildings and equipment",
+              "Medicines and medical goods",
+              "Prevention"
+            ],
+            "range": [
+              "#E0CCA6",
+              "#C4A673",
+              "#A88A5C",
+              "#EFE3CC",
+              "#6B4429",
+              "#C0563A",
+              "#1B3A4B"
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "columns": 4,
+            "symbolType": "square",
+            "symbolSize": 140,
+            "labelLimit": 200
+          }
+        },
+        "tooltip": [
+          {
+            "field": "group",
+            "type": "nominal",
+            "title": "Service"
+          },
+          {
+            "field": "year",
+            "type": "quantitative",
+            "title": "Year",
+            "format": "d"
+          },
+          {
+            "field": "rm_bn",
+            "type": "quantitative",
+            "title": "RM billion",
+            "format": ".1f"
+          },
+          {
+            "field": "share",
+            "type": "quantitative",
+            "title": "Share of all spending (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "year": 2021,
+            "t1": "2021: COVID-19 vaccination drive",
+            "t2": "lifts prevention to RM10.9 bn"
+          }
+        ]
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "text",
+            "align": "right",
+            "dx": -8,
+            "fontSize": 12,
+            "fontWeight": 700,
+            "color": "#1F2933"
+          },
+          "encoding": {
+            "x": {
+              "field": "year",
+              "type": "quantitative"
+            },
+            "y": {
+              "value": 14
+            },
+            "text": {
+              "field": "t1"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "right",
+            "dx": -8,
+            "fontSize": 12,
+            "color": "#1F2933"
+          },
+          "encoding": {
+            "x": {
+              "field": "year",
+              "type": "quantitative"
+            },
+            "y": {
+              "value": 29
+            },
+            "text": {
+              "field": "t2"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "rule",
+            "color": "#1F2933"
+          },
+          "encoding": {
+            "x": {
+              "field": "year",
+              "type": "quantitative"
+            },
+            "y": {
+              "value": 8
+            },
+            "y2": {
+              "value": 50
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

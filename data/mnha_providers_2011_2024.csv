@@ -1,0 +1,127 @@
+year,code,provider,short_label,total_rm_mil,pct_teh,public_rm_mil
+2011,MHP.1,All hospitals,Hospitals,18635,51.83,11357
+2012,MHP.1,All hospitals,Hospitals,21047,53.35,13350
+2013,MHP.1,All hospitals,Hospitals,21962,52.73,13706
+2014,MHP.1,All hospitals,Hospitals,24793,53.0,15762
+2015,MHP.1,All hospitals,Hospitals,26665,53.26,16441
+2016,MHP.1,All hospitals,Hospitals,28139,54.35,16681
+2017,MHP.1,All hospitals,Hospitals,30333,53.99,17721
+2018,MHP.1,All hospitals,Hospitals,32736,54.3,18934
+2019,MHP.1,All hospitals,Hospitals,35437,55.3,20319
+2020,MHP.1,All hospitals,Hospitals,36847,53.99,20712
+2021,MHP.1,All hospitals,Hospitals,39317,50.02,22814
+2022,MHP.1,All hospitals,Hospitals,41714,53.58,23582
+2023,MHP.1,All hospitals,Hospitals,44790,54.06,24592
+2024,MHP.1,All hospitals,Hospitals,48721,54.24,26296
+2011,MHP.2,Residential long-term care facilities,Nursing homes,16,0.04,2
+2012,MHP.2,Residential long-term care facilities,Nursing homes,20,0.05,2
+2013,MHP.2,Residential long-term care facilities,Nursing homes,2,0.0,1
+2014,MHP.2,Residential long-term care facilities,Nursing homes,2,0.0,1
+2015,MHP.2,Residential long-term care facilities,Nursing homes,2,0.0,1
+2016,MHP.2,Residential long-term care facilities,Nursing homes,5,0.01,1
+2017,MHP.2,Residential long-term care facilities,Nursing homes,2,0.0,1
+2018,MHP.2,Residential long-term care facilities,Nursing homes,5,0.01,1
+2019,MHP.2,Residential long-term care facilities,Nursing homes,1,0.0,1
+2020,MHP.2,Residential long-term care facilities,Nursing homes,5,0.01,2
+2021,MHP.2,Residential long-term care facilities,Nursing homes,2,0.0,1
+2022,MHP.2,Residential long-term care facilities,Nursing homes,4,0.01,1
+2023,MHP.2,Residential long-term care facilities,Nursing homes,21,0.03,16
+2024,MHP.2,Residential long-term care facilities,Nursing homes,21,0.02,14
+2011,MHP.3,Providers of ambulatory health care,Clinics,6424,17.87,2591
+2012,MHP.3,Providers of ambulatory health care,Clinics,7528,19.08,3032
+2013,MHP.3,Providers of ambulatory health care,Clinics,8521,20.46,3417
+2014,MHP.3,Providers of ambulatory health care,Clinics,10017,21.41,4004
+2015,MHP.3,Providers of ambulatory health care,Clinics,10458,20.89,4206
+2016,MHP.3,Providers of ambulatory health care,Clinics,10967,21.18,4388
+2017,MHP.3,Providers of ambulatory health care,Clinics,11876,21.14,4780
+2018,MHP.3,Providers of ambulatory health care,Clinics,12707,21.08,5354
+2019,MHP.3,Providers of ambulatory health care,Clinics,13708,21.39,5945
+2020,MHP.3,Providers of ambulatory health care,Clinics,13889,20.35,6405
+2021,MHP.3,Providers of ambulatory health care,Clinics,15981,20.33,7666
+2022,MHP.3,Providers of ambulatory health care,Clinics,17442,22.4,7674
+2023,MHP.3,Providers of ambulatory health care,Clinics,17011,20.53,7037
+2024,MHP.3,Providers of ambulatory health care,Clinics,18881,21.02,8171
+2011,MHP.4,Providers of ancillary services,"Labs, imaging, ambulance",226,0.63,154
+2012,MHP.4,Providers of ancillary services,"Labs, imaging, ambulance",245,0.62,159
+2013,MHP.4,Providers of ancillary services,"Labs, imaging, ambulance",234,0.56,137
+2014,MHP.4,Providers of ancillary services,"Labs, imaging, ambulance",294,0.63,182
+2015,MHP.4,Providers of ancillary services,"Labs, imaging, ambulance",277,0.55,199
+2016,MHP.4,Providers of ancillary services,"Labs, imaging, ambulance",231,0.45,183
+2017,MHP.4,Providers of ancillary services,"Labs, imaging, ambulance",249,0.44,196
+2018,MHP.4,Providers of ancillary services,"Labs, imaging, ambulance",251,0.42,199
+2019,MHP.4,Providers of ancillary services,"Labs, imaging, ambulance",340,0.53,225
+2020,MHP.4,Providers of ancillary services,"Labs, imaging, ambulance",465,0.68,371
+2021,MHP.4,Providers of ancillary services,"Labs, imaging, ambulance",4520,5.75,4459
+2022,MHP.4,Providers of ancillary services,"Labs, imaging, ambulance",379,0.49,321
+2023,MHP.4,Providers of ancillary services,"Labs, imaging, ambulance",335,0.4,278
+2024,MHP.4,Providers of ancillary services,"Labs, imaging, ambulance",269,0.3,210
+2011,MHP.5,Retail sale and other providers of medical goods,Pharmacies and medical shops,1909,5.31,135
+2012,MHP.5,Retail sale and other providers of medical goods,Pharmacies and medical shops,2129,5.4,168
+2013,MHP.5,Retail sale and other providers of medical goods,Pharmacies and medical shops,2374,5.7,202
+2014,MHP.5,Retail sale and other providers of medical goods,Pharmacies and medical shops,2921,6.24,220
+2015,MHP.5,Retail sale and other providers of medical goods,Pharmacies and medical shops,3344,6.68,286
+2016,MHP.5,Retail sale and other providers of medical goods,Pharmacies and medical shops,3520,6.8,283
+2017,MHP.5,Retail sale and other providers of medical goods,Pharmacies and medical shops,3699,6.58,304
+2018,MHP.5,Retail sale and other providers of medical goods,Pharmacies and medical shops,4328,7.18,182
+2019,MHP.5,Retail sale and other providers of medical goods,Pharmacies and medical shops,3863,6.03,172
+2020,MHP.5,Retail sale and other providers of medical goods,Pharmacies and medical shops,4115,6.03,243
+2021,MHP.5,Retail sale and other providers of medical goods,Pharmacies and medical shops,4724,6.01,238
+2022,MHP.5,Retail sale and other providers of medical goods,Pharmacies and medical shops,5629,7.23,293
+2023,MHP.5,Retail sale and other providers of medical goods,Pharmacies and medical shops,6966,8.41,335
+2024,MHP.5,Retail sale and other providers of medical goods,Pharmacies and medical shops,7636,8.5,443
+2011,MHP.6,Provision and administration of public health programmes,Public health programmes,1136,3.16,1125
+2012,MHP.6,Provision and administration of public health programmes,Public health programmes,1467,3.72,1449
+2013,MHP.6,Provision and administration of public health programmes,Public health programmes,1166,2.8,1163
+2014,MHP.6,Provision and administration of public health programmes,Public health programmes,1429,3.06,1427
+2015,MHP.6,Provision and administration of public health programmes,Public health programmes,1511,3.02,1488
+2016,MHP.6,Provision and administration of public health programmes,Public health programmes,1682,3.25,1652
+2017,MHP.6,Provision and administration of public health programmes,Public health programmes,1602,2.85,1584
+2018,MHP.6,Provision and administration of public health programmes,Public health programmes,1393,2.31,1373
+2019,MHP.6,Provision and administration of public health programmes,Public health programmes,1787,2.79,1783
+2020,MHP.6,Provision and administration of public health programmes,Public health programmes,2713,3.97,2381
+2021,MHP.6,Provision and administration of public health programmes,Public health programmes,2932,3.73,2850
+2022,MHP.6,Provision and administration of public health programmes,Public health programmes,2728,3.5,2714
+2023,MHP.6,Provision and administration of public health programmes,Public health programmes,2072,2.5,2063
+2024,MHP.6,Provision and administration of public health programmes,Public health programmes,2161,2.41,2144
+2011,MHP.7,Providers of health care system administration and financing,Administration and insurers,4674,13.0,3207
+2012,MHP.7,Providers of health care system administration and financing,Administration and insurers,3961,10.04,2332
+2013,MHP.7,Providers of health care system administration and financing,Administration and insurers,4096,9.84,2753
+2014,MHP.7,Providers of health care system administration and financing,Administration and insurers,4003,8.56,2692
+2015,MHP.7,Providers of health care system administration and financing,Administration and insurers,4441,8.87,2871
+2016,MHP.7,Providers of health care system administration and financing,Administration and insurers,3683,7.11,1967
+2017,MHP.7,Providers of health care system administration and financing,Administration and insurers,4974,8.85,3268
+2018,MHP.7,Providers of health care system administration and financing,Administration and insurers,5175,8.58,3599
+2019,MHP.7,Providers of health care system administration and financing,Administration and insurers,5536,8.64,4073
+2020,MHP.7,Providers of health care system administration and financing,Administration and insurers,6221,9.12,4372
+2021,MHP.7,Providers of health care system administration and financing,Administration and insurers,7054,8.97,4569
+2022,MHP.7,Providers of health care system administration and financing,Administration and insurers,6749,8.67,5300
+2023,MHP.7,Providers of health care system administration and financing,Administration and insurers,8396,10.13,6891
+2024,MHP.7,Providers of health care system administration and financing,Administration and insurers,8640,9.62,6862
+2011,MHP.8,Other industries (rest of the Malaysian economy),Other industries,2830,7.87,1680
+2012,MHP.8,Other industries (rest of the Malaysian economy),Other industries,2966,7.52,1513
+2013,MHP.8,Other industries (rest of the Malaysian economy),Other industries,3285,7.89,1487
+2014,MHP.8,Other industries (rest of the Malaysian economy),Other industries,3310,7.08,1632
+2015,MHP.8,Other industries (rest of the Malaysian economy),Other industries,3348,6.69,1550
+2016,MHP.8,Other industries (rest of the Malaysian economy),Other industries,3534,6.82,1618
+2017,MHP.8,Other industries (rest of the Malaysian economy),Other industries,3425,6.1,1451
+2018,MHP.8,Other industries (rest of the Malaysian economy),Other industries,3661,6.07,1753
+2019,MHP.8,Other industries (rest of the Malaysian economy),Other industries,3395,5.3,1699
+2020,MHP.8,Other industries (rest of the Malaysian economy),Other industries,3984,5.84,2173
+2021,MHP.8,Other industries (rest of the Malaysian economy),Other industries,4066,5.17,2361
+2022,MHP.8,Other industries (rest of the Malaysian economy),Other industries,3194,4.1,1423
+2023,MHP.8,Other industries (rest of the Malaysian economy),Other industries,3245,3.92,1367
+2024,MHP.8,Other industries (rest of the Malaysian economy),Other industries,3486,3.88,1438
+2011,MHP.9,Rest of the world,Overseas providers,102,0.28,1
+2012,MHP.9,Rest of the world,Overseas providers,86,0.22,1
+2013,MHP.9,Rest of the world,Overseas providers,7,0.02,1
+2014,MHP.9,Rest of the world,Overseas providers,11,0.02,1
+2015,MHP.9,Rest of the world,Overseas providers,19,0.04,4
+2016,MHP.9,Rest of the world,Overseas providers,15,0.03,2
+2017,MHP.9,Rest of the world,Overseas providers,22,0.04,1
+2018,MHP.9,Rest of the world,Overseas providers,28,0.05,1
+2019,MHP.9,Rest of the world,Overseas providers,18,0.03,1
+2020,MHP.9,Rest of the world,Overseas providers,12,0.02,1
+2021,MHP.9,Rest of the world,Overseas providers,9,0.01,1
+2022,MHP.9,Rest of the world,Overseas providers,11,0.01,1
+2023,MHP.9,Rest of the world,Overseas providers,10,0.01,1
+2024,MHP.9,Rest of the world,Overseas providers,12,0.01,1

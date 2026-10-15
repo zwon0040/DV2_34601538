@@ -1,0 +1,183 @@
+year,provider,short_label,sector,rm_mil
+2011,Private hospitals,Private hospitals,Private,5359
+2012,Private hospitals,Private hospitals,Private,5613
+2013,Private hospitals,Private hospitals,Private,5736
+2014,Private hospitals,Private hospitals,Private,6034
+2015,Private hospitals,Private hospitals,Private,6600
+2016,Private hospitals,Private hospitals,Private,7519
+2017,Private hospitals,Private hospitals,Private,8424
+2018,Private hospitals,Private hospitals,Private,9261
+2019,Private hospitals,Private hospitals,Private,9993
+2020,Private hospitals,Private hospitals,Private,11332
+2021,Private hospitals,Private hospitals,Private,11741
+2022,Private hospitals,Private hospitals,Private,12089
+2023,Private hospitals,Private hospitals,Private,13677
+2024,Private hospitals,Private hospitals,Private,15339
+2011,Private medical clinics,Private medical clinics,Private,2272
+2012,Private medical clinics,Private medical clinics,Private,2654
+2013,Private medical clinics,Private medical clinics,Private,3055
+2014,Private medical clinics,Private medical clinics,Private,3767
+2015,Private medical clinics,Private medical clinics,Private,3181
+2016,Private medical clinics,Private medical clinics,Private,3433
+2017,Private medical clinics,Private medical clinics,Private,3841
+2018,Private medical clinics,Private medical clinics,Private,3946
+2019,Private medical clinics,Private medical clinics,Private,4593
+2020,Private medical clinics,Private medical clinics,Private,4724
+2021,Private medical clinics,Private medical clinics,Private,5227
+2022,Private medical clinics,Private medical clinics,Private,6785
+2023,Private medical clinics,Private medical clinics,Private,6840
+2024,Private medical clinics,Private medical clinics,Private,7299
+2011,Private pharmacies,Private pharmacies,Private,1407
+2012,Private pharmacies,Private pharmacies,Private,1580
+2013,Private pharmacies,Private pharmacies,Private,1842
+2014,Private pharmacies,Private pharmacies,Private,2360
+2015,Private pharmacies,Private pharmacies,Private,2625
+2016,Private pharmacies,Private pharmacies,Private,2711
+2017,Private pharmacies,Private pharmacies,Private,2842
+2018,Private pharmacies,Private pharmacies,Private,3579
+2019,Private pharmacies,Private pharmacies,Private,3113
+2020,Private pharmacies,Private pharmacies,Private,3161
+2021,Private pharmacies,Private pharmacies,Private,3659
+2022,Private pharmacies,Private pharmacies,Private,4220
+2023,Private pharmacies,Private pharmacies,Private,5503
+2024,Private pharmacies,Private pharmacies,Private,5999
+2011,Private dental clinics,Private dental clinics,Private,509
+2012,Private dental clinics,Private dental clinics,Private,560
+2013,Private dental clinics,Private dental clinics,Private,592
+2014,Private dental clinics,Private dental clinics,Private,646
+2015,Private dental clinics,Private dental clinics,Private,851
+2016,Private dental clinics,Private dental clinics,Private,911
+2017,Private dental clinics,Private dental clinics,Private,1011
+2018,Private dental clinics,Private dental clinics,Private,1076
+2019,Private dental clinics,Private dental clinics,Private,1127
+2020,Private dental clinics,Private dental clinics,Private,1080
+2021,Private dental clinics,Private dental clinics,Private,1176
+2022,Private dental clinics,Private dental clinics,Private,1383
+2023,Private dental clinics,Private dental clinics,Private,1457
+2024,Private dental clinics,Private dental clinics,Private,1561
+2011,Retail sale and other suppliers of medical goods & appliances,Medical goods shops,Private,321
+2012,Retail sale and other suppliers of medical goods & appliances,Medical goods shops,Private,326
+2013,Retail sale and other suppliers of medical goods & appliances,Medical goods shops,Private,325
+2014,Retail sale and other suppliers of medical goods & appliances,Medical goods shops,Private,334
+2015,Retail sale and other suppliers of medical goods & appliances,Medical goods shops,Private,420
+2016,Retail sale and other suppliers of medical goods & appliances,Medical goods shops,Private,511
+2017,Retail sale and other suppliers of medical goods & appliances,Medical goods shops,Private,543
+2018,Retail sale and other suppliers of medical goods & appliances,Medical goods shops,Private,556
+2019,Retail sale and other suppliers of medical goods & appliances,Medical goods shops,Private,558
+2020,Retail sale and other suppliers of medical goods & appliances,Medical goods shops,Private,637
+2021,Retail sale and other suppliers of medical goods & appliances,Medical goods shops,Private,816
+2022,Retail sale and other suppliers of medical goods & appliances,Medical goods shops,Private,1087
+2023,Retail sale and other suppliers of medical goods & appliances,Medical goods shops,Private,1104
+2024,Retail sale and other suppliers of medical goods & appliances,Medical goods shops,Private,1170
+2011,Traditional and complementary medicine (TCM) providers,Traditional medicine,Private,394
+2012,Traditional and complementary medicine (TCM) providers,Traditional medicine,Private,412
+2013,Traditional and complementary medicine (TCM) providers,Traditional medicine,Private,424
+2014,Traditional and complementary medicine (TCM) providers,Traditional medicine,Private,452
+2015,Traditional and complementary medicine (TCM) providers,Traditional medicine,Private,531
+2016,Traditional and complementary medicine (TCM) providers,Traditional medicine,Private,617
+2017,Traditional and complementary medicine (TCM) providers,Traditional medicine,Private,645
+2018,Traditional and complementary medicine (TCM) providers,Traditional medicine,Private,647
+2019,Traditional and complementary medicine (TCM) providers,Traditional medicine,Private,641
+2020,Traditional and complementary medicine (TCM) providers,Traditional medicine,Private,604
+2021,Traditional and complementary medicine (TCM) providers,Traditional medicine,Private,664
+2022,Traditional and complementary medicine (TCM) providers,Traditional medicine,Private,773
+2023,Traditional and complementary medicine (TCM) providers,Traditional medicine,Private,785
+2024,Traditional and complementary medicine (TCM) providers,Traditional medicine,Private,832
+2011,Private medical and diagnostic laboratories,Private labs,Private,43
+2012,Private medical and diagnostic laboratories,Private labs,Private,59
+2013,Private medical and diagnostic laboratories,Private labs,Private,78
+2014,Private medical and diagnostic laboratories,Private labs,Private,108
+2015,Private medical and diagnostic laboratories,Private labs,Private,72
+2016,Private medical and diagnostic laboratories,Private labs,Private,44
+2017,Private medical and diagnostic laboratories,Private labs,Private,46
+2018,Private medical and diagnostic laboratories,Private labs,Private,46
+2019,Private medical and diagnostic laboratories,Private labs,Private,46
+2020,Private medical and diagnostic laboratories,Private labs,Private,42
+2021,Private medical and diagnostic laboratories,Private labs,Private,45
+2022,Private medical and diagnostic laboratories,Private labs,Private,49
+2023,Private medical and diagnostic laboratories,Private labs,Private,50
+2024,Private medical and diagnostic laboratories,Private labs,Private,53
+2011,All other private sector providers of health care,Other private providers,Private,534
+2012,All other private sector providers of health care,Other private providers,Private,754
+2013,All other private sector providers of health care,Other private providers,Private,869
+2014,All other private sector providers of health care,Other private providers,Private,678
+2015,All other private sector providers of health care,Other private providers,Private,711
+2016,All other private sector providers of health care,Other private providers,Private,744
+2017,All other private sector providers of health care,Other private providers,Private,756
+2018,All other private sector providers of health care,Other private providers,Private,795
+2019,All other private sector providers of health care,Other private providers,Private,871
+2020,All other private sector providers of health care,Other private providers,Private,866
+2021,All other private sector providers of health care,Other private providers,Private,919
+2022,All other private sector providers of health care,Other private providers,Private,962
+2023,All other private sector providers of health care,Other private providers,Private,1045
+2024,All other private sector providers of health care,Other private providers,Private,1125
+2011,Public institutions providing health-related services,Other public institutions,Public,324
+2012,Public institutions providing health-related services,Other public institutions,Public,388
+2013,Public institutions providing health-related services,Other public institutions,Public,634
+2014,Public institutions providing health-related services,Other public institutions,Public,638
+2015,Public institutions providing health-related services,Other public institutions,Public,669
+2016,Public institutions providing health-related services,Other public institutions,Public,716
+2017,Public institutions providing health-related services,Other public institutions,Public,724
+2018,Public institutions providing health-related services,Other public institutions,Public,657
+2019,Public institutions providing health-related services,Other public institutions,Public,635
+2020,Public institutions providing health-related services,Other public institutions,Public,692
+2021,Public institutions providing health-related services,Other public institutions,Public,492
+2022,Public institutions providing health-related services,Other public institutions,Public,578
+2023,Public institutions providing health-related services,Other public institutions,Public,601
+2024,Public institutions providing health-related services,Other public institutions,Public,718
+2011,Public hospitals,Public hospitals,Public,259
+2012,Public hospitals,Public hospitals,Public,253
+2013,Public hospitals,Public hospitals,Public,334
+2014,Public hospitals,Public hospitals,Public,309
+2015,Public hospitals,Public hospitals,Public,372
+2016,Public hospitals,Public hospitals,Public,453
+2017,Public hospitals,Public hospitals,Public,438
+2018,Public hospitals,Public hospitals,Public,420
+2019,Public hospitals,Public hospitals,Public,446
+2020,Public hospitals,Public hospitals,Public,471
+2021,Public hospitals,Public hospitals,Public,416
+2022,Public hospitals,Public hospitals,Public,431
+2023,Public hospitals,Public hospitals,Public,564
+2024,Public hospitals,Public hospitals,Public,695
+2011,Public medical clinics,Public medical clinics,Public,45
+2012,Public medical clinics,Public medical clinics,Public,50
+2013,Public medical clinics,Public medical clinics,Public,44
+2014,Public medical clinics,Public medical clinics,Public,48
+2015,Public medical clinics,Public medical clinics,Public,18
+2016,Public medical clinics,Public medical clinics,Public,20
+2017,Public medical clinics,Public medical clinics,Public,18
+2018,Public medical clinics,Public medical clinics,Public,18
+2019,Public medical clinics,Public medical clinics,Public,18
+2020,Public medical clinics,Public medical clinics,Public,55
+2021,Public medical clinics,Public medical clinics,Public,25
+2022,Public medical clinics,Public medical clinics,Public,25
+2023,Public medical clinics,Public medical clinics,Public,31
+2024,Public medical clinics,Public medical clinics,Public,31
+2011,Public dental clinics,Public dental clinics,Public,
+2012,Public dental clinics,Public dental clinics,Public,
+2013,Public dental clinics,Public dental clinics,Public,
+2014,Public dental clinics,Public dental clinics,Public,
+2015,Public dental clinics,Public dental clinics,Public,13
+2016,Public dental clinics,Public dental clinics,Public,14
+2017,Public dental clinics,Public dental clinics,Public,16
+2018,Public dental clinics,Public dental clinics,Public,17
+2019,Public dental clinics,Public dental clinics,Public,20
+2020,Public dental clinics,Public dental clinics,Public,11
+2021,Public dental clinics,Public dental clinics,Public,15
+2022,Public dental clinics,Public dental clinics,Public,18
+2023,Public dental clinics,Public dental clinics,Public,20
+2024,Public dental clinics,Public dental clinics,Public,20
+2011,Provision and administration of public health programmes (MOH),MOH public health programmes,Public,
+2012,Provision and administration of public health programmes (MOH),MOH public health programmes,Public,
+2013,Provision and administration of public health programmes (MOH),MOH public health programmes,Public,
+2014,Provision and administration of public health programmes (MOH),MOH public health programmes,Public,
+2015,Provision and administration of public health programmes (MOH),MOH public health programmes,Public,
+2016,Provision and administration of public health programmes (MOH),MOH public health programmes,Public,
+2017,Provision and administration of public health programmes (MOH),MOH public health programmes,Public,
+2018,Provision and administration of public health programmes (MOH),MOH public health programmes,Public,
+2019,Provision and administration of public health programmes (MOH),MOH public health programmes,Public,
+2020,Provision and administration of public health programmes (MOH),MOH public health programmes,Public,2
+2021,Provision and administration of public health programmes (MOH),MOH public health programmes,Public,2
+2022,Provision and administration of public health programmes (MOH),MOH public health programmes,Public,
+2023,Provision and administration of public health programmes (MOH),MOH public health programmes,Public,
+2024,Provision and administration of public health programmes (MOH),MOH public health programmes,Public,

@@ -1,0 +1,109 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Growth of the Ministry of Health's three main budget types since 2015 (2015 = 100). Development grew fastest, partly because of a 2020-2021 reclassification.",
+  "width": 430,
+  "height": 300,
+  "data": {
+    "url": "data/budget_allocation_moh.csv",
+    "format": {"type": "csv", "parse": {"allocation": "number", "date": "date"}}
+  },
+  "transform": [
+    {
+      "filter": "datum.category === 'de' || datum.category === 'oe_10000' || datum.category === 'oe_20000'"
+    },
+    {"calculate": "utcyear(datum.date)", "as": "year"},
+    {
+      "calculate": "datum.category === 'oe_10000' ? 'Salaries' : datum.category === 'oe_20000' ? 'Services and supplies' : 'Development'",
+      "as": "type"
+    },
+    {
+      "aggregate": [{"op": "sum", "field": "allocation", "as": "allocation"}],
+      "groupby": ["year", "type"]
+    },
+    {
+      "window": [{"op": "first_value", "field": "allocation", "as": "base"}],
+      "groupby": ["type"],
+      "sort": [{"field": "year"}],
+      "frame": [null, null]
+    },
+    {"calculate": "datum.allocation / datum.base * 100", "as": "index"},
+    {"calculate": "datum.allocation / 1e9", "as": "rm_bn"}
+  ],
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "quantitative",
+      "title": null,
+      "scale": {"domain": [2015, 2024]},
+      "axis": {"format": "d", "tickCount": 5, "grid": false}
+    },
+    "y": {
+      "field": "index",
+      "type": "quantitative",
+      "title": "Budget compared with 2015 (2015 = 100)",
+      "scale": {"domain": [0, 400]},
+      "axis": {"tickCount": 5}
+    },
+    "color": {
+      "condition": {"test": "datum.type === 'Development'", "value": "#007A5E"},
+      "value": "#B8C2CC"
+    }
+  },
+  "layer": [
+    {
+      "mark": {"type": "rule", "color": "#9AA5B1", "strokeDash": [2, 2]},
+      "encoding": {
+        "x": {"datum": 2015},
+        "x2": {"datum": 2024},
+        "y": {"datum": 100},
+        "color": {"value": "#9AA5B1"}
+      }
+    },
+    {
+      "mark": {"type": "line", "strokeWidth": 2.5},
+      "encoding": {
+        "detail": {"field": "type"},
+        "strokeWidth": {
+          "condition": {"test": "datum.type === 'Development'", "value": 3.5},
+          "value": 2
+        }
+      }
+    },
+    {
+      "mark": {"type": "point", "filled": true, "size": 30},
+      "encoding": {
+        "tooltip": [
+          {"field": "type", "type": "nominal", "title": "Budget type"},
+          {"field": "year", "type": "quantitative", "title": "Year", "format": "d"},
+          {"field": "rm_bn", "type": "quantitative", "title": "RM billion", "format": ".2f"},
+          {"field": "index", "type": "quantitative", "title": "Compared with 2015", "format": ".0f"}
+        ]
+      }
+    },
+    {
+      "transform": [
+        {"filter": "datum.year === 2024"},
+        {"calculate": "datum.type + '  ×' + format(datum.index / 100, '.1f')", "as": "label"}
+      ],
+      "mark": {"type": "text", "align": "left", "dx": 8, "fontSize": 12},
+      "encoding": {
+        "text": {"field": "label"},
+        "color": {
+          "condition": {"test": "datum.type === 'Development'", "value": "#1F2933"},
+          "value": "#52606D"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"year": 2015.3, "index": 360, "note": "The 2021 jump is partly an accounting change:"},
+          {"year": 2015.3, "index": 336, "note": "hospital support services were moved into"},
+          {"year": 2015.3, "index": 312, "note": "the development budget in 2020 and 2021."}
+        ]
+      },
+      "mark": {"type": "text", "align": "left", "fontSize": 11, "color": "#52606D"},
+      "encoding": {"text": {"field": "note"}, "color": {"value": "#52606D"}}
+    }
+  ]
+}

@@ -1,0 +1,469 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "M3. Choropleth map of the change in public-sector health staff by state, 2014 to 2022, with a linked line chart (staff indexed to 2014 = 100). Hover a state to highlight its line. 2020 values are marked with diamonds because several look disrupted.",
+  "data": {
+    "url": "data/healthcare_staff.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "staff": "number",
+        "date": "date"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.type === 'all' && datum.state !== 'Malaysia'"
+    },
+    {
+      "calculate": "utcyear(datum.date)",
+      "as": "year"
+    },
+    {
+      "window": [
+        {
+          "op": "first_value",
+          "field": "staff",
+          "as": "first"
+        },
+        {
+          "op": "last_value",
+          "field": "staff",
+          "as": "last"
+        }
+      ],
+      "groupby": [
+        "state"
+      ],
+      "sort": [
+        {
+          "field": "year"
+        }
+      ],
+      "frame": [
+        null,
+        null
+      ]
+    },
+    {
+      "calculate": "datum.staff / datum.first * 100",
+      "as": "index"
+    },
+    {
+      "calculate": "datum.last / datum.first - 1",
+      "as": "growth"
+    },
+    {
+      "calculate": "datum.growth < 0 ? 'Fell' : datum.growth < 0.3 ? 'Up to 30%' : datum.growth < 0.5 ? '30 to 50%' : 'More than 50%'",
+      "as": "growth_class"
+    },
+    {
+      "calculate": "replace(datum.state, 'W.P. ', '')",
+      "as": "name"
+    },
+    {
+      "lookup": "state",
+      "from": {
+        "data": {
+          "url": "geo/malaysia_states.topojson",
+          "format": {
+            "type": "topojson",
+            "feature": "states"
+          }
+        },
+        "key": "properties.state"
+      },
+      "as": "geo"
+    }
+  ],
+  "params": [
+    {
+      "name": "pick",
+      "select": {
+        "type": "point",
+        "fields": [
+          "state"
+        ],
+        "on": "pointerover",
+        "clear": "pointerout"
+      },
+      "views": [
+        "map"
+      ]
+    }
+  ],
+  "vconcat": [
+    {
+      "width": 540,
+      "height": 255,
+      "projection": {
+        "type": "mercator"
+      },
+      "layer": [
+        {
+          "name": "map",
+          "transform": [
+            {
+              "filter": "datum.year === 2022"
+            }
+          ],
+          "mark": {
+            "type": "geoshape",
+            "stroke": "#EDE1E5",
+            "strokeWidth": 1
+          },
+          "encoding": {
+            "shape": {
+              "field": "geo",
+              "type": "geojson"
+            },
+            "color": {
+              "field": "growth_class",
+              "type": "ordinal",
+              "title": "Change in staff, 2014 to 2022",
+              "scale": {
+                "domain": [
+                  "Fell",
+                  "Up to 30%",
+                  "30 to 50%",
+                  "More than 50%"
+                ],
+                "range": [
+                  "#7B8794",
+                  "#C4B8E6",
+                  "#9A88CC",
+                  "#5E4FA2"
+                ]
+              },
+              "legend": {
+                "orient": "none",
+                "legendX": 180,
+                "legendY": 0,
+                "symbolType": "square",
+                "symbolSize": 180
+              }
+            },
+            "opacity": {
+              "condition": {
+                "param": "pick",
+                "empty": true,
+                "value": 1
+              },
+              "value": 0.4
+            },
+            "tooltip": [
+              {
+                "field": "name",
+                "type": "nominal",
+                "title": "State"
+              },
+              {
+                "field": "first",
+                "type": "quantitative",
+                "title": "Staff in 2014",
+                "format": ","
+              },
+              {
+                "field": "last",
+                "type": "quantitative",
+                "title": "Staff in 2022",
+                "format": ","
+              },
+              {
+                "field": "growth",
+                "type": "quantitative",
+                "title": "Change",
+                "format": "+.0%"
+              }
+            ]
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": "datum.year === 2022 && (datum.name === 'Kuala Lumpur' || datum.name === 'Putrajaya')"
+            },
+            {
+              "lookup": "state",
+              "from": {
+                "data": {
+                  "url": "geo/malaysia_state_label_points.csv",
+                  "format": {
+                    "type": "csv",
+                    "parse": {
+                      "longitude": "number",
+                      "latitude": "number"
+                    }
+                  }
+                },
+                "key": "state",
+                "fields": [
+                  "longitude",
+                  "latitude"
+                ]
+              }
+            },
+            {
+              "calculate": "datum.name + ' ' + format(datum.growth, '+.0%')",
+              "as": "label"
+            }
+          ],
+          "layer": [
+            {
+              "mark": {
+                "type": "circle",
+                "size": 22,
+                "color": "#1F2933"
+              },
+              "encoding": {
+                "longitude": {
+                  "field": "longitude",
+                  "type": "quantitative"
+                },
+                "latitude": {
+                  "field": "latitude",
+                  "type": "quantitative"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 34,
+                "dy": -14,
+                "fontSize": 12,
+                "fontWeight": 600,
+                "color": "#1F2933"
+              },
+              "transform": [
+                {
+                  "filter": "datum.name === 'Kuala Lumpur'"
+                }
+              ],
+              "encoding": {
+                "longitude": {
+                  "field": "longitude",
+                  "type": "quantitative"
+                },
+                "latitude": {
+                  "field": "latitude",
+                  "type": "quantitative"
+                },
+                "text": {
+                  "field": "label"
+                }
+              }
+            },
+            {
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 34,
+                "dy": 8,
+                "fontSize": 12,
+                "fontWeight": 600,
+                "color": "#1F2933"
+              },
+              "transform": [
+                {
+                  "filter": "datum.name === 'Putrajaya'"
+                }
+              ],
+              "encoding": {
+                "longitude": {
+                  "field": "longitude",
+                  "type": "quantitative"
+                },
+                "latitude": {
+                  "field": "latitude",
+                  "type": "quantitative"
+                },
+                "text": {
+                  "field": "label"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 540,
+      "height": 230,
+      "layer": [
+        {
+          "mark": {
+            "type": "line",
+            "color": "#5E4FA2",
+            "clip": true
+          },
+          "encoding": {
+            "x": {
+              "field": "year",
+              "type": "quantitative",
+              "title": null,
+              "axis": {
+                "format": "d",
+                "values": [
+                  2014,
+                  2016,
+                  2018,
+                  2020,
+                  2022
+                ],
+                "grid": false
+              }
+            },
+            "y": {
+              "field": "index",
+              "type": "quantitative",
+              "title": "Staff compared with 2014 (2014 = 100)",
+              "scale": {
+                "domain": [
+                  0,
+                  250
+                ],
+                "nice": false
+              },
+              "axis": {
+                "values": [
+                  0,
+                  50,
+                  100,
+                  150,
+                  200,
+                  250
+                ],
+                "grid": true
+              }
+            },
+            "detail": {
+              "field": "state"
+            },
+            "strokeWidth": {
+              "condition": {
+                "param": "pick",
+                "empty": false,
+                "value": 3.5
+              },
+              "value": 1.5
+            },
+            "opacity": {
+              "condition": {
+                "param": "pick",
+                "empty": false,
+                "value": 1
+              },
+              "value": 0.45
+            }
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": "datum.year === 2020"
+            }
+          ],
+          "mark": {
+            "type": "point",
+            "shape": "diamond",
+            "size": 90,
+            "filled": true,
+            "fill": "#EDE1E5",
+            "stroke": "#1F2933",
+            "strokeWidth": 1.5,
+            "clip": true
+          },
+          "encoding": {
+            "x": {
+              "field": "year",
+              "type": "quantitative"
+            },
+            "y": {
+              "field": "index",
+              "type": "quantitative"
+            },
+            "tooltip": [
+              {
+                "field": "name",
+                "type": "nominal",
+                "title": "State"
+              },
+              {
+                "field": "staff",
+                "type": "quantitative",
+                "title": "Staff in 2020 (as published, read with caution)",
+                "format": ","
+              }
+            ]
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": "datum.year === 2020 && datum.name === 'Perak'"
+            },
+            {
+              "calculate": "'Perak: 11,995 \u2192 6,566'",
+              "as": "lab"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "dx": 9,
+            "fontSize": 12,
+            "fontWeight": 600,
+            "color": "#1F2933"
+          },
+          "encoding": {
+            "x": {
+              "field": "year",
+              "type": "quantitative"
+            },
+            "y": {
+              "field": "index",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "lab"
+            }
+          }
+        },
+        {
+          "data": {
+            "values": [
+              {
+                "x": 2020,
+                "lab": "\u25b2 Perlis 2020: 1,994 \u2192 10,665 (nurses 914 \u2192 9,465), off the scale"
+              }
+            ]
+          },
+          "mark": {
+            "type": "text",
+            "align": "right",
+            "dx": 14,
+            "dy": 0,
+            "fontSize": 12,
+            "fontWeight": 600,
+            "color": "#1F2933"
+          },
+          "encoding": {
+            "x": {
+              "field": "x",
+              "type": "quantitative"
+            },
+            "y": {
+              "value": 9
+            },
+            "text": {
+              "field": "lab"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "spacing": 24
+}

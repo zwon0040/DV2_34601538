@@ -1,0 +1,210 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "C6. Dumbbell chart: where households paid out of their own pocket (private providers), 2011 vs 2024.",
+  "width": 460,
+  "height": 280,
+  "data": {
+    "url": "data/mnha_oop_providers_2011_2024.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "year": "number",
+        "rm_mil": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.sector === 'Private' && (datum.year === 2011 || datum.year === 2024)"
+    },
+    {
+      "calculate": "datum.rm_mil / 1000",
+      "as": "rm_bn"
+    }
+  ],
+  "encoding": {
+    "y": {
+      "field": "short_label",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "Private hospitals",
+        "Private medical clinics",
+        "Private pharmacies",
+        "Private dental clinics",
+        "Medical goods shops",
+        "Other private providers",
+        "Traditional medicine",
+        "Private labs"
+      ],
+      "axis": {
+        "domain": false,
+        "ticks": false,
+        "labelFontSize": 12,
+        "labelPadding": 8
+      }
+    }
+  },
+  "layer": [
+    {
+      "transform": [
+        {
+          "pivot": "year",
+          "value": "rm_bn",
+          "groupby": [
+            "short_label"
+          ]
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "color": "#CBD2D9",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "2011",
+          "type": "quantitative",
+          "title": "RM billion paid by households",
+          "axis": {
+            "tickCount": 6,
+            "format": ",.0f"
+          }
+        },
+        "x2": {
+          "field": "2024"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year === 2011"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "filled": false,
+        "size": 90,
+        "strokeWidth": 2,
+        "color": "#E69F00"
+      },
+      "encoding": {
+        "x": {
+          "field": "rm_bn",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "provider",
+            "type": "nominal",
+            "title": "Paid at"
+          },
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "rm_bn",
+            "type": "quantitative",
+            "title": "RM billion",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year === 2024"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 90,
+        "opacity": 1,
+        "color": "#E69F00"
+      },
+      "encoding": {
+        "x": {
+          "field": "rm_bn",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "provider",
+            "type": "nominal",
+            "title": "Paid at"
+          },
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "rm_bn",
+            "type": "quantitative",
+            "title": "RM billion",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year === 2024"
+        },
+        {
+          "calculate": "'RM' + format(datum.rm_bn, '.1f') + ' bn'",
+          "as": "label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "fontSize": 12,
+        "color": "#1F2933"
+      },
+      "encoding": {
+        "x": {
+          "field": "rm_bn",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year === 2011 && datum.short_label === 'Private hospitals'"
+        },
+        {
+          "calculate": "'RM' + format(datum.rm_bn, '.1f') + ' bn in 2011'",
+          "as": "label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -12,
+        "fontSize": 12,
+        "color": "#52606D"
+      },
+      "encoding": {
+        "x": {
+          "field": "rm_bn",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    }
+  ]
+}

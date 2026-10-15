@@ -1,0 +1,88 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "C7. Bullet chart: MOH operating budget 2025, money allocated (tick) vs money actually spent (bar), by programme.",
+  "width": 380,
+  "height": 300,
+  "data": {
+    "url": "data/moh_programme_budget_2020_2025.csv",
+    "format": {
+      "type": "csv",
+      "parse": {"year": "number", "allocation_rm": "number", "expenditure_rm": "number"}
+    }
+  },
+  "transform": [
+    {"filter": "datum.year === 2025"},
+    {
+      "aggregate": [
+        {"op": "sum", "field": "allocation_rm", "as": "allocation_rm"},
+        {"op": "sum", "field": "expenditure_rm", "as": "expenditure_rm"}
+      ],
+      "groupby": ["group"]
+    },
+    {"calculate": "datum.allocation_rm / 1e9", "as": "allocated_bn"},
+    {"calculate": "datum.expenditure_rm / 1e9", "as": "spent_bn"},
+    {"calculate": "datum.expenditure_rm / datum.allocation_rm", "as": "used"},
+    {"calculate": "format(datum.used, '.0%') + ' used'", "as": "label"}
+  ],
+  "encoding": {
+    "y": {
+      "field": "group",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "Medical",
+        "Other (special, new policy, commitments)",
+        "Public Health",
+        "Management",
+        "Oral Health",
+        "Research and Technical Support",
+        "Pharmaceutical Services",
+        "Food Safety and Quality"
+      ],
+      "axis": {
+        "domain": false,
+        "ticks": false,
+        "labelFontSize": 12,
+        "labelPadding": 8,
+        "labelLimit": 260,
+        "labelExpr": "datum.value === 'Other (special, new policy, commitments)' ? 'Other*' : datum.value"
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {"type": "bar", "color": "#007A5E", "height": 14, "cornerRadiusEnd": 3},
+      "encoding": {
+        "x": {
+          "field": "spent_bn",
+          "type": "quantitative",
+          "title": "RM billion",
+          "scale": {"domain": [0, 16]},
+          "axis": {"tickCount": 8}
+        },
+        "tooltip": [
+          {"field": "group", "type": "nominal", "title": "Programme"},
+          {
+            "field": "allocated_bn",
+            "type": "quantitative",
+            "title": "Allocated (RM bn)",
+            "format": ".2f"
+          },
+          {"field": "spent_bn", "type": "quantitative", "title": "Spent (RM bn)", "format": ".2f"},
+          {"field": "used", "type": "quantitative", "title": "Share used", "format": ".0%"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "tick", "color": "#1F2933", "thickness": 2.5, "size": 26},
+      "encoding": {"x": {"field": "allocated_bn", "type": "quantitative"}}
+    },
+    {
+      "mark": {"type": "text", "align": "left", "dx": 10, "fontSize": 12, "color": "#52606D"},
+      "encoding": {
+        "x": {"field": "allocated_bn", "type": "quantitative"},
+        "text": {"field": "label"}
+      }
+    }
+  ]
+}

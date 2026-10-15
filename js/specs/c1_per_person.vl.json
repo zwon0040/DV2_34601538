@@ -1,0 +1,109 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Health spending per person in Malaysia rose from RM1,237 in 2011 to RM2,637 in 2024; after removing inflation it rose 74%.",
+  "width": 560,
+  "height": 300,
+  "data": {
+    "url": "data/mnha_national_2011_2024.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "year": "number",
+        "per_capita_nominal_rm": "number",
+        "per_capita_constant_2024_rm": "number"
+      }
+    }
+  },
+  "transform": [
+    {"fold": ["per_capita_nominal_rm", "per_capita_constant_2024_rm"], "as": ["measure", "rm"]},
+    {
+      "calculate": "datum.measure === 'per_capita_nominal_rm' ? 'As spent' : 'After inflation'",
+      "as": "series"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "quantitative",
+      "title": null,
+      "scale": {"domain": [2011, 2024]},
+      "axis": {"format": "d", "tickCount": 7, "grid": false}
+    }
+  },
+  "layer": [
+    {
+      "data": {"values": [{"year": 2020, "end": 2021, "label": "COVID-19 years"}]},
+      "layer": [
+        {
+          "mark": {"type": "rect", "color": "#CAD6E2", "opacity": 0.6},
+          "encoding": {"x2": {"field": "end"}}
+        },
+        {
+          "mark": {"type": "text", "y": -8, "dx": 22, "fontSize": 12, "color": "#52606D"},
+          "encoding": {"text": {"field": "label"}}
+        }
+      ]
+    },
+    {
+      "mark": {"type": "line", "strokeWidth": 2.5, "color": "#3A5FCD"},
+      "encoding": {
+        "y": {
+          "field": "rm",
+          "type": "quantitative",
+          "title": "RM per person per year",
+          "scale": {"domain": [0, 3000]},
+          "axis": {"format": ",.0f", "tickCount": 4}
+        },
+        "strokeDash": {
+          "field": "series",
+          "type": "nominal",
+          "legend": null,
+          "scale": {"domain": ["As spent", "After inflation"], "range": [[1, 0], [6, 4]]}
+        }
+      }
+    },
+    {
+      "mark": {"type": "point", "filled": true, "size": 40, "color": "#3A5FCD"},
+      "encoding": {
+        "y": {"field": "rm", "type": "quantitative"},
+        "tooltip": [
+          {"field": "year", "type": "quantitative", "title": "Year", "format": "d"},
+          {"field": "series", "type": "nominal", "title": "Measure"},
+          {"field": "rm", "type": "quantitative", "title": "RM per person", "format": ",.0f"}
+        ]
+      }
+    },
+    {
+      "transform": [{"filter": "datum.year === 2014 && datum.series === 'After inflation'"}],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dy": -16,
+        "fontSize": 13,
+        "fontWeight": 600,
+        "color": "#1F2933"
+      },
+      "encoding": {"y": {"field": "rm", "type": "quantitative"}, "text": {"field": "series"}}
+    },
+    {
+      "transform": [{"filter": "datum.year === 2014 && datum.series === 'As spent'"}],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dy": 20,
+        "fontSize": 13,
+        "fontWeight": 600,
+        "color": "#1F2933"
+      },
+      "encoding": {"y": {"field": "rm", "type": "quantitative"}, "text": {"field": "series"}}
+    },
+    {
+      "transform": [
+        {"filter": "datum.year === 2011 || (datum.year === 2024 && datum.series === 'As spent')"},
+        {"calculate": "'RM' + format(datum.rm, ',.0f')", "as": "label"}
+      ],
+      "mark": {"type": "text", "dy": -12, "fontSize": 12, "fontWeight": 600, "color": "#1F2933"},
+      "encoding": {"y": {"field": "rm", "type": "quantitative"}, "text": {"field": "label"}}
+    }
+  ]
+}

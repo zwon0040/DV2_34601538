@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Where does your health ringgit go? (v2.1)</title>
+  <meta name="description" content="A data story about Malaysia's health spending, 2011 to 2025: who pays, what it buys and whether priorities have changed.">
+  <meta name="author" content="Zi Cheng Wong">
+
+  <!-- Fonts: Plus Jakarta Sans (headings), Source Sans 3 (body and charts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Vega-Lite (pinned versions) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="masthead">
+  <div class="wrap masthead-grid">
+    <div class="masthead-text">
+    <p class="kicker">Malaysia · Health spending 2011–2025</p>
+    <h1>Where does your health ringgit go?</h1>
+    <p class="dek">Malaysia spends more on health every year. This page follows the money: who pays, what it buys, and where it goes.</p>
+    <p class="byline">By Zi Cheng Wong · FIT3179 Data Visualisation 2 · October 2026</p>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi">
+        <div class="kpi-value">RM89.8 billion</div>
+        <div class="kpi-label">spent on health in Malaysia in 2024, by everyone</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-value">RM2,637</div>
+        <div class="kpi-label">per person in 2024, about RM220 a month</div>
+      </div>
+      <div class="kpi households">
+        <div class="kpi-value">38.8%</div>
+        <div class="kpi-label">paid by households straight from their own pockets</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="act" id="act1">
+    <div class="chapter ch-total">
+      <span class="chapter-num">01</span>
+      <div>
+        <p class="chapter-kicker">Part 1</p>
+        <h2>The bill keeps growing</h2>
+        <p class="chapter-sub">Spending per person has more than doubled since 2011.</p>
+      </div>
+    </div>
+    <div class="grid">
+    <div class="row">
+      <div class="narrative">
+        <p>In 2011, Malaysia spent <strong>RM1,237</strong> on health for every person.</p>
+        <p>By 2024 that figure had more than doubled to <strong>RM2,637</strong>.</p>
+        <p>Some of the rise is just prices going up. Even after removing inflation, spending per person grew by about <strong>74%</strong>.</p>
+        <p>The jump in 2020 and 2021 mostly reflects COVID-19. Spending dipped in 2022, then kept climbing.</p>
+        <div class="stat total"><span class="stat-value">+74%</span><span class="stat-label">growth in spending per person after inflation, 2011 to 2024</span></div>
+      </div>
+      <figure class="chart figure-col">
+        <h3>Health Spending Per Malaysian Has More Than Doubled Since 2011</h3>
+        <p class="chart-sub">Spending on health per person per year, in ringgit. The dashed line removes inflation.</p>
+        <div id="c1" class="vis"></div>
+        <figcaption><p>Source: Ministry of Health, Malaysia National Health Accounts 2011–2024, Tables 4.1 and 4.2.</p></figcaption>
+      </figure>
+    </div>
+    <div class="row">
+      <div class="narrative">
+        <p>Zoom in on the last five years, in 2024 ringgit so prices are comparable.</p>
+        <p>Total spending rose from <strong>RM70.6 billion</strong> in 2019 to <strong>RM89.8 billion</strong> in 2024.</p>
+        <p>2020 and 2021 added RM5.2 billion and RM6.8 billion, during COVID-19. Spending then <strong>fell by RM5.6 billion</strong> in 2022, and rose again by about RM6 billion in each of the next two years.</p>
+        <div class="stat total"><span class="stat-value">−RM5.6 bn</span><span class="stat-label">the only yearly fall since 2019, in 2022 (2024 prices)</span></div>
+      </div>
+      <figure class="chart figure-col">
+        <h3>Spending Rose In Four Of The Last Five Years, With One Fall In 2022</h3>
+        <p class="chart-sub">How total health spending changed each year since 2019, in RM billion at 2024 prices.</p>
+        <div id="c8" class="vis"></div>
+        <figcaption><p>Source: Ministry of Health, Malaysia National Health Accounts 2011–2024, Tables 4.1 and 4.2 (constant 2024 prices). Each bar starts where the one before it ended.</p></figcaption>
+      </figure>
+    </div>
+    </div>
+  </section>
+  <section class="act" id="act2">
+    <div class="chapter ch-households">
+      <span class="chapter-num">02</span>
+      <div>
+        <p class="chapter-kicker">Part 2</p>
+        <h2>Who pays the bill?</h2>
+        <p class="chapter-sub">Families now carry a bigger share of the bill.</p>
+      </div>
+    </div>
+    <div class="grid">
+    <div class="row">
+      <div class="narrative">
+        <p>Two payers cover most of the bill: the <span class="key moh">Ministry of Health</span> and <span class="key households">households</span> paying from their own pockets.</p>
+        <p>In 2024, the Ministry paid <strong>RM39.1 billion</strong>. Households paid <strong>RM34.8 billion</strong>.</p>
+        <p>Since 2011, household spending has <strong>tripled</strong>. Ministry spending grew <strong>2.4 times</strong>. So a bigger share now lands on families.</p>
+        <details class="glossary">
+          <summary>What do these words mean?</summary>
+          <dl>
+            <dt>Out of pocket</dt>
+            <dd>Money you pay yourself at the counter, not covered by insurance or the government.</dd>
+            <dt>Other government</dt>
+            <dd>Public bodies besides the Ministry, such as university hospitals, SOCSO and local councils.</dd>
+            <dt>Employers and others</dt>
+            <dd>Companies paying for staff care, managed-care firms and charities.</dd>
+          </dl>
+        </details>
+        <div class="stat households"><span class="stat-value">3×</span><span class="stat-label">growth in household out-of-pocket spending, 2011 to 2024</span></div>
+      </div>
+      <figure class="chart figure-col">
+        <h3>Almost 4 In Every 10 Ringgit Came Straight From Households</h3>
+        <p class="chart-sub">Who paid for health care in 2024. Each square is about RM1 billion.</p>
+        <div id="c2" class="vis"></div>
+        <figcaption><p>Source: Ministry of Health, Malaysia National Health Accounts 2011–2024, Table 5.1b. Squares are rounded to the nearest RM1 billion.</p></figcaption>
+      </figure>
+    </div>
+    <div class="row">
+      <div class="narrative">
+        <p>Now compare each payer's share in 2011 and 2024.</p>
+        <p>The <span class="key households">households</span> line climbs by 6.9 points. The <span class="key moh">Ministry of Health</span> line slips from 45.9% to 43.6%.</p>
+        <p><span class="key insurance">Private insurance</span> barely moves, at about 8%.</p>
+        <div class="stat households"><span class="stat-value">+6.9 points</span><span class="stat-label">rise in the household share of the bill</span></div>
+      </div>
+      <figure class="chart figure-col">
+        <h3>Households' Share Rose From 31.9% To 38.8%</h3>
+        <p class="chart-sub">Each payer's share of total health spending, 2011 compared with 2024.</p>
+        <div id="c3" class="vis"></div>
+        <figcaption><p>Source: Ministry of Health, Malaysia National Health Accounts 2011–2024, Table 5.1c.</p></figcaption>
+      </figure>
+    </div>
+    </div>
+  </section>
+  <section class="act" id="act3">
+    <div class="chapter ch-services">
+      <span class="chapter-num">03</span>
+      <div>
+        <p class="chapter-kicker">Part 3</p>
+        <h2>What does the money buy?</h2>
+        <p class="chapter-sub">Treating illness dominates, but COVID-19 shifted priorities.</p>
+      </div>
+    </div>
+    <div class="grid">
+    <div class="row">
+      <div class="narrative">
+        <p>Most of the money goes to <span class="key illness">treating illness</span>: RM56.6 billion in 2024, or 63%.</p>
+        <p>Each coloured band is a service. The thicker the band, the more money.</p>
+        <p><span class="key medicines">Medicines</span> grew from RM2.2 billion to RM8.6 billion. <span class="key buildings">Buildings and equipment</span> grew from RM2.4 billion to RM8.5 billion.</p>
+        <p><span class="key prevention">Prevention</span> bulged to RM10.9 billion in 2021, during the national COVID-19 vaccination drive. It fell back to RM5.1 billion by 2024.</p>
+        <div class="stat prevention"><span class="stat-value">RM10.9 bn</span><span class="stat-label">spent on prevention in 2021, its COVID-19 peak</span></div>
+      </div>
+      <figure class="chart figure-col">
+        <h3>Prevention Bulged In 2021; Medicines And Buildings Kept Growing</h3>
+        <p class="chart-sub">Health spending by service, in RM billion. Band thickness shows the amount. Hover for details.</p>
+        <div id="c4" class="vis"></div>
+        <figcaption>
+          <p>Source: Ministry of Health, Malaysia National Health Accounts 2011–2024, Tables 7.1b and 7.1c. Lab tests, research, drinking water, rehabilitation and long-term care are each under 1% and grouped as "Everything else".</p>
+          <p>Vaccination programme: <a href="https://www.malaysianow.com/news/2021/04/27/khairy-gives-detailed-breakdown-of-rm5-billion-vaccine-bill">MalaysiaNow, 27 April 2021</a>.</p>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="row">
+      <div class="narrative">
+        <p>Where the money is spent has barely changed. <strong>Hospitals, clinics and administration</strong> held the top three places every year.</p>
+        <p>The steady climber is <strong class="hl-pharmacies">pharmacies and medical shops</strong>. They moved from 5th to 4th in 2017, and spending there grew four times, from RM1.9 billion to RM7.6 billion.</p>
+        <p>The one sudden jump came during COVID-19. <strong>Labs, imaging and ambulance</strong> rose from RM0.5 billion in 2020 to <strong>RM4.5 billion</strong> in 2021, then fell back to RM0.4 billion.</p>
+        <p>Hover over a line to follow one place.</p>
+        <div class="stat ink"><span class="stat-value">~10×</span><span class="stat-label">jump in lab, imaging and ambulance spending, 2020 to 2021</span></div>
+      </div>
+      <figure class="chart figure-col">
+        <h3>A Stable Ranking: Pharmacies Climbed, And Labs Spiked During COVID-19</h3>
+        <p class="chart-sub">Where health money was spent, ranked each year (1 = most money, all payers). Labels show RM spent in 2024.</p>
+        <div id="c5" class="vis"></div>
+        <figcaption><p>Source: Ministry of Health, Malaysia National Health Accounts 2011–2024, Table 6.1b. Nursing homes and overseas providers are left out (under 0.3% of spending).</p></figcaption>
+      </figure>
+    </div>
+    <div class="row">
+      <div class="narrative">
+        <p>Who pays depends on where the money is spent.</p>
+        <p>The government pays <strong>54%</strong> of hospital spending and <strong>43%</strong> at clinics.</p>
+        <p>At <strong>pharmacies and medical shops</strong>, it pays only <strong>6%</strong>. Almost all of the RM7.6 billion comes from private sources.</p>
+        <p>Wider columns mean more money. Hover for RM values.</p>
+        <div class="stat moh"><span class="stat-value">6%</span><span class="stat-label">of pharmacy spending paid by the government in 2024</span></div>
+      </div>
+      <figure class="chart figure-col">
+        <h3>Government Pays About Half At Hospitals, But Almost Nothing At Pharmacies</h3>
+        <p class="chart-sub">Where health money was spent in 2024 (column width) and who paid (column height).</p>
+        <div id="c11" class="vis"></div>
+        <figcaption><p>Source: Ministry of Health, Malaysia National Health Accounts 2011–2024, Table 6.1b (total and public spending by provider). Private = total minus public. Hover for RM values. Labs, nursing homes and overseas providers (0.3%) are left out.</p></figcaption>
+      </figure>
+    </div>
+    <div class="row">
+      <div class="narrative">
+        <p>Where do <span class="key households">households</span> spend their own money?</p>
+        <p>Mostly at <strong>private hospitals</strong>: RM15.3 billion in 2024, nearly three times the 2011 amount.</p>
+        <p>Private clinics and pharmacies come next. Public providers took only 4.2% of household spending.</p>
+        <div class="stat households"><span class="stat-value">RM15.3 bn</span><span class="stat-label">paid by households at private hospitals in 2024</span></div>
+      </div>
+      <figure class="chart figure-col">
+        <h3>Households Now Spend RM15.3 Billion A Year At Private Hospitals</h3>
+        <p class="chart-sub">Money households paid out of pocket at private providers, in RM billion.</p>
+        <p class="legend-note">○ 2011 &nbsp;&nbsp; ● 2024</p>
+        <div id="c6" class="vis"></div>
+        <figcaption><p>Source: Ministry of Health, Malaysia National Health Accounts 2011–2024, Table 9.2c (private providers).</p></figcaption>
+      </figure>
+    </div>
+    </div>
+  </section>
+  <section class="act" id="act4">
+    <div class="chapter ch-moh">
+      <span class="chapter-num">04</span>
+      <div>
+        <p class="chapter-kicker">Part 4</p>
+        <h2>The government's own priorities</h2>
+        <p class="chapter-sub">The Ministry spends almost all of what it plans.</p>
+      </div>
+    </div>
+    <div class="grid">
+    <div class="row">
+      <div class="narrative">
+        <p>Did the Ministry spend what it planned?</p>
+        <p>In 2025 it spent <strong>97%</strong> of its budget. Most programmes used almost all of their money.</p>
+        <p><strong>Management</strong> used the least: 87%.</p>
+        <div class="stat moh"><span class="stat-value">97%</span><span class="stat-label">of the Ministry's 2025 budget actually spent</span></div>
+      </div>
+      <figure class="chart figure-col">
+        <h3>In 2025 The Ministry Spent 97% Of Its Budget</h3>
+        <p class="chart-sub">Budget (black tick) and money actually spent (bar) by programme, 2025, in RM billion.</p>
+        <div id="c7" class="vis"></div>
+        <figcaption><p>Source: Ministry of Health Annual Report 2025, Table 3.7. Budget is the amended allocation at 31 December 2025, after in-year changes. *Other = special programme, new policies, one-off items and financial commitments.</p></figcaption>
+      </figure>
+    </div>
+    <div class="row">
+      <div class="narrative">
+        <p>Salaries are the biggest item: about <strong>53%</strong> of the Ministry's 2024 budget.</p>
+        <p>The <strong>development</strong> budget, for new buildings and equipment, grew fastest. It rose from RM1.6 billion in 2015 to RM6.1 billion in 2024.</p>
+        <p>Part of that jump is an accounting change. In 2020 and 2021, hospital support services were moved from the running budget into development.</p>
+        <div class="stat moh"><span class="stat-value">3.8×</span><span class="stat-label">growth of the development budget since 2015</span></div>
+      </div>
+      <figure class="chart figure-col">
+        <h3>The Development Budget Grew Fastest, Partly Through A 2021 Accounting Change</h3>
+        <p class="chart-sub">Each type of Ministry of Health budget compared with its 2015 level (2015 = 100).</p>
+        <div id="c9" class="vis"></div>
+        <figcaption>
+          <p>Source: Ministry of Finance Budget Books via data.gov.my, "Annual Budget Allocation for the Ministry of Health". Budgeted amounts, not actual spending. Other running costs (under 3% of the budget) are not shown.</p>
+          <p>Reclassification: MOH Annual Reports 2020 and 2021, Finance chapter.</p>
+        </figcaption>
+      </figure>
+    </div>
+    </div>
+  </section>
+  <section class="act" id="act5">
+    <div class="chapter ch-states">
+      <span class="chapter-num">05</span>
+      <div>
+        <p class="chapter-kicker">Part 5</p>
+        <h2>Does the money reach every state?</h2>
+        <p class="chapter-sub">Where you live changes how much is spent near you.</p>
+      </div>
+    </div>
+    <p class="chapter-note">Spending is counted where hospitals are, not where patients live. Keep that in mind on these maps.</p>
+    <div class="grid">
+    <div class="row">
+      <div class="narrative">
+        <p><strong>Sabah</strong> receives the least: RM1,690 per person.</p>
+        <p><strong>Kuala Lumpur</strong> (RM6,448) and <strong>Putrajaya</strong> (RM8,279) look far higher.</p>
+        <p>Their large hospitals also treat patients from nearby states. So these figures overstate spending on their own residents.</p>
+        <p>Hover over a state to find it in both views.</p>
+        <div class="stat total"><span class="stat-value">RM1,690</span><span class="stat-label">per person in Sabah, the lowest in 2024</span></div>
+      </div>
+      <figure class="chart figure-col">
+        <h3>Sabah Gets The Least Spending Per Person; Kuala Lumpur And Putrajaya The Most</h3>
+        <p class="chart-sub">Total health spending per person by state, 2024, in ringgit.</p>
+        <div id="m1" class="vis"></div>
+        <figcaption><p>Source: Ministry of Health, Malaysia National Health Accounts 2011–2024, Table 4.3 (spending and population). Map: Natural Earth.</p></figcaption>
+      </figure>
+    </div>
+    <div class="row">
+      <div class="narrative">
+        <p><strong>Selangor</strong> has the most public hospital beds: 7,640.</p>
+        <p>But it also has the most people. Per 10,000 residents it has only <strong>10.8 beds</strong>, the fewest of any state. The national figure is 15.3.</p>
+        <p>Hover over a circle to see beds per person.</p>
+        <div class="stat moh"><span class="stat-value">10.8</span><span class="stat-label">beds per 10,000 people in Selangor</span></div>
+      </div>
+      <figure class="chart figure-col">
+        <h3>Selangor Has The Most Public Hospital Beds, But The Fewest Per Person</h3>
+        <p class="chart-sub">Public-sector hospital beds by state, 2022. Circle area shows the number of beds; colour shows beds per 10,000 people. These greens show beds per person, not who pays.</p>
+        <div id="m2" class="vis"></div>
+        <figcaption><p>Source: Ministry of Health via data.gov.my, "Hospital Beds by State and Hospital Type". Population: DOSM, 2022. Private hospitals are not included in this dataset.</p></figcaption>
+      </figure>
+    </div>
+    <div class="row">
+      <div class="narrative">
+        <p>Government health staff increased in every state from 2014 to 2022, except Putrajaya.</p>
+        <p>Kuala Lumpur more than doubled (+126%). Kelantan rose by 78%.</p>
+        <p>Hover over a state on the map to follow its line.</p>
+        <div class="caution">
+          <p><strong>◇ Read the 2020 values with caution.</strong></p>
+          <p>Several states jump or drop in 2020, then return to trend. Perak falls from 11,995 to 6,566. Perlis jumps from 1,994 to 10,665, almost all in nurses (914 to 9,465).</p>
+          <p>The national total still grows smoothly, from 154,177 to 156,639. So the staff did not disappear; they seem to be counted under the wrong states.</p>
+          <p>COVID-19 disrupted health services that year, which may have affected record keeping. This is not confirmed. The values are shown as published.</p>
+        </div>
+      </div>
+      <figure class="chart figure-col">
+        <h3>Health Staff Grew Almost Everywhere, But 2020 Looks Disrupted</h3>
+        <p class="chart-sub">Map: change in government health staff, 2014 to 2022. Lines: each state's staff compared with 2014 (2014 = 100). Hover over a state on the map.</p>
+        <p class="legend-note">◇ 2020 value, read with caution</p>
+        <div id="m3" class="vis"></div>
+        <figcaption><p>Source: Ministry of Health via data.gov.my, "Healthcare Staff by State and Staff Type" (doctors, nurses, community nurses and dentists in the public sector). Counts are as at 31 December each year, although the source file labels them 1 January. The chart axis stops at 250, so Perlis in 2020 runs off the top.</p></figcaption>
+      </figure>
+    </div>
+    <div class="row">
+      <div class="narrative">
+        <p>How does Malaysia compare with its neighbours?</p>
+        <p>In 2000, health took <strong>4.6%</strong> of all government spending. It peaked at <strong>10.1%</strong> in 2021, during COVID-19, then fell to <strong>7.9%</strong> in 2023.</p>
+        <p>That puts Malaysia <strong>7th of 11</strong> ASEAN countries, far behind <strong>Singapore</strong> (17.4%) and <strong>Thailand</strong> (15.6%).</p>
+        <p>Drag the slider to see other years.</p>
+        <div class="stat moh"><span class="stat-value">7th of 11</span><span class="stat-label">Malaysia's rank in ASEAN in 2023</span></div>
+      </div>
+      <figure class="chart figure-col">
+        <h3>Malaysia Ranks 7th Of 11 In ASEAN For Health's Share Of Government Spending</h3>
+        <p class="chart-sub">Government health spending as a share of all government spending (%).</p>
+        <div id="m4" class="vis"></div>
+        <figcaption><p>Source: World Bank indicator "Domestic general government health expenditure (% of general government expenditure)", from the WHO Global Health Expenditure Database, data to 2023. Map: Natural Earth.</p></figcaption>
+      </figure>
+    </div>
+    </div>
+  </section>
+
+  <!-- ================= CLOSING ================= -->
+  <section class="act" id="closing">
+    <div class="act-head">
+      <p class="kicker">What this means for you</p>
+      <h2>Three things to remember</h2>
+    </div>
+    <ul class="takeaways">
+      <li>
+        <h3>Care costs more every year</h3>
+        <p>Spending per person more than doubled from 2011 to 2024, and grew 74% after inflation.</p>
+      </li>
+      <li>
+        <h3>More comes from your pocket</h3>
+        <p>Households paid 38.8% of the bill in 2024, up from 31.9%. Their biggest cost is private hospitals.</p>
+      </li>
+      <li>
+        <h3>The government is investing</h3>
+        <p>The Ministry spent 97% of its 2025 budget. The development budget grew fastest.</p>
+      </li>
+    </ul>
+  </section>
+</main>
+
+<!-- ================= FOOTER: metadata ================= -->
+<footer>
+  <div class="wrap grid">
+    <div class="half-left">
+      <h3>Data sources</h3>
+      <ul>
+        <li><a href="https://www.moh.gov.my/images/04-penerbitan/laporan-mnha/MNHA%20National%20Health%20Accounts%20Health%20Expenditure%20Report%202011-2024.pdf">Malaysia National Health Accounts, Health Expenditure Report 2011–2024</a>, Ministry of Health</li>
+        <li><a href="https://www.moh.gov.my/en/publications-and-reports/infographics-reports-statistics/annual-report">MOH Annual Reports 2022–2025</a>, Ministry of Health</li>
+        <li><a href="https://data.gov.my/data-catalogue/federal_budget_moh">Annual Budget Allocation for MOH</a>, <a href="https://data.gov.my/data-catalogue/hospital_beds">Hospital Beds</a> and <a href="https://data.gov.my/data-catalogue/healthcare_staff">Healthcare Staff</a>, data.gov.my (CC BY 4.0)</li>
+        <li><a href="https://data.worldbank.org/indicator/SH.XPD.GHED.GE.ZS">Domestic general government health expenditure</a>, World Bank / WHO (CC BY 4.0)</li>
+        <li>Boundaries: <a href="https://www.naturalearthdata.com/">Natural Earth</a> (public domain)</li>
+      </ul>
+    </div>
+    <div class="half-right">
+      <h3>About</h3>
+      <p>Created by Zi Cheng Wong for FIT3179 Data Visualisation, Monash University Malaysia, October 2026.</p>
+      <p>Built with Vega-Lite. Typefaces: Plus Jakarta Sans and Source Sans 3.</p>
+      <p>AI use: Claude (Anthropic) helped collect data, draft code and check grammar. All figures come from the sources listed.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
