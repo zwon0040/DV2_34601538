@@ -86,7 +86,7 @@
           "as": "top"
         },
         {
-          "calculate": "'RM' + format(datum.bn, '.1f') + ' bn'",
+          "calculate": "'RM' + format(datum.bn, '.1f') + ' billion'",
           "as": "label"
         }
       ],
@@ -248,7 +248,7 @@
               {
                 "field": "change",
                 "type": "quantitative",
-                "title": "Change (RM bn, 2024 prices)",
+                "title": "Change (RM billion, 2024 prices)",
                 "format": "+.1f"
               }
             ]

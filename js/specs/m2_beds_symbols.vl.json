@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Proportional symbol map of public-sector hospital beds by state in 2022. Circle area shows the number of beds.",
+  "description": "Graduated symbol map of public-sector hospital beds by state in 2022. Circles come in four size classes of bed counts; colour shows beds per 10,000 people.",
   "width": 560,
-  "height": 270,
+  "height": 300,
   "projection": {
     "type": "mercator"
   },
@@ -97,6 +97,10 @@
         {
           "calculate": "datum.per_10k < 12 ? 'Under 12' : datum.per_10k < 15 ? '12 to 15' : datum.per_10k < 20 ? '15 to 20' : '20 or more'",
           "as": "rate_class"
+        },
+        {
+          "calculate": "datum.all < 1000 ? 'Under 1,000' : datum.all < 3000 ? '1,000 to 2,999' : datum.all < 5000 ? '3,000 to 4,999' : '5,000 or more'",
+          "as": "bed_class"
         }
       ],
       "layer": [
@@ -117,28 +121,28 @@
               "type": "quantitative"
             },
             "size": {
-              "field": "all",
-              "type": "quantitative",
+              "field": "bed_class",
+              "type": "ordinal",
               "title": "Public hospital beds",
               "scale": {
                 "domain": [
-                  0,
-                  8000
+                  "Under 1,000",
+                  "1,000 to 2,999",
+                  "3,000 to 4,999",
+                  "5,000 or more"
                 ],
                 "range": [
-                  0,
-                  1400
+                  60,
+                  250,
+                  600,
+                  1100
                 ]
               },
               "legend": {
                 "orient": "none",
                 "legendX": 455,
-                "legendY": 128,
+                "legendY": 150,
                 "direction": "vertical",
-                "values": [
-                  1000,
-                  5000
-                ],
                 "symbolFillColor": "#9AA5B1",
                 "symbolOpacity": 0.85,
                 "symbolStrokeColor": "#EDE1E5",
@@ -197,7 +201,7 @@
               "legend": {
                 "orient": "none",
                 "legendX": 455,
-                "legendY": 200,
+                "legendY": 245,
                 "direction": "vertical",
                 "symbolType": "circle",
                 "symbolSize": 90,

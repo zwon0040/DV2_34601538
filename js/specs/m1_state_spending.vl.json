@@ -1,23 +1,38 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Choropleth map and sorted bar chart of health spending per person by state in 2024. Hovering a state highlights it in both views.",
+  "description": "Choropleth map of total health spending per person by state, 2024. Classed colour bands; hover a state for its exact value.",
   "data": {
     "url": "data/mnha_state_2024.csv",
-    "format": {"type": "csv", "parse": {"population": "number", "expenditure_rm_mil": "number"}}
+    "format": {
+      "type": "csv",
+      "parse": {
+        "population": "number",
+        "expenditure_rm_mil": "number"
+      }
+    }
   },
   "transform": [
-    {"calculate": "datum.expenditure_rm_mil * 1e6 / datum.population", "as": "per_person"},
+    {
+      "calculate": "datum.expenditure_rm_mil * 1e6 / datum.population",
+      "as": "per_person"
+    },
     {
       "calculate": "datum.per_person < 2000 ? 'Under RM2,000' : datum.per_person < 2500 ? 'RM2,000 to 2,499' : datum.per_person < 3000 ? 'RM2,500 to 2,999' : datum.per_person < 5000 ? 'RM3,000 to 4,999' : 'RM5,000 or more'",
       "as": "band"
     },
-    {"calculate": "replace(datum.state, 'W.P. ', '')", "as": "name"},
+    {
+      "calculate": "replace(datum.state, 'W.P. ', '')",
+      "as": "name"
+    },
     {
       "lookup": "state",
       "from": {
         "data": {
           "url": "geo/malaysia_states.topojson",
-          "format": {"type": "topojson", "feature": "states"}
+          "format": {
+            "type": "topojson",
+            "feature": "states"
+          }
         },
         "key": "properties.state"
       },
@@ -28,165 +43,43 @@
       "from": {
         "data": {
           "url": "geo/malaysia_state_label_points.csv",
-          "format": {"type": "csv", "parse": {"longitude": "number", "latitude": "number"}}
+          "format": {
+            "type": "csv",
+            "parse": {
+              "longitude": "number",
+              "latitude": "number"
+            }
+          }
         },
         "key": "state",
-        "fields": ["longitude", "latitude"]
+        "fields": [
+          "longitude",
+          "latitude"
+        ]
       }
     }
   ],
-  "params": [
+  "width": 540,
+  "height": 255,
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
     {
-      "name": "pick",
-      "select": {"type": "point", "fields": ["state"], "on": "pointerover", "clear": "pointerout"},
-      "views": ["map", "bar"]
-    }
-  ],
-  "vconcat": [
-    {
-      "width": 540,
-      "height": 255,
-      "projection": {"type": "mercator"},
-      "layer": [
-        {
-          "name": "map",
-          "mark": {"type": "geoshape", "stroke": "#EDE1E5", "strokeWidth": 1},
-          "encoding": {
-            "shape": {"field": "geo", "type": "geojson"},
-            "color": {
-              "field": "band",
-              "type": "ordinal",
-              "title": "Spending per person, 2024",
-              "scale": {
-                "domain": [
-                  "Under RM2,000",
-                  "RM2,000 to 2,499",
-                  "RM2,500 to 2,999",
-                  "RM3,000 to 4,999",
-                  "RM5,000 or more"
-                ],
-                "range": ["#BFCCF2", "#A8BAEC", "#7390DF", "#3A5FCD", "#1F3A93"]
-              },
-              "legend": {
-                "orient": "none",
-                "legendX": 180,
-                "legendY": 0,
-                "symbolType": "square",
-                "symbolSize": 180
-              }
-            },
-            "opacity": {"condition": {"param": "pick", "empty": true, "value": 1}, "value": 0.35},
-            "tooltip": [
-              {"field": "name", "type": "nominal", "title": "State"},
-              {
-                "field": "per_person",
-                "type": "quantitative",
-                "title": "RM per person",
-                "format": ",.0f"
-              },
-              {
-                "field": "expenditure_rm_mil",
-                "type": "quantitative",
-                "title": "Total (RM million)",
-                "format": ",.0f"
-              },
-              {"field": "population", "type": "quantitative", "title": "Population", "format": ","}
-            ]
-          }
-        },
-        {
-          "transform": [
-            {
-              "filter": "datum.name === 'Sabah' || datum.name === 'Kuala Lumpur' || datum.name === 'Putrajaya'"
-            },
-            {"calculate": "datum.name + ' RM' + format(datum.per_person, ',.0f')", "as": "label"}
-          ],
-          "layer": [
-            {
-              "mark": {"type": "circle", "size": 22, "color": "#1F2933"},
-              "encoding": {
-                "longitude": {"field": "longitude", "type": "quantitative"},
-                "latitude": {"field": "latitude", "type": "quantitative"}
-              }
-            },
-            {
-              "transform": [{"filter": "datum.name === 'Kuala Lumpur'"}],
-              "mark": {
-                "type": "text",
-                "align": "left",
-                "dx": 34,
-                "dy": -14,
-                "fontSize": 12,
-                "fontWeight": 600,
-                "color": "#1F2933"
-              },
-              "encoding": {
-                "longitude": {"field": "longitude", "type": "quantitative"},
-                "latitude": {"field": "latitude", "type": "quantitative"},
-                "text": {"field": "label"}
-              }
-            },
-            {
-              "transform": [{"filter": "datum.name === 'Putrajaya'"}],
-              "mark": {
-                "type": "text",
-                "align": "left",
-                "dx": 34,
-                "dy": 8,
-                "fontSize": 12,
-                "fontWeight": 600,
-                "color": "#1F2933"
-              },
-              "encoding": {
-                "longitude": {"field": "longitude", "type": "quantitative"},
-                "latitude": {"field": "latitude", "type": "quantitative"},
-                "text": {"field": "label"}
-              }
-            },
-            {
-              "transform": [{"filter": "datum.name === 'Sabah'"}],
-              "mark": {
-                "type": "text",
-                "align": "center",
-                "dx": 0,
-                "dy": 16,
-                "fontSize": 12,
-                "fontWeight": 600,
-                "color": "#1F2933"
-              },
-              "encoding": {
-                "longitude": {"field": "longitude", "type": "quantitative"},
-                "latitude": {"field": "latitude", "type": "quantitative"},
-                "text": {"field": "label"}
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "bar",
-      "width": 430,
-      "height": {"step": 17},
-      "mark": {"type": "bar", "cornerRadiusEnd": 2},
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#EDE1E5",
+        "strokeWidth": 1
+      },
       "encoding": {
-        "y": {
-          "field": "name",
-          "type": "nominal",
-          "title": null,
-          "sort": "-x",
-          "axis": {"domain": false, "ticks": false}
-        },
-        "x": {
-          "field": "per_person",
-          "type": "quantitative",
-          "title": "RM per person, 2024",
-          "axis": {"format": ",.0f", "tickCount": 5}
+        "shape": {
+          "field": "geo",
+          "type": "geojson"
         },
         "color": {
           "field": "band",
           "type": "ordinal",
-          "legend": null,
+          "title": "Spending per person, 2024",
           "scale": {
             "domain": [
               "Under RM2,000",
@@ -195,21 +88,165 @@
               "RM3,000 to 4,999",
               "RM5,000 or more"
             ],
-            "range": ["#BFCCF2", "#A8BAEC", "#7390DF", "#3A5FCD", "#1F3A93"]
+            "range": [
+              "#BFCCF2",
+              "#A8BAEC",
+              "#7390DF",
+              "#3A5FCD",
+              "#1F3A93"
+            ]
+          },
+          "legend": {
+            "orient": "none",
+            "legendX": 180,
+            "legendY": 0,
+            "symbolType": "square",
+            "symbolSize": 180
           }
         },
-        "opacity": {"condition": {"param": "pick", "empty": true, "value": 1}, "value": 0.35},
         "tooltip": [
-          {"field": "name", "type": "nominal", "title": "State"},
+          {
+            "field": "name",
+            "type": "nominal",
+            "title": "State"
+          },
           {
             "field": "per_person",
             "type": "quantitative",
             "title": "RM per person",
             "format": ",.0f"
+          },
+          {
+            "field": "expenditure_rm_mil",
+            "type": "quantitative",
+            "title": "Total (RM million)",
+            "format": ",.0f"
+          },
+          {
+            "field": "population",
+            "type": "quantitative",
+            "title": "Population",
+            "format": ","
           }
         ]
       }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.name === 'Sabah' || datum.name === 'Kuala Lumpur' || datum.name === 'Putrajaya'"
+        },
+        {
+          "calculate": "datum.name + ' RM' + format(datum.per_person, ',.0f')",
+          "as": "label"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "circle",
+            "size": 22,
+            "color": "#1F2933"
+          },
+          "encoding": {
+            "longitude": {
+              "field": "longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "latitude",
+              "type": "quantitative"
+            }
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": "datum.name === 'Kuala Lumpur'"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "dx": 34,
+            "dy": -14,
+            "fontSize": 12,
+            "fontWeight": 600,
+            "color": "#1F2933"
+          },
+          "encoding": {
+            "longitude": {
+              "field": "longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "latitude",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "label"
+            }
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": "datum.name === 'Putrajaya'"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "dx": 34,
+            "dy": 8,
+            "fontSize": 12,
+            "fontWeight": 600,
+            "color": "#1F2933"
+          },
+          "encoding": {
+            "longitude": {
+              "field": "longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "latitude",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "label"
+            }
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": "datum.name === 'Sabah'"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "align": "center",
+            "dx": 0,
+            "dy": 16,
+            "fontSize": 12,
+            "fontWeight": 600,
+            "color": "#1F2933"
+          },
+          "encoding": {
+            "longitude": {
+              "field": "longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "latitude",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "label"
+            }
+          }
+        }
+      ]
     }
-  ],
-  "spacing": 28
+  ]
 }

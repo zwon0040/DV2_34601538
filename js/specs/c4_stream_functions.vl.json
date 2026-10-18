@@ -88,8 +88,20 @@
           "field": "rm_bn",
           "type": "quantitative",
           "stack": "center",
-          "title": null,
-          "axis": null,
+          "title": "RM billion",
+          "axis": {
+            "values": [
+              0,
+              20,
+              40,
+              60,
+              80,
+              100
+            ],
+            "grid": true,
+            "domain": false,
+            "ticks": false
+          },
           "scale": {
             "domain": [
               -6,
@@ -128,7 +140,7 @@
           },
           "legend": {
             "orient": "bottom",
-            "columns": 4,
+            "columns": 3,
             "symbolType": "square",
             "symbolSize": 140,
             "labelLimit": 200
@@ -167,7 +179,7 @@
           {
             "year": 2021,
             "t1": "2021: COVID-19 vaccination drive",
-            "t2": "lifts prevention to RM10.9 bn"
+            "t2": "lifts prevention to RM10.9 billion"
           }
         ]
       },

@@ -65,10 +65,10 @@
           {
             "field": "allocated_bn",
             "type": "quantitative",
-            "title": "Allocated (RM bn)",
+            "title": "Allocated (RM billion)",
             "format": ".2f"
           },
-          {"field": "spent_bn", "type": "quantitative", "title": "Spent (RM bn)", "format": ".2f"},
+          {"field": "spent_bn", "type": "quantitative", "title": "Spent (RM billion)", "format": ".2f"},
           {"field": "used", "type": "quantitative", "title": "Share used", "format": ".0%"}
         ]
       }

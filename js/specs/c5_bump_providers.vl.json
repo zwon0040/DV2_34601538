@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "C5. Bump chart: rank of where health money is spent (providers), 2011-2024. Each place has its own colour; pharmacies (rust, the same colour as medicines in the streamgraph) and labs, imaging and ambulance (dark ink) are drawn stronger because the story mentions them.",
-  "width": 400,
+  "width": 360,
   "height": 260,
   "data": {
     "url": "data/mnha_providers_2011_2024.csv",
@@ -39,7 +39,7 @@
       "as": "highlight"
     },
     {
-      "calculate": "'RM' + format(datum.total_rm_mil / 1000, '.1f') + ' bn'",
+      "calculate": "'RM' + format(datum.total_rm_mil / 1000, '.1f') + ' billion'",
       "as": "amt"
     }
   ],
@@ -309,7 +309,7 @@
             "year": 2021,
             "t1": "2021: COVID-19",
             "t2": "Labs, imaging and ambulance jump",
-            "t3": "from RM0.5 bn to RM4.5 bn, then fall back"
+            "t3": "from RM0.5 billion to RM4.5 billion, then fall back"
           }
         ]
       },
