@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "C8. Waterfall: how Malaysia's total health spending changed year by year from 2019 to 2024, in constant 2024 ringgit. Increases and the 2022 fall both appear.",
+  "description": "C8. Waterfall: how Malaysia's total health spending changed year by year from 2011 to 2024, in constant 2024 ringgit. Spending rose in 12 of 13 years; 2022 is the only fall.",
   "width": 590,
   "height": 330,
   "data": {
@@ -15,7 +15,7 @@
   },
   "transform": [
     {
-      "filter": "datum.year >= 2019"
+      "filter": "datum.year >= 2011"
     },
     {
       "calculate": "datum.teh_constant_2024_rm_mil / 1000",
@@ -51,7 +51,15 @@
       "type": "nominal",
       "title": null,
       "sort": [
-        "2019 total",
+        "2011 total",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
         "2020",
         "2021",
         "2022",
@@ -71,7 +79,7 @@
     {
       "transform": [
         {
-          "filter": "datum.year === 2019 || datum.year === 2024"
+          "filter": "datum.year === 2011 || datum.year === 2024"
         },
         {
           "calculate": "datum.year + ' total'",
@@ -86,7 +94,7 @@
           "as": "top"
         },
         {
-          "calculate": "'RM' + format(datum.bn, '.1f') + ' billion'",
+          "calculate": "'RM' + format(datum.bn, '.1f')",
           "as": "label"
         }
       ],
@@ -152,7 +160,7 @@
     {
       "transform": [
         {
-          "filter": "datum.year >= 2020"
+          "filter": "datum.year >= 2012"
         },
         {
           "calculate": "datum.bn - datum.prev",
@@ -258,7 +266,7 @@
           "mark": {
             "type": "text",
             "dy": -8,
-            "fontSize": 12,
+            "fontSize": 11,
             "color": "#1F2933"
           },
           "encoding": {

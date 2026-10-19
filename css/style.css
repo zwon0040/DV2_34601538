@@ -258,7 +258,7 @@ footer ul { padding-left: 1.1em; margin: 0 0 var(--s2); }
 p, li, dd, .stat-label, .kpi-label { text-wrap: pretty; }
 h1, h2, h3 { text-wrap: balance; }
 
-/* ---------- Story questions: lead line of each text block ----------
-   Same style as the chapter intro sentence (20px, regular weight, darkest ink),
-   so it stands out by size and tone without adding another bold level. */
-.narrative .question { font-size: 20px; line-height: 1.4; font-weight: 400; color: var(--ink); margin-bottom: var(--s2); }
+/* ---------- Lead line of each text block (a question or a short claim) ----------
+   19px regular weight in the darkest ink: one step above body text, below chart titles,
+   with no extra bold, so the callout stays the only heavy element in the column. */
+.narrative .lead { font-size: 19px; line-height: 1.4; font-weight: 400; color: var(--ink); margin-bottom: var(--s1); }
