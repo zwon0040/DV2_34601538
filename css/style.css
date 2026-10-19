@@ -257,3 +257,8 @@ footer ul { padding-left: 1.1em; margin: 0 0 var(--s2); }
 /* ---------- Line breaking: avoid a single orphan word on the last line ---------- */
 p, li, dd, .stat-label, .kpi-label { text-wrap: pretty; }
 h1, h2, h3 { text-wrap: balance; }
+
+/* ---------- Story questions: lead line of each text block ----------
+   Same style as the chapter intro sentence (20px, regular weight, darkest ink),
+   so it stands out by size and tone without adding another bold level. */
+.narrative .question { font-size: 20px; line-height: 1.4; font-weight: 400; color: var(--ink); margin-bottom: var(--s2); }
