@@ -5,8 +5,9 @@
   --ink-2: #3E4C59;        /* body text */
   --muted: #52606D;        /* captions, axis-style text */
   --rule: #CDB8B6;         /* thin dividers (a darker rose so they show on the cards) */
-  --page: #D5ECEA;         /* page background: light teal */
-  --card: #EDE1E5;         /* chart cards: light mauve */
+  --page: #F0EEE9;         /* page background: warm off-white */
+  --card: #FBE9EA;         /* chart cards: light pink */
+  --spine-node: #820007;   /* story spine crosses: deep red */
 
   /* Data colours: one colour = one meaning on every chart */
   --total: #3A5FCD;        /* total health spending (all payers) */
@@ -246,8 +247,12 @@ footer ul { padding-left: 1.1em; margin: 0 0 var(--s2); }
 .act .grid { position: relative; padding-left: 36px; }
 .act .grid::before { content: ""; position: absolute; left: 11px; top: 0; bottom: 0; width: 2px; background: var(--ink); opacity: 0.25; }
 .act .row .narrative { position: relative; }
-.act .row .narrative::before { content: ""; position: absolute; left: -33px; top: 50%; width: 12px; height: 12px; border-radius: 50%;
-                               background: var(--page); border: 3px solid var(--ink); transform: translateY(-50%); opacity: 0.85; }
+/* Each node is a medical cross: two 4px bars drawn as gradients, centred on the spine line. */
+.act .row .narrative::before { content: ""; position: absolute; left: -32px; top: 50%; width: 16px; height: 16px;
+                               background:
+                                 linear-gradient(var(--spine-node), var(--spine-node)) center / 4px 100% no-repeat,
+                                 linear-gradient(var(--spine-node), var(--spine-node)) center / 100% 4px no-repeat;
+                               transform: translateY(-50%); }
 
 @media (max-width: 900px) {
   .act .grid { padding-left: 0; }

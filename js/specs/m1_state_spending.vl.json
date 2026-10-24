@@ -1,27 +1,21 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Dorling cartogram of health spending by state, 2024. Each state is a circle placed near its location; circle area shows population and colour shows total health spending per person. Circles are moved apart so none overlap.",
-  "width": 540,
-  "height": 280,
+  "description": "Dorling cartogram of health spending by state, 2024. Each state is a circle; circle area shows population and colour shows health spending per person. Circles start near each state's location and are packed together so neighbours touch but none overlap. No base map is drawn, so circle positions are approximate.",
+  "width": 580,
+  "height": 300,
   "projection": {
-    "type": "mercator"
+    "type": "mercator",
+    "scale": 1800,
+    "center": [
+      106.0,
+      4.2
+    ],
+    "translate": [
+      290,
+      150
+    ]
   },
   "layer": [
-    {
-      "data": {
-        "url": "geo/malaysia_states.topojson",
-        "format": {
-          "type": "topojson",
-          "feature": "states"
-        }
-      },
-      "mark": {
-        "type": "geoshape",
-        "fill": "#DCE3EA",
-        "stroke": "#EDE1E5",
-        "strokeWidth": 0.8
-      }
-    },
     {
       "data": {
         "url": "data/mnha_state_2024.csv",
@@ -58,7 +52,11 @@
                   "latitude": "number",
                   "label_longitude": "number",
                   "label_latitude": "number",
-                  "leader": "number"
+                  "leader": "number",
+                  "leader_longitude": "number",
+                  "leader_latitude": "number",
+                  "leader_end_longitude": "number",
+                  "leader_end_latitude": "number"
                 }
               }
             },
@@ -69,44 +67,21 @@
               "label_longitude",
               "label_latitude",
               "label_align",
-              "leader"
+              "leader",
+              "leader_longitude",
+              "leader_latitude",
+              "leader_end_longitude",
+              "leader_end_latitude",
+              "code"
             ]
           }
         },
         {
-          "calculate": "indexof(['Sabah','Kuala Lumpur','Putrajaya'], datum.name) >= 0 ? datum.name + ' RM' + format(datum.per_person, ',.0f') : datum.name",
-          "as": "label"
+          "calculate": "datum.label_align === 'inside' ? datum.code : datum.name",
+          "as": "label_lines"
         }
       ],
       "layer": [
-        {
-          "transform": [
-            {
-              "filter": "datum.leader === 1"
-            }
-          ],
-          "mark": {
-            "type": "rule",
-            "color": "#52606D",
-            "strokeWidth": 0.8
-          },
-          "encoding": {
-            "longitude": {
-              "field": "longitude",
-              "type": "quantitative"
-            },
-            "latitude": {
-              "field": "latitude",
-              "type": "quantitative"
-            },
-            "longitude2": {
-              "field": "label_longitude"
-            },
-            "latitude2": {
-              "field": "label_latitude"
-            }
-          }
-        },
         {
           "mark": {
             "type": "circle",
@@ -133,13 +108,13 @@
                 ],
                 "range": [
                   0,
-                  2000
+                  5200
                 ]
               },
               "legend": {
                 "orient": "none",
-                "legendX": 20,
-                "legendY": 238,
+                "legendX": 470,
+                "legendY": 125,
                 "values": [
                   1000000,
                   3000000,
@@ -149,7 +124,7 @@
                 "symbolFillColor": "#C9D2DC",
                 "symbolStrokeColor": "#FFFFFF",
                 "symbolOpacity": 1,
-                "direction": "horizontal",
+                "direction": "vertical",
                 "rowPadding": 3
               },
               "title": "Population"
@@ -176,7 +151,7 @@
               },
               "legend": {
                 "orient": "none",
-                "legendX": 200,
+                "legendX": 470,
                 "legendY": 0,
                 "symbolType": "circle",
                 "symbolSize": 160,
@@ -217,6 +192,34 @@
         {
           "transform": [
             {
+              "filter": "toNumber(datum.leader) === 1"
+            }
+          ],
+          "mark": {
+            "type": "rule",
+            "color": "#52606D",
+            "strokeWidth": 0.8
+          },
+          "encoding": {
+            "longitude": {
+              "field": "leader_longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "leader_latitude",
+              "type": "quantitative"
+            },
+            "longitude2": {
+              "field": "leader_end_longitude"
+            },
+            "latitude2": {
+              "field": "leader_end_latitude"
+            }
+          }
+        },
+        {
+          "transform": [
+            {
               "filter": "datum.label_align === 'right'"
             }
           ],
@@ -237,7 +240,7 @@
               "type": "quantitative"
             },
             "text": {
-              "field": "label"
+              "field": "label_lines"
             }
           }
         },
@@ -264,7 +267,7 @@
               "type": "quantitative"
             },
             "text": {
-              "field": "label"
+              "field": "label_lines"
             }
           }
         },
@@ -279,7 +282,7 @@
             "align": "center",
             "baseline": "middle",
             "fontSize": 11,
-            "color": "#1F2933"
+            "lineHeight": 10.5
           },
           "encoding": {
             "longitude": {
@@ -291,7 +294,45 @@
               "type": "quantitative"
             },
             "text": {
-              "field": "label"
+              "field": "label_lines"
+            },
+            "color": {
+              "value": "#3E4C59"
+            }
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": "datum.label_align === 'inside'"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "align": "center",
+            "baseline": "middle",
+            "fontSize": 10.5,
+            "lineHeight": 10.5,
+            "fontWeight": 600
+          },
+          "encoding": {
+            "longitude": {
+              "field": "label_longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "label_latitude",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "label_lines"
+            },
+            "color": {
+              "condition": {
+                "test": "datum.per_person >= 3000",
+                "value": "#FFFFFF"
+              },
+              "value": "#1F2933"
             }
           }
         }

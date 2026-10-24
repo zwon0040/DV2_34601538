@@ -5,7 +5,7 @@
 // so each spec file only describes its data and encodings.
 
 const theme = {
-  background: "#EDE1E5",
+  background: "#FBE9EA",
   font: "'Source Sans 3', sans-serif",
   padding: 4,
   view: { stroke: null },

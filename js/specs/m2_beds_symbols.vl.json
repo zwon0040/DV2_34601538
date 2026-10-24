@@ -18,7 +18,7 @@
       "mark": {
         "type": "geoshape",
         "fill": "#CAD6E2",
-        "stroke": "#EDE1E5",
+        "stroke": "#FBE9EA",
         "strokeWidth": 1
       }
     },
@@ -108,7 +108,7 @@
           "mark": {
             "type": "circle",
             "opacity": 0.9,
-            "stroke": "#EDE1E5",
+            "stroke": "#FBE9EA",
             "strokeWidth": 1.5
           },
           "encoding": {
@@ -145,7 +145,7 @@
                 "direction": "vertical",
                 "symbolFillColor": "#9AA5B1",
                 "symbolOpacity": 0.85,
-                "symbolStrokeColor": "#EDE1E5",
+                "symbolStrokeColor": "#FBE9EA",
                 "titleFontSize": 11,
                 "labelFontSize": 11,
                 "rowPadding": 2

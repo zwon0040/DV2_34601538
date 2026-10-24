@@ -51,7 +51,7 @@
           "mark": {
             "type": "geoshape",
             "fill": "#CAD6E2",
-            "stroke": "#EDE1E5",
+            "stroke": "#FBE9EA",
             "strokeWidth": 0.8
           }
         },
@@ -81,7 +81,7 @@
           ],
           "mark": {
             "type": "geoshape",
-            "stroke": "#EDE1E5",
+            "stroke": "#FBE9EA",
             "strokeWidth": 0.8
           },
           "encoding": {
@@ -129,7 +129,7 @@
                 "test": "datum.iso3 === 'MYS'",
                 "value": "#1F2933"
               },
-              "value": "#EDE1E5"
+              "value": "#FBE9EA"
             },
             "tooltip": [
               {

@@ -97,7 +97,7 @@
     {
       "mark": {
         "type": "rect",
-        "stroke": "#EDE1E5",
+        "stroke": "#FBE9EA",
         "strokeWidth": 2
       },
       "encoding": {
