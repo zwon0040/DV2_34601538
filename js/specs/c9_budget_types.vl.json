@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Growth of the Ministry of Health's three main budget types since 2015 (2015 = 100). Development grew fastest, partly because of a 2020-2021 reclassification.",
+  "description": "Growth of the Ministry of Health's three main budget types since 2015 (as a percentage of the 2015 level). Development grew fastest, partly because of a 2020-2021 reclassification.",
   "width": 430,
   "height": 300,
   "data": {
@@ -40,7 +40,7 @@
     "y": {
       "field": "index",
       "type": "quantitative",
-      "title": "Budget compared with 2015 (2015 = 100)",
+      "title": "% of 2015 level",
       "scale": {"domain": [0, 400]},
       "axis": {"tickCount": 5}
     },

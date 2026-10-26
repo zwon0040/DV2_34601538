@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "M3. Choropleth map of the change in public-sector health staff by state, 2014 to 2022, with a linked line chart (staff indexed to 2014 = 100). Hover a state to highlight its line. 2020 values are marked with diamonds because several look disrupted.",
+  "description": "M3. Choropleth map of the change in public-sector health staff by state, 2014 to 2022, with a linked line chart (staff as a percentage of the 2014 level). Hover a state to highlight its line. 2020 values are marked with diamonds because several look disrupted.",
   "data": {
     "url": "data/healthcare_staff.csv",
     "format": {
@@ -317,7 +317,7 @@
             "y": {
               "field": "index",
               "type": "quantitative",
-              "title": "Staff compared with 2014 (2014 = 100)",
+              "title": "% of 2014 level",
               "scale": {
                 "zero": false
               }

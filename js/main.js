@@ -12,7 +12,7 @@ const theme = {
   axis: {
     labelFont: "'Source Sans 3', sans-serif",
     labelFontSize: 13,
-    labelColor: "#52606D",
+    labelColor: "#3E4C59",
     titleFont: "'Source Sans 3', sans-serif",
     titleFontSize: 12,
     titleFontWeight: 600,

@@ -109,7 +109,7 @@ a { color: var(--total); }
 .chart h3 { margin-bottom: 4px; max-width: 34ch; }   /* chart titles also stay within ~10 words per line */
 .chart-sub { font-size: 15px; color: var(--muted); margin: 0 0 var(--s2); max-width: 40ch; }
 .chart figcaption {
-  font-size: 13px; color: var(--muted);
+  font-size: 13px; color: var(--ink-2);
   margin-top: var(--s2); padding-top: var(--s1);
   border-top: 1px solid var(--rule);
   max-width: none;
@@ -267,3 +267,6 @@ h1, h2, h3 { text-wrap: balance; }
    19px regular weight in the darkest ink: one step above body text, below chart titles,
    with no extra bold, so the callout stays the only heavy element in the column. */
 .narrative .lead { font-size: 19px; line-height: 1.4; font-weight: 400; color: var(--ink); margin-bottom: var(--s1); }
+
+/* Closing line under the three takeaways: same size as a lead line, so the page ends on one clear sentence. */
+.closing-line { margin-top: var(--s4); font-size: 19px; line-height: 1.4; color: var(--ink); }

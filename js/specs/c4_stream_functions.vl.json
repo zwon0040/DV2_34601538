@@ -17,7 +17,7 @@
   },
   "transform": [
     {
-      "calculate": "indexof(['Treating illness','Medicines and medical goods','Buildings and equipment','Administration','Prevention','Training health workers'], datum.plain_label) >= 0 ? datum.plain_label : 'Everything else'",
+      "calculate": "indexof(['Treating illness','Medicines and medical goods','Buildings and equipment','Administration','Prevention','Training health workers'], datum.plain_label) >= 0 ? datum.plain_label : 'Other small services'",
       "as": "group"
     },
     {
@@ -43,7 +43,7 @@
       "as": "rm_bn"
     },
     {
-      "calculate": "indexof(['Training health workers', 'Administration', 'Treating illness', 'Buildings and equipment', 'Medicines and medical goods', 'Prevention', 'Everything else'], datum.group)",
+      "calculate": "indexof(['Training health workers', 'Administration', 'Treating illness', 'Buildings and equipment', 'Medicines and medical goods', 'Prevention', 'Other small services'], datum.group)",
       "as": "stack_order"
     }
   ],
@@ -123,7 +123,7 @@
               "Treating illness",
               "Administration",
               "Training health workers",
-              "Everything else",
+              "Other small services",
               "Buildings and equipment",
               "Medicines and medical goods",
               "Prevention"

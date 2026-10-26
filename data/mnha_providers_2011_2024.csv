@@ -97,20 +97,20 @@ year,code,provider,short_label,total_rm_mil,pct_teh,public_rm_mil
 2022,MHP.7,Providers of health care system administration and financing,Administration and insurers,6749,8.67,5300
 2023,MHP.7,Providers of health care system administration and financing,Administration and insurers,8396,10.13,6891
 2024,MHP.7,Providers of health care system administration and financing,Administration and insurers,8640,9.62,6862
-2011,MHP.8,Other industries (rest of the Malaysian economy),Other industries,2830,7.87,1680
-2012,MHP.8,Other industries (rest of the Malaysian economy),Other industries,2966,7.52,1513
-2013,MHP.8,Other industries (rest of the Malaysian economy),Other industries,3285,7.89,1487
-2014,MHP.8,Other industries (rest of the Malaysian economy),Other industries,3310,7.08,1632
-2015,MHP.8,Other industries (rest of the Malaysian economy),Other industries,3348,6.69,1550
-2016,MHP.8,Other industries (rest of the Malaysian economy),Other industries,3534,6.82,1618
-2017,MHP.8,Other industries (rest of the Malaysian economy),Other industries,3425,6.1,1451
-2018,MHP.8,Other industries (rest of the Malaysian economy),Other industries,3661,6.07,1753
-2019,MHP.8,Other industries (rest of the Malaysian economy),Other industries,3395,5.3,1699
-2020,MHP.8,Other industries (rest of the Malaysian economy),Other industries,3984,5.84,2173
-2021,MHP.8,Other industries (rest of the Malaysian economy),Other industries,4066,5.17,2361
-2022,MHP.8,Other industries (rest of the Malaysian economy),Other industries,3194,4.1,1423
-2023,MHP.8,Other industries (rest of the Malaysian economy),Other industries,3245,3.92,1367
-2024,MHP.8,Other industries (rest of the Malaysian economy),Other industries,3486,3.88,1438
+2011,MHP.8,Other industries (rest of the Malaysian economy),Non-health organisations,2830,7.87,1680
+2012,MHP.8,Other industries (rest of the Malaysian economy),Non-health organisations,2966,7.52,1513
+2013,MHP.8,Other industries (rest of the Malaysian economy),Non-health organisations,3285,7.89,1487
+2014,MHP.8,Other industries (rest of the Malaysian economy),Non-health organisations,3310,7.08,1632
+2015,MHP.8,Other industries (rest of the Malaysian economy),Non-health organisations,3348,6.69,1550
+2016,MHP.8,Other industries (rest of the Malaysian economy),Non-health organisations,3534,6.82,1618
+2017,MHP.8,Other industries (rest of the Malaysian economy),Non-health organisations,3425,6.1,1451
+2018,MHP.8,Other industries (rest of the Malaysian economy),Non-health organisations,3661,6.07,1753
+2019,MHP.8,Other industries (rest of the Malaysian economy),Non-health organisations,3395,5.3,1699
+2020,MHP.8,Other industries (rest of the Malaysian economy),Non-health organisations,3984,5.84,2173
+2021,MHP.8,Other industries (rest of the Malaysian economy),Non-health organisations,4066,5.17,2361
+2022,MHP.8,Other industries (rest of the Malaysian economy),Non-health organisations,3194,4.1,1423
+2023,MHP.8,Other industries (rest of the Malaysian economy),Non-health organisations,3245,3.92,1367
+2024,MHP.8,Other industries (rest of the Malaysian economy),Non-health organisations,3486,3.88,1438
 2011,MHP.9,Rest of the world,Overseas providers,102,0.28,1
 2012,MHP.9,Rest of the world,Overseas providers,86,0.22,1
 2013,MHP.9,Rest of the world,Overseas providers,7,0.02,1
