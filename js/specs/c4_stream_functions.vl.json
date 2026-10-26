@@ -170,8 +170,27 @@
             "title": "Share of all spending (%)",
             "format": ".1f"
           }
-        ]
-      }
+        ],
+        "opacity": {
+          "condition": {
+            "param": "legend_pick",
+            "value": 1
+          },
+          "value": 0.2
+        }
+      },
+      "params": [
+        {
+          "name": "legend_pick",
+          "select": {
+            "type": "point",
+            "fields": [
+              "group"
+            ]
+          },
+          "bind": "legend"
+        }
+      ]
     },
     {
       "data": {

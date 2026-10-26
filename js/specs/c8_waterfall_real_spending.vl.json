@@ -201,7 +201,7 @@
           "as": "step"
         },
         {
-          "calculate": "(datum.change >= 0 ? '+' : '−') + format(abs(datum.change), '.1f')",
+          "calculate": "(datum.change >= 0 ? '+' : '\u2212') + format(abs(datum.change), '.1f')",
           "as": "label"
         },
         {
@@ -259,8 +259,27 @@
                 "title": "Change (RM billion, 2024 prices)",
                 "format": "+.1f"
               }
-            ]
-          }
+            ],
+            "opacity": {
+              "condition": {
+                "param": "legend_pick",
+                "value": 1
+              },
+              "value": 0.2
+            }
+          },
+          "params": [
+            {
+              "name": "legend_pick",
+              "select": {
+                "type": "point",
+                "fields": [
+                  "direction"
+                ]
+              },
+              "bind": "legend"
+            }
+          ]
         },
         {
           "mark": {

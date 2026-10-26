@@ -90,6 +90,19 @@
       "views": [
         "map"
       ]
+    },
+    {
+      "name": "legend_pick",
+      "select": {
+        "type": "point",
+        "fields": [
+          "growth_class"
+        ]
+      },
+      "bind": "legend",
+      "views": [
+        "map"
+      ]
     }
   ],
   "vconcat": [
@@ -175,7 +188,14 @@
                 "title": "Change",
                 "format": "+.0%"
               }
-            ]
+            ],
+            "fillOpacity": {
+              "condition": {
+                "param": "legend_pick",
+                "value": 1
+              },
+              "value": 0.2
+            }
           }
         },
         {

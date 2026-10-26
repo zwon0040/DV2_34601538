@@ -155,8 +155,27 @@
                 "title": "Paid out of pocket (%)",
                 "format": ".1f"
               }
-            ]
-          }
+            ],
+            "fillOpacity": {
+              "condition": {
+                "param": "legend_pick",
+                "value": 1
+              },
+              "value": 0.2
+            }
+          },
+          "params": [
+            {
+              "name": "legend_pick",
+              "select": {
+                "type": "point",
+                "fields": [
+                  "band"
+                ]
+              },
+              "bind": "legend"
+            }
+          ]
         },
         {
           "data": {

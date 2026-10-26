@@ -138,6 +138,25 @@
         "type": "nominal",
         "title": "Amount in 2024"
       }
-    ]
-  }
+    ],
+    "opacity": {
+      "condition": {
+        "param": "legend_pick",
+        "value": 1
+      },
+      "value": 0.2
+    }
+  },
+  "params": [
+    {
+      "name": "legend_pick",
+      "select": {
+        "type": "point",
+        "fields": [
+          "payer_group"
+        ]
+      },
+      "bind": "legend"
+    }
+  ]
 }

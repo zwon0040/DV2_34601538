@@ -211,8 +211,27 @@
                 "labelFontSize": 11,
                 "rowPadding": 1
               }
+            },
+            "opacity": {
+              "condition": {
+                "param": "legend_pick",
+                "value": 1
+              },
+              "value": 0.2
             }
-          }
+          },
+          "params": [
+            {
+              "name": "legend_pick",
+              "select": {
+                "type": "point",
+                "fields": [
+                  "rate_class"
+                ]
+              },
+              "bind": "legend"
+            }
+          ]
         },
         {
           "transform": [
