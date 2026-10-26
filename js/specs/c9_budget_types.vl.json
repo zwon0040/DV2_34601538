@@ -1,95 +1,196 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Growth of the Ministry of Health's three main budget types since 2015 (as a percentage of the 2015 level). Development grew fastest, partly because of a 2020-2021 reclassification.",
+  "description": "The Ministry of Health's three main budget types in RM billion, 2015 to 2024. Salaries are by far the largest; the development (building and equipment) budget grew fastest, partly because of a 2020-2021 reclassification.",
   "width": 430,
   "height": 300,
   "data": {
     "url": "data/budget_allocation_moh.csv",
-    "format": {"type": "csv", "parse": {"allocation": "number", "date": "date"}}
+    "format": {
+      "type": "csv",
+      "parse": {
+        "allocation": "number",
+        "date": "date"
+      }
+    }
   },
   "transform": [
     {
       "filter": "datum.category === 'de' || datum.category === 'oe_10000' || datum.category === 'oe_20000'"
     },
-    {"calculate": "utcyear(datum.date)", "as": "year"},
+    {
+      "calculate": "utcyear(datum.date)",
+      "as": "year"
+    },
     {
       "calculate": "datum.category === 'oe_10000' ? 'Salaries' : datum.category === 'oe_20000' ? 'Services and supplies' : 'Development'",
       "as": "type"
     },
     {
-      "aggregate": [{"op": "sum", "field": "allocation", "as": "allocation"}],
-      "groupby": ["year", "type"]
+      "aggregate": [
+        {
+          "op": "sum",
+          "field": "allocation",
+          "as": "allocation"
+        }
+      ],
+      "groupby": [
+        "year",
+        "type"
+      ]
     },
     {
-      "window": [{"op": "first_value", "field": "allocation", "as": "base"}],
-      "groupby": ["type"],
-      "sort": [{"field": "year"}],
-      "frame": [null, null]
+      "window": [
+        {
+          "op": "first_value",
+          "field": "allocation",
+          "as": "base"
+        }
+      ],
+      "groupby": [
+        "type"
+      ],
+      "sort": [
+        {
+          "field": "year"
+        }
+      ],
+      "frame": [
+        null,
+        null
+      ]
     },
-    {"calculate": "datum.allocation / datum.base * 100", "as": "index"},
-    {"calculate": "datum.allocation / 1e9", "as": "rm_bn"}
+    {
+      "calculate": "datum.allocation / datum.base * 100",
+      "as": "index"
+    },
+    {
+      "calculate": "datum.allocation / 1e9",
+      "as": "rm_bn"
+    },
+    {
+      "calculate": "datum.index - 100",
+      "as": "growth"
+    }
   ],
   "encoding": {
     "x": {
       "field": "year",
       "type": "quantitative",
       "title": null,
-      "scale": {"domain": [2015, 2024]},
-      "axis": {"format": "d", "tickCount": 5, "grid": false}
+      "scale": {
+        "domain": [
+          2015,
+          2024
+        ]
+      },
+      "axis": {
+        "format": "d",
+        "tickCount": 5,
+        "grid": false
+      }
     },
     "y": {
-      "field": "index",
+      "field": "rm_bn",
       "type": "quantitative",
-      "title": "% of 2015 level",
-      "scale": {"domain": [0, 400]},
-      "axis": {"tickCount": 5}
+      "title": "RM billion",
+      "scale": {
+        "domain": [
+          0,
+          25
+        ]
+      },
+      "axis": {
+        "tickCount": 5
+      }
     },
     "color": {
-      "condition": {"test": "datum.type === 'Development'", "value": "#007A5E"},
-      "value": "#B8C2CC"
+      "condition": {
+        "test": "datum.type === 'Salaries'",
+        "value": "#007A5E"
+      },
+      "value": "#9AA5B1"
     }
   },
   "layer": [
     {
-      "mark": {"type": "rule", "color": "#9AA5B1", "strokeDash": [2, 2]},
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2.5
+      },
       "encoding": {
-        "x": {"datum": 2015},
-        "x2": {"datum": 2024},
-        "y": {"datum": 100},
-        "color": {"value": "#9AA5B1"}
-      }
-    },
-    {
-      "mark": {"type": "line", "strokeWidth": 2.5},
-      "encoding": {
-        "detail": {"field": "type"},
+        "detail": {
+          "field": "type"
+        },
         "strokeWidth": {
-          "condition": {"test": "datum.type === 'Development'", "value": 3.5},
+          "condition": {
+            "test": "datum.type === 'Salaries'",
+            "value": 3.5
+          },
           "value": 2
         }
       }
     },
     {
-      "mark": {"type": "point", "filled": true, "size": 30},
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 30
+      },
       "encoding": {
         "tooltip": [
-          {"field": "type", "type": "nominal", "title": "Budget type"},
-          {"field": "year", "type": "quantitative", "title": "Year", "format": "d"},
-          {"field": "rm_bn", "type": "quantitative", "title": "RM billion", "format": ".2f"},
-          {"field": "index", "type": "quantitative", "title": "Compared with 2015", "format": ".0f"}
+          {
+            "field": "type",
+            "type": "nominal",
+            "title": "Budget type"
+          },
+          {
+            "field": "year",
+            "type": "quantitative",
+            "title": "Year",
+            "format": "d"
+          },
+          {
+            "field": "rm_bn",
+            "type": "quantitative",
+            "title": "RM billion",
+            "format": ".1f"
+          },
+          {
+            "field": "growth",
+            "type": "quantitative",
+            "title": "Change since 2015 (%)",
+            "format": "+.0f"
+          }
         ]
       }
     },
     {
       "transform": [
-        {"filter": "datum.year === 2024"},
-        {"calculate": "datum.type + '  ×' + format(datum.index / 100, '.1f')", "as": "label"}
+        {
+          "filter": "datum.year === 2024"
+        },
+        {
+          "calculate": "[datum.type, 'RM' + format(datum.rm_bn, '.1f') + ' billion, ' + format(datum.growth, '+.0f') + '%']",
+          "as": "label"
+        }
       ],
-      "mark": {"type": "text", "align": "left", "dx": 8, "fontSize": 12},
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 8,
+        "fontSize": 12,
+        "lineHeight": 14,
+        "baseline": "middle"
+      },
       "encoding": {
-        "text": {"field": "label"},
+        "text": {
+          "field": "label"
+        },
         "color": {
-          "condition": {"test": "datum.type === 'Development'", "value": "#1F2933"},
+          "condition": {
+            "test": "datum.type === 'Salaries'",
+            "value": "#1F2933"
+          },
           "value": "#52606D"
         }
       }
@@ -97,13 +198,41 @@
     {
       "data": {
         "values": [
-          {"year": 2015.3, "index": 360, "note": "The 2021 jump is partly an accounting change:"},
-          {"year": 2015.3, "index": 336, "note": "hospital support services were moved into"},
-          {"year": 2015.3, "index": 312, "note": "the development budget in 2020 and 2021."}
+          {
+            "year": 2015.3,
+            "rm_bn": 24.5,
+            "note": "The 2021 jump in development is partly"
+          },
+          {
+            "year": 2015.3,
+            "rm_bn": 23.1,
+            "note": "an accounting change: hospital support"
+          },
+          {
+            "year": 2015.3,
+            "rm_bn": 21.7,
+            "note": "services were moved into it in 2020\u201321."
+          }
         ]
       },
-      "mark": {"type": "text", "align": "left", "fontSize": 11, "color": "#52606D"},
-      "encoding": {"text": {"field": "note"}, "color": {"value": "#52606D"}}
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontSize": 11,
+        "color": "#52606D"
+      },
+      "encoding": {
+        "text": {
+          "field": "note"
+        },
+        "color": {
+          "value": "#52606D"
+        },
+        "y": {
+          "field": "rm_bn",
+          "type": "quantitative"
+        }
+      }
     }
   ]
 }

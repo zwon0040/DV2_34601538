@@ -374,6 +374,37 @@
               "value": "#1F2933"
             }
           }
+        },
+        {
+          "transform": [
+            {
+              "filter": "focus_state != null && datum.state === focus_state"
+            },
+            {
+              "calculate": "[datum.name, 'RM' + format(datum.per_person, ',.0f') + ' per person']",
+              "as": "focus_label"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "top",
+            "fontSize": 13,
+            "fontWeight": 700,
+            "lineHeight": 17,
+            "color": "#1F2933"
+          },
+          "encoding": {
+            "x": {
+              "value": 0
+            },
+            "y": {
+              "value": 262
+            },
+            "text": {
+              "field": "focus_label"
+            }
+          }
         }
       ]
     }

@@ -324,6 +324,40 @@
               }
             }
           ]
+        },
+        {
+          "transform": [
+            {
+              "filter": "datum.year === 2022"
+            },
+            {
+              "filter": "focus_state != null && datum.state === focus_state"
+            },
+            {
+              "calculate": "[datum.name, 'Staff ' + format(datum.growth, '+.0%') + ' since 2014']",
+              "as": "focus_label"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "top",
+            "fontSize": 13,
+            "fontWeight": 700,
+            "lineHeight": 17,
+            "color": "#1F2933"
+          },
+          "encoding": {
+            "x": {
+              "value": 0
+            },
+            "y": {
+              "value": 0
+            },
+            "text": {
+              "field": "focus_label"
+            }
+          }
         }
       ]
     },

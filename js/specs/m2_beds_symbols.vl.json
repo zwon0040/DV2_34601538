@@ -319,6 +319,37 @@
               "field": "label"
             }
           }
+        },
+        {
+          "transform": [
+            {
+              "filter": "focus_state != null && datum.state === focus_state"
+            },
+            {
+              "calculate": "[datum.name, format(datum.all, ',') + ' beds, ' + format(datum.per_10k, '.1f') + ' per 10,000 people']",
+              "as": "focus_label"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "top",
+            "fontSize": 13,
+            "fontWeight": 700,
+            "lineHeight": 17,
+            "color": "#1F2933"
+          },
+          "encoding": {
+            "x": {
+              "value": 0
+            },
+            "y": {
+              "value": 0
+            },
+            "text": {
+              "field": "focus_label"
+            }
+          }
         }
       ]
     }

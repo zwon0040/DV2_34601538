@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "C8. Waterfall: how Malaysia's total health spending changed year by year from 2011 to 2024, in constant 2024 ringgit. Spending rose in 12 of 13 years; 2022 is the only fall.",
+  "description": "C8. Waterfall: how Malaysia's total health spending changed year by year from 2011 to 2024, in ringgit as spent. Spending rose in 12 of 13 years; 2022 is the only fall.",
   "width": 590,
   "height": 330,
   "data": {
@@ -9,7 +9,7 @@
       "type": "csv",
       "parse": {
         "year": "number",
-        "teh_constant_2024_rm_mil": "number"
+        "teh_nominal_rm_mil": "number"
       }
     }
   },
@@ -18,7 +18,7 @@
       "filter": "datum.year >= 2011"
     },
     {
-      "calculate": "datum.teh_constant_2024_rm_mil / 1000",
+      "calculate": "datum.teh_nominal_rm_mil / 1000",
       "as": "bn"
     },
     {
@@ -111,7 +111,7 @@
             "y": {
               "field": "bottom",
               "type": "quantitative",
-              "title": "Total health spending (RM billion, 2024 prices)",
+              "title": "Total health spending (RM billion)",
               "scale": {
                 "domain": [
                   0,
@@ -131,7 +131,7 @@
               {
                 "field": "bn",
                 "type": "quantitative",
-                "title": "RM billion (2024 prices)",
+                "title": "RM billion",
                 "format": ".1f"
               }
             ]
@@ -256,7 +256,7 @@
               {
                 "field": "change",
                 "type": "quantitative",
-                "title": "Change (RM billion, 2024 prices)",
+                "title": "Change (RM billion)",
                 "format": "+.1f"
               }
             ],

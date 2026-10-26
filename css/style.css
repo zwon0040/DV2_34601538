@@ -282,3 +282,6 @@ h1, h2, h3 { text-wrap: balance; }
 .part-close { font-family: var(--font-head); font-size: 28px; line-height: 1.3; font-weight: 700; color: var(--ink);
               max-width: 26ch; margin: var(--s6) 0 0; }
 @media (max-width: 900px) { .part-close { font-size: 23px; } }
+
+/* Dumbbell legend dots use the same orange as the chart's dots. */
+.dot-2011, .dot-2024 { color: var(--households); font-size: 16px; }
