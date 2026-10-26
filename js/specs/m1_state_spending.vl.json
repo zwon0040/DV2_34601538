@@ -71,13 +71,12 @@
               "leader_longitude",
               "leader_latitude",
               "leader_end_longitude",
-              "leader_end_latitude",
-              "code"
+              "leader_end_latitude"
             ]
           }
         },
         {
-          "calculate": "datum.label_align === 'inside' ? datum.code : datum.name",
+          "calculate": "datum.label_align === 'inside' ? split(datum.name, ' ') : datum.name",
           "as": "label_lines"
         }
       ],
@@ -311,9 +310,8 @@
             "type": "text",
             "align": "center",
             "baseline": "middle",
-            "fontSize": 10.5,
-            "lineHeight": 10.5,
-            "fontWeight": 600
+            "fontSize": 9.5,
+            "lineHeight": 10.5
           },
           "encoding": {
             "longitude": {

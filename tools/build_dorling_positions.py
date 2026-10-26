@@ -120,16 +120,9 @@ for A in S.values():
 #   'in' = inside, 'L'/'R' = just outside on that side, 'B'/'T' = just below/above,
 #   ('lead', dx, dy, align) = label placed dx, dy pixels away, joined by a leader line
 LBL = {s: 'in' for s in SKETCH}
-LBL.update({'Perlis': 'L', 'W.P. Labuan': 'T', 'W.P. Putrajaya': ('lead', -52, 20, 'right')})
-
-# short codes shown inside the circles (the common three-letter state codes);
-# the three smallest circles keep their full name outside, and the tooltip shows every full name
-CODE = {
-    'Johor': 'JHR', 'Kedah': 'KDH', 'Kelantan': 'KTN', 'Melaka': 'MLK', 'Negeri Sembilan': 'NSN',
-    'Pahang': 'PHG', 'Pulau Pinang': 'PNG', 'Perak': 'PRK', 'Perlis': 'PLS', 'Sabah': 'SBH',
-    'Sarawak': 'SWK', 'Selangor': 'SGR', 'Terengganu': 'TRG', 'W.P. Kuala Lumpur': 'KUL',
-    'W.P. Putrajaya': 'PJY', 'W.P. Labuan': 'LBN',
-}
+LBL.update({'Perlis': 'L', 'Terengganu': 'R', 'Melaka': 'B', 'W.P. Labuan': 'T',
+            'Pulau Pinang': 'L', 'W.P. Kuala Lumpur': 'R',
+            'W.P. Putrajaya': ('lead', -52, 20, 'right'), 'Negeri Sembilan': ('lead', 60, 4, 'left')})
 
 
 def to_lonlat(x, y):
@@ -140,7 +133,7 @@ def to_lonlat(x, y):
 
 w = csv.writer(open(f'{ROOT}/geo/malaysia_dorling_positions.csv', 'w', newline=''))
 w.writerow(['state', 'longitude', 'latitude', 'radius_px', 'x_px', 'y_px',
-            'code', 'label_longitude', 'label_latitude', 'label_align', 'leader',
+            'label_longitude', 'label_latitude', 'label_align', 'leader',
             'leader_longitude', 'leader_latitude', 'leader_end_longitude', 'leader_end_latitude'])
 for s, A in S.items():
     side = LBL[s]; leader = 0; dy = 0
@@ -156,6 +149,6 @@ for s, A in S.items():
     d = math.hypot(dx, dy) or 1
     edge = to_lonlat(A['x'] + dx / d * (A['r'] + 1), A['y'] + dy / d * (A['r'] + 1)) if leader else (lon, lat)
     end = to_lonlat(A['x'] + dx - math.copysign(3, dx), A['y'] + dy) if leader else (llon, llat)
-    w.writerow([s, lon, lat, round(A['r'], 1), round(A['x'], 1), round(A['y'], 1), CODE[s],
+    w.writerow([s, lon, lat, round(A['r'], 1), round(A['x'], 1), round(A['y'], 1),
                 llon, llat, al, leader, edge[0], edge[1], end[0], end[1]])
     print(f"{s:20s} r={A['r']:5.1f} x={A['x']:6.1f} y={A['y']:6.1f}", file=sys.stderr)
