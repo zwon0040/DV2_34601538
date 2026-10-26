@@ -76,6 +76,13 @@ document.fonts.ready.then(() => {
   for (const [id, spec] of charts) {
     vegaEmbed(id, spec, { actions: false, renderer: "svg", config: theme })
       .then((result) => {
+        // Let the chart grow to fill its card on wide screens, up to 30% larger than designed,
+        // so text inside charts never gets oversized. The SVG keeps its viewBox, so it scales evenly.
+        const svg = document.querySelector(id + " svg");
+        if (svg) {
+          svg.style.maxWidth = Math.round(svg.width.baseVal.value * 1.3) + "px";
+          svg.style.width = "100%";
+        }
         if (!linkedMaps.includes(id)) return;
         linkedViews.push(result.view);
         result.view.addEventListener("click", (event, item) => {

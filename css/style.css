@@ -64,7 +64,7 @@ a { color: var(--total); }
 }
 
 /* ---------- 3. Layout grid: 12 columns, 32px gutters ---------- */
-.wrap { max-width: 1120px; margin: 0 auto; padding: 0 var(--s3); }
+.wrap { max-width: 1360px; margin: 0 auto; padding: 0 var(--s3); }   /* wider page so large screens are not mostly empty */
 .grid { display: flex; flex-direction: column; gap: var(--s9); }
 .row { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--s4); align-items: center; }   /* text block sits level with the middle of its chart */
 .row .narrative { grid-column: 1 / span 4; grid-row: 1; }
@@ -290,3 +290,6 @@ h1, h2, h3 { text-wrap: balance; }
    ("Where money was s..."), so remove that limit and keep each name on one line. */
 #vg-tooltip-element table tr td.key { max-width: none !important; white-space: nowrap; }
 #vg-tooltip-element table tr td.value { max-width: 260px; }
+
+/* Charts scale with their card on wide screens (see main.js), keeping their proportions. */
+.vis svg { display: block; height: auto; }
