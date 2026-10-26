@@ -38,6 +38,10 @@
     {
       "calculate": "datum.share + datum.nudge",
       "as": "label_y"
+    },
+    {
+      "calculate": "replace(datum.payer_group, 'Households', 'Families')",
+      "as": "payer_label"
     }
   ],
   "encoding": {
@@ -113,7 +117,7 @@
       "encoding": {
         "tooltip": [
           {
-            "field": "payer_group",
+            "field": "payer_label",
             "type": "nominal",
             "title": "Paid by"
           },
@@ -137,7 +141,7 @@
           "filter": "datum.year === 2024"
         },
         {
-          "calculate": "format(datum.share, '.1f') + '%  ' + datum.payer_group",
+          "calculate": "format(datum.share, '.1f') + '%  ' + datum.payer_label",
           "as": "label"
         }
       ],

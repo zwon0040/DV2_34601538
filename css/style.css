@@ -285,3 +285,8 @@ h1, h2, h3 { text-wrap: balance; }
 
 /* Dumbbell legend dots use the same orange as the chart's dots. */
 .dot-2011, .dot-2024 { color: var(--households); font-size: 16px; }
+
+/* Tooltips: show field names in full. The tooltip library cuts names at about 150px
+   ("Where money was s..."), so remove that limit and keep each name on one line. */
+#vg-tooltip-element table tr td.key { max-width: none !important; white-space: nowrap; }
+#vg-tooltip-element table tr td.value { max-width: 260px; }

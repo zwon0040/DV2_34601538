@@ -19,7 +19,7 @@
       "filter": "datum.year === 2024 && indexof(['Nursing homes', 'Overseas providers', 'Labs, imaging, ambulance'], datum.short_label) < 0"
     },
     {
-      "calculate": "datum.short_label === 'Administration and insurers' ? 'Administration and insurers' : datum.short_label === 'Pharmacies and medical shops' ? 'Pharmacies' : datum.short_label === 'Public health programmes' ? 'Public health' : datum.short_label",
+      "calculate": "datum.short_label === 'Running the system and insurance' ? 'Running the system and insurance' : datum.short_label === 'Pharmacies and medical shops' ? 'Pharmacies' : datum.short_label === 'Public health programmes' ? 'Public health' : datum.short_label",
       "as": "name"
     },
     {

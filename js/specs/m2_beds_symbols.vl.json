@@ -263,6 +263,50 @@
             {
               "calculate": "datum.name + ': ' + format(datum.all, ',') + ' beds, ' + format(datum.per_10k, '.1f') + ' per 10,000 people'",
               "as": "label"
+            },
+            {
+              "calculate": "length(datum.label) * 5.4",
+              "as": "box_w"
+            },
+            {
+              "calculate": "'M' + (26 - 6) + ',-11 H' + (26 + datum.box_w + 6) + ' V10 H' + (26 - 6) + ' Z'",
+              "as": "box_path"
+            }
+          ],
+          "mark": {
+            "type": "point",
+            "filled": true,
+            "size": 4,
+            "fill": "#FFFFFF",
+            "fillOpacity": 0.95,
+            "stroke": "#CDB8B6",
+            "strokeWidth": 0.8
+          },
+          "encoding": {
+            "longitude": {
+              "field": "longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "latitude",
+              "type": "quantitative"
+            },
+            "shape": {
+              "field": "box_path",
+              "type": "nominal",
+              "scale": null,
+              "legend": null
+            }
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": "datum.name === 'Selangor'"
+            },
+            {
+              "calculate": "datum.name + ': ' + format(datum.all, ',') + ' beds, ' + format(datum.per_10k, '.1f') + ' per 10,000 people'",
+              "as": "label"
             }
           ],
           "mark": {
@@ -284,6 +328,50 @@
             },
             "text": {
               "field": "label"
+            }
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": "datum.name === 'Labuan'"
+            },
+            {
+              "calculate": "datum.name + ': ' + format(datum.all, ',') + ' beds, ' + format(datum.per_10k, '.1f') + ' per 10,000 people'",
+              "as": "label"
+            },
+            {
+              "calculate": "length(datum.label) * 5.4",
+              "as": "box_w"
+            },
+            {
+              "calculate": "'M' + ((-12 - datum.box_w) - 6) + ',7 H' + ((-12 - datum.box_w) + datum.box_w + 6) + ' V28 H' + ((-12 - datum.box_w) - 6) + ' Z'",
+              "as": "box_path"
+            }
+          ],
+          "mark": {
+            "type": "point",
+            "filled": true,
+            "size": 4,
+            "fill": "#FFFFFF",
+            "fillOpacity": 0.95,
+            "stroke": "#CDB8B6",
+            "strokeWidth": 0.8
+          },
+          "encoding": {
+            "longitude": {
+              "field": "longitude",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "latitude",
+              "type": "quantitative"
+            },
+            "shape": {
+              "field": "box_path",
+              "type": "nominal",
+              "scale": null,
+              "legend": null
             }
           }
         },
@@ -317,6 +405,48 @@
             },
             "text": {
               "field": "label"
+            }
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": "focus_state != null && datum.state === focus_state"
+            },
+            {
+              "calculate": "[datum.name, format(datum.all, ',') + ' beds, ' + format(datum.per_10k, '.1f') + ' per 10,000 people']",
+              "as": "focus_label"
+            },
+            {
+              "calculate": "max(length(datum.focus_label[0]), length(datum.focus_label[1])) * 6.4",
+              "as": "box_w"
+            },
+            {
+              "calculate": "'M' + (0 - 6) + ',-5 H' + (0 + datum.box_w + 6) + ' V40 H' + (0 - 6) + ' Z'",
+              "as": "box_path"
+            }
+          ],
+          "mark": {
+            "type": "point",
+            "filled": true,
+            "size": 4,
+            "fill": "#FFFFFF",
+            "fillOpacity": 0.95,
+            "stroke": "#CDB8B6",
+            "strokeWidth": 0.8
+          },
+          "encoding": {
+            "x": {
+              "value": 0
+            },
+            "y": {
+              "value": 0
+            },
+            "shape": {
+              "field": "box_path",
+              "type": "nominal",
+              "scale": null,
+              "legend": null
             }
           }
         },

@@ -266,6 +266,46 @@
               }
             },
             {
+              "transform": [
+                {
+                  "filter": "datum.name === 'Kuala Lumpur'"
+                },
+                {
+                  "calculate": "length(datum.label) * 5.4",
+                  "as": "box_w"
+                },
+                {
+                  "calculate": "'M' + (34 - 6) + ',-25 H' + (34 + datum.box_w + 6) + ' V-3 H' + (34 - 6) + ' Z'",
+                  "as": "box_path"
+                }
+              ],
+              "mark": {
+                "type": "point",
+                "filled": true,
+                "size": 4,
+                "fill": "#FFFFFF",
+                "fillOpacity": 0.95,
+                "stroke": "#CDB8B6",
+                "strokeWidth": 0.8
+              },
+              "encoding": {
+                "longitude": {
+                  "field": "longitude",
+                  "type": "quantitative"
+                },
+                "latitude": {
+                  "field": "latitude",
+                  "type": "quantitative"
+                },
+                "shape": {
+                  "field": "box_path",
+                  "type": "nominal",
+                  "scale": null,
+                  "legend": null
+                }
+              }
+            },
+            {
               "mark": {
                 "type": "text",
                 "align": "left",
@@ -291,6 +331,46 @@
                 },
                 "text": {
                   "field": "label"
+                }
+              }
+            },
+            {
+              "transform": [
+                {
+                  "filter": "datum.name === 'Putrajaya'"
+                },
+                {
+                  "calculate": "length(datum.label) * 5.4",
+                  "as": "box_w"
+                },
+                {
+                  "calculate": "'M' + (34 - 6) + ',-3 H' + (34 + datum.box_w + 6) + ' V19 H' + (34 - 6) + ' Z'",
+                  "as": "box_path"
+                }
+              ],
+              "mark": {
+                "type": "point",
+                "filled": true,
+                "size": 4,
+                "fill": "#FFFFFF",
+                "fillOpacity": 0.95,
+                "stroke": "#CDB8B6",
+                "strokeWidth": 0.8
+              },
+              "encoding": {
+                "longitude": {
+                  "field": "longitude",
+                  "type": "quantitative"
+                },
+                "latitude": {
+                  "field": "latitude",
+                  "type": "quantitative"
+                },
+                "shape": {
+                  "field": "box_path",
+                  "type": "nominal",
+                  "scale": null,
+                  "legend": null
                 }
               }
             },
@@ -324,6 +404,51 @@
               }
             }
           ]
+        },
+        {
+          "transform": [
+            {
+              "filter": "datum.year === 2022"
+            },
+            {
+              "filter": "focus_state != null && datum.state === focus_state"
+            },
+            {
+              "calculate": "[datum.name, 'Staff ' + format(datum.growth, '+.0%') + ' since 2014']",
+              "as": "focus_label"
+            },
+            {
+              "calculate": "max(length(datum.focus_label[0]), length(datum.focus_label[1])) * 6.4",
+              "as": "box_w"
+            },
+            {
+              "calculate": "'M' + (0 - 6) + ',-5 H' + (0 + datum.box_w + 6) + ' V40 H' + (0 - 6) + ' Z'",
+              "as": "box_path"
+            }
+          ],
+          "mark": {
+            "type": "point",
+            "filled": true,
+            "size": 4,
+            "fill": "#FFFFFF",
+            "fillOpacity": 0.95,
+            "stroke": "#CDB8B6",
+            "strokeWidth": 0.8
+          },
+          "encoding": {
+            "x": {
+              "value": 0
+            },
+            "y": {
+              "value": 0
+            },
+            "shape": {
+              "field": "box_path",
+              "type": "nominal",
+              "scale": null,
+              "legend": null
+            }
+          }
         },
         {
           "transform": [
@@ -465,7 +590,7 @@
               {
                 "field": "staff",
                 "type": "quantitative",
-                "title": "Staff in 2020 (as published, read with caution)",
+                "title": "Staff in 2020 (use with care)",
                 "format": ","
               }
             ]

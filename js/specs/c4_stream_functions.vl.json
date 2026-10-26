@@ -167,7 +167,7 @@
           {
             "field": "share",
             "type": "quantitative",
-            "title": "Share of all spending (%)",
+            "title": "Share of spending (%)",
             "format": ".1f"
           }
         ],

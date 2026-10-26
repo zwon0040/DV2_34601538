@@ -138,13 +138,13 @@
               {
                 "field": "gov_health_pct_gov_spending",
                 "type": "quantitative",
-                "title": "Health share of government spending (%)",
+                "title": "Health share (%)",
                 "format": ".1f"
               },
               {
                 "field": "oop_pct_che",
                 "type": "quantitative",
-                "title": "Paid out of pocket (%)",
+                "title": "Paid by families (%)",
                 "format": ".1f"
               }
             ],
@@ -298,6 +298,53 @@
           }
         },
         {
+          "transform": [
+            {
+              "filter": "datum.iso3 === 'MYS'"
+            }
+          ],
+          "mark": {
+            "type": "line",
+            "strokeWidth": 8,
+            "color": "#FFFFFF",
+            "opacity": 0.9,
+            "interpolate": "linear"
+          },
+          "encoding": {
+            "x": {
+              "field": "year",
+              "type": "quantitative"
+            },
+            "y": {
+              "field": "gov_health_pct_gov_spending",
+              "type": "quantitative"
+            }
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": "datum.iso3 === 'MYS'"
+            }
+          ],
+          "mark": {
+            "type": "line",
+            "strokeWidth": 4,
+            "color": "#007A5E",
+            "interpolate": "linear"
+          },
+          "encoding": {
+            "x": {
+              "field": "year",
+              "type": "quantitative"
+            },
+            "y": {
+              "field": "gov_health_pct_gov_spending",
+              "type": "quantitative"
+            }
+          }
+        },
+        {
           "mark": {
             "type": "point",
             "filled": true,
@@ -328,7 +375,7 @@
               {
                 "field": "gov_health_pct_gov_spending",
                 "type": "quantitative",
-                "title": "Health share of government spending (%)",
+                "title": "Health share (%)",
                 "format": ".1f"
               }
             ]
@@ -344,7 +391,8 @@
             "type": "text",
             "align": "left",
             "dx": 6,
-            "fontSize": 11
+            "fontSize": 12,
+            "fontWeight": 600
           },
           "encoding": {
             "x": {

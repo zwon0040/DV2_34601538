@@ -297,6 +297,28 @@
               "field": "label"
             }
           }
+        },
+        {
+          "transform": [
+            {
+              "filter": "datum.year === 2021"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "dy": -22,
+            "fontSize": 11,
+            "color": "#52606D"
+          },
+          "encoding": {
+            "y": {
+              "field": "high",
+              "type": "quantitative"
+            },
+            "text": {
+              "value": "COVID-19"
+            }
+          }
         }
       ]
     }

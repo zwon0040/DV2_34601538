@@ -65,7 +65,7 @@
         "x": {
           "field": "2011",
           "type": "quantitative",
-          "title": "RM billion paid by households",
+          "title": "RM billion paid by families",
           "axis": {
             "tickCount": 6,
             "format": ",.0f"

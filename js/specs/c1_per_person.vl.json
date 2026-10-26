@@ -132,7 +132,7 @@
     {
       "transform": [
         {
-          "filter": "datum.year === 2011 || datum.year === 2024"
+          "filter": "datum.year === 2011"
         },
         {
           "calculate": "'RM' + format(datum.rm, ',.0f')",
@@ -144,7 +144,8 @@
         "dy": -14,
         "fontSize": 12,
         "fontWeight": 600,
-        "color": "#1F2933"
+        "color": "#1F2933",
+        "align": "left"
       },
       "encoding": {
         "y": {
@@ -153,13 +154,34 @@
         },
         "text": {
           "field": "label"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year === 2024"
         },
-        "align": {
-          "condition": {
-            "test": "datum.year === 2024",
-            "value": "right"
-          },
-          "value": "left"
+        {
+          "calculate": "'RM' + format(datum.rm, ',.0f')",
+          "as": "label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dy": -14,
+        "fontSize": 12,
+        "fontWeight": 600,
+        "color": "#1F2933",
+        "align": "right"
+      },
+      "encoding": {
+        "y": {
+          "field": "rm",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
         }
       }
     }

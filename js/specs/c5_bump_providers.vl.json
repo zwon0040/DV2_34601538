@@ -130,9 +130,9 @@
             "domain": [
               "Hospitals",
               "Clinics",
-              "Administration and insurers",
+              "Running the system and insurance",
               "Pharmacies and medical shops",
-              "Non-health organisations",
+              "Other organisations",
               "Public health programmes",
               "Labs, imaging, ambulance"
             ],
@@ -221,9 +221,9 @@
             "domain": [
               "Hospitals",
               "Clinics",
-              "Administration and insurers",
+              "Running the system and insurance",
               "Pharmacies and medical shops",
-              "Non-health organisations",
+              "Other organisations",
               "Public health programmes",
               "Labs, imaging, ambulance"
             ],
@@ -256,6 +256,9 @@
         {
           "calculate": "datum.short_label + '  ' + datum.amt",
           "as": "lab"
+        },
+        {
+          "filter": "!datum.highlight"
         }
       ],
       "mark": {
@@ -276,9 +279,9 @@
             "domain": [
               "Hospitals",
               "Clinics",
-              "Administration and insurers",
+              "Running the system and insurance",
               "Pharmacies and medical shops",
-              "Non-health organisations",
+              "Other organisations",
               "Public health programmes",
               "Labs, imaging, ambulance"
             ],
@@ -292,13 +295,57 @@
               "#1F2933"
             ]
           }
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.year === 2024"
         },
-        "fontWeight": {
-          "condition": {
-            "test": "datum.highlight",
-            "value": 700
-          },
-          "value": 400
+        {
+          "calculate": "datum.short_label + '  ' + datum.amt",
+          "as": "lab"
+        },
+        {
+          "filter": "datum.highlight"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 10,
+        "fontSize": 12,
+        "fontWeight": 700
+      },
+      "encoding": {
+        "text": {
+          "field": "lab"
+        },
+        "color": {
+          "field": "short_label",
+          "type": "nominal",
+          "legend": null,
+          "scale": {
+            "domain": [
+              "Hospitals",
+              "Clinics",
+              "Running the system and insurance",
+              "Pharmacies and medical shops",
+              "Other organisations",
+              "Public health programmes",
+              "Labs, imaging, ambulance"
+            ],
+            "range": [
+              "#4F6A8C",
+              "#6E655C",
+              "#7D6640",
+              "#A3472E",
+              "#6E5A7A",
+              "#4F7378",
+              "#1F2933"
+            ]
+          }
         }
       }
     },

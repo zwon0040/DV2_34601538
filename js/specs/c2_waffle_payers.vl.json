@@ -124,7 +124,7 @@
         "labelFontSize": 13,
         "rowPadding": 8,
         "labelLimit": 300,
-        "labelExpr": "datum.value === 'Ministry of Health' ? 'Ministry of Health \u00b7 RM39.1 billion' : datum.value === 'Other government' ? 'Other government \u00b7 RM6.4 billion' : datum.value === 'Households (out of pocket)' ? 'Households (out of pocket) \u00b7 RM34.8 billion' : datum.value === 'Private insurance' ? 'Private insurance \u00b7 RM7.1 billion' : 'Employers and others \u00b7 RM2.3 billion'"
+        "labelExpr": "datum.value === 'Ministry of Health' ? 'Ministry of Health \u00b7 RM39.1 billion' : datum.value === 'Other government' ? 'Other government \u00b7 RM6.4 billion' : datum.value === 'Households (out of pocket)' ? 'Families (out of pocket) \u00b7 RM34.8 billion' : datum.value === 'Private insurance' ? 'Private insurance \u00b7 RM7.1 billion' : 'Employers and others \u00b7 RM2.3 billion'"
       }
     },
     "tooltip": [
