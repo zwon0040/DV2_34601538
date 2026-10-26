@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "C4. Streamgraph of Malaysia's health spending by service, 2011 to 2024, in RM billion. Band thickness shows how much was spent; the stack is centred so each band's shape is easy to follow.",
-  "width": 600,
+  "width": 590,
   "height": 330,
   "data": {
     "url": "data/mnha_functions_2011_2024.csv",
@@ -129,10 +129,10 @@
               "Prevention"
             ],
             "range": [
-              "#E0CCA6",
-              "#C4A673",
-              "#A88A5C",
-              "#EFE3CC",
+              "#E8D9BC",
+              "#C29A5B",
+              "#7E5E36",
+              "#8C7B6B",
               "#6B4429",
               "#C0563A",
               "#1B3A4B"

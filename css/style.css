@@ -19,7 +19,7 @@
 
   /* Services (streamgraph): an earth-tone family used nowhere else, so services never share a colour with payers, totals or maps.
      Sand shades = background services; strong colours = the three services the story is about. */
-  --illness: #E0CCA6;      /* treating illness */
+  --illness: #E8D9BC;      /* treating illness */
   --medicines: #C0563A;    /* medicines and medical goods */
   --buildings: #6B4429;    /* buildings and equipment */
   --prevention: #1B3A4B;   /* prevention */
@@ -246,9 +246,10 @@ footer ul { padding-left: 1.1em; margin: 0 0 var(--s2); }
    and a short tick linking each text block to its chart (Gestalt continuity + connection). */
 .act .grid { position: relative; padding-left: 36px; }
 .act .grid::before { content: ""; position: absolute; left: 11px; top: 0; bottom: 0; width: 2px; background: var(--ink); opacity: 0.25; }
-.act .row .narrative { position: relative; }
-/* Each node is a medical cross: two 4px bars drawn as gradients, centred on the spine line. */
-.act .row .narrative::before { content: ""; position: absolute; left: -32px; top: 50%; width: 16px; height: 16px;
+.act .row { position: relative; }
+/* Each node is a medical cross: two 4px bars drawn as gradients, centred on the spine line
+   and level with the middle of the row, so it lines up with the middle of the chart. */
+.act .row::before { content: ""; position: absolute; left: -32px; top: 50%; width: 16px; height: 16px;
                                background:
                                  linear-gradient(var(--spine-node), var(--spine-node)) center / 4px 100% no-repeat,
                                  linear-gradient(var(--spine-node), var(--spine-node)) center / 100% 4px no-repeat;
@@ -256,7 +257,7 @@ footer ul { padding-left: 1.1em; margin: 0 0 var(--s2); }
 
 @media (max-width: 900px) {
   .act .grid { padding-left: 0; }
-  .act .grid::before, .act .row .narrative::before { display: none; }
+  .act .grid::before, .act .row::before { display: none; }
 }
 
 /* ---------- Line breaking: avoid a single orphan word on the last line ---------- */
@@ -266,7 +267,12 @@ h1, h2, h3 { text-wrap: balance; }
 /* ---------- Lead line of each text block (a question or a short claim) ----------
    19px regular weight in the darkest ink: one step above body text, below chart titles,
    with no extra bold, so the callout stays the only heavy element in the column. */
-.narrative .lead { font-size: 19px; line-height: 1.4; font-weight: 400; color: var(--ink); margin-bottom: var(--s1); }
+.narrative .lead { font-size: 20px; line-height: 1.35; font-weight: 600; color: var(--ink); margin-bottom: var(--s1); }
+/* The question that opens a block sits just above its answer: readable, but regular weight, so the bold answer still leads. */
+.narrative .q { font-size: 18px; line-height: 1.4; color: var(--ink-2); margin-bottom: 6px; }
 
 /* Closing line under the three takeaways: same size as a lead line, so the page ends on one clear sentence. */
 .closing-line { margin-top: var(--s4); font-size: 19px; line-height: 1.4; color: var(--ink); }
+
+/* Keep "COVID-19" on one line so it never breaks at the hyphen. */
+.nowrap { white-space: nowrap; }
