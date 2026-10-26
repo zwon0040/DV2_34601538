@@ -109,7 +109,8 @@
             "type": "circle",
             "opacity": 0.9,
             "stroke": "#FBE9EA",
-            "strokeWidth": 1.5
+            "strokeWidth": 1.5,
+            "cursor": "pointer"
           },
           "encoding": {
             "longitude": {
@@ -218,6 +219,27 @@
                 "value": 1
               },
               "value": 0.2
+            },
+            "stroke": {
+              "condition": {
+                "test": "focus_state != null && datum.state === focus_state",
+                "value": "#1F2933"
+              },
+              "value": "#FBE9EA"
+            },
+            "strokeWidth": {
+              "condition": {
+                "test": "focus_state != null && datum.state === focus_state",
+                "value": 3
+              },
+              "value": 1.5
+            },
+            "fillOpacity": {
+              "condition": {
+                "test": "focus_state == null || datum.state === focus_state",
+                "value": 1
+              },
+              "value": 0.3
             }
           },
           "params": [
@@ -299,6 +321,12 @@
           }
         }
       ]
+    }
+  ],
+  "params": [
+    {
+      "name": "focus_state",
+      "value": null
     }
   ]
 }

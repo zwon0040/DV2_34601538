@@ -103,6 +103,10 @@
       "views": [
         "map"
       ]
+    },
+    {
+      "name": "focus_state",
+      "value": null
     }
   ],
   "vconcat": [
@@ -123,7 +127,8 @@
           "mark": {
             "type": "geoshape",
             "stroke": "#FBE9EA",
-            "strokeWidth": 1
+            "strokeWidth": 1,
+            "cursor": "pointer"
           },
           "encoding": {
             "shape": {
@@ -195,6 +200,20 @@
                 "value": 1
               },
               "value": 0.2
+            },
+            "stroke": {
+              "condition": {
+                "test": "focus_state != null && datum.state === focus_state",
+                "value": "#1F2933"
+              },
+              "value": "#FBE9EA"
+            },
+            "strokeWidth": {
+              "condition": {
+                "test": "focus_state != null && datum.state === focus_state",
+                "value": 3
+              },
+              "value": 1
             }
           }
         },
@@ -346,19 +365,35 @@
               "field": "state"
             },
             "strokeWidth": {
-              "condition": {
-                "param": "pick",
-                "empty": false,
-                "value": 3.5
-              },
+              "condition": [
+                {
+                  "test": "focus_state != null && datum.state === focus_state",
+                  "value": 3.5
+                },
+                {
+                  "param": "pick",
+                  "empty": false,
+                  "value": 3.5
+                }
+              ],
               "value": 1.5
             },
             "opacity": {
-              "condition": {
-                "param": "pick",
-                "empty": false,
-                "value": 1
-              },
+              "condition": [
+                {
+                  "test": "focus_state != null && datum.state === focus_state",
+                  "value": 1
+                },
+                {
+                  "test": "focus_state != null",
+                  "value": 0.2
+                },
+                {
+                  "param": "pick",
+                  "empty": false,
+                  "value": 1
+                }
+              ],
               "value": 0.45
             }
           }

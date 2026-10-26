@@ -53,10 +53,36 @@ const charts = [
   ["#m4", "js/specs/m4_asean_priority.vl.json"]
 ];
 
+// The three Malaysia maps share one "focus state". Clicking a state on any of them
+// outlines that state on all three (and highlights its line in the staff chart).
+// Clicking the same state again, or empty space, clears it.
+const linkedMaps = ["#m1", "#m2", "#m3"];
+const linkedViews = [];
+let focusState = null;
+
+function stateOf(item) {
+  const d = item && item.datum;
+  if (!d) return null;
+  return d.state || (d.properties && d.properties.state) || null;
+}
+
+function setFocus(state) {
+  focusState = state;
+  for (const view of linkedViews) view.signal("focus_state", state).runAsync();
+}
+
 // Wait for the web fonts first, so Vega measures label widths with the real font.
 document.fonts.ready.then(() => {
   for (const [id, spec] of charts) {
     vegaEmbed(id, spec, { actions: false, renderer: "svg", config: theme })
+      .then((result) => {
+        if (!linkedMaps.includes(id)) return;
+        linkedViews.push(result.view);
+        result.view.addEventListener("click", (event, item) => {
+          const state = stateOf(item);
+          setFocus(state && state !== focusState && state !== "Malaysia" ? state : null);
+        });
+      })
       .catch((error) => console.error(id, error));
   }
 });
