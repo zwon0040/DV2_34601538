@@ -276,3 +276,9 @@ h1, h2, h3 { text-wrap: balance; }
 
 /* Keep "COVID-19" on one line so it never breaks at the hyphen. */
 .nowrap { white-space: nowrap; }
+
+/* One sentence that closes each Part. It sits after the story spine ends, starting at the spine's own edge
+   so it breaks out of the text column, and uses the heading typeface so readers notice it as the Part's takeaway. */
+.part-close { font-family: var(--font-head); font-size: 28px; line-height: 1.3; font-weight: 700; color: var(--ink);
+              max-width: 26ch; margin: var(--s6) 0 0; }
+@media (max-width: 900px) { .part-close { font-size: 23px; } }
