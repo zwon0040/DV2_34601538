@@ -1,555 +1,411 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "M3. Choropleth map of the change in public-sector health staff by state, 2014 to 2022, with a linked line chart (staff as a percentage of the 2014 level). Hover a state to highlight its line. 2020 values are marked with diamonds because several look disrupted.",
-  "data": {
-    "url": "data/healthcare_staff.csv",
-    "format": {
-      "type": "csv",
-      "parse": {
-        "staff": "number",
-        "date": "date"
-      }
-    }
+ "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+ "description": "M3. Choropleth map of the change in public-sector health staff by state, 2014 to 2022, with a linked line chart (staff as a percentage of the 2014 level). Hover a state to highlight its line. 2020 values are marked with diamonds because several look disrupted.",
+ "data": {
+  "url": "data/healthcare_staff.csv",
+  "format": {
+   "type": "csv",
+   "parse": {
+    "staff": "number",
+    "date": "date"
+   }
+  }
+ },
+ "transform": [
+  {
+   "filter": "datum.type === 'all' && datum.state !== 'Malaysia'"
   },
-  "transform": [
+  {
+   "calculate": "utcyear(datum.date)",
+   "as": "year"
+  },
+  {
+   "window": [
     {
-      "filter": "datum.type === 'all' && datum.state !== 'Malaysia'"
+     "op": "first_value",
+     "field": "staff",
+     "as": "first"
     },
     {
-      "calculate": "utcyear(datum.date)",
-      "as": "year"
-    },
-    {
-      "window": [
-        {
-          "op": "first_value",
-          "field": "staff",
-          "as": "first"
-        },
-        {
-          "op": "last_value",
-          "field": "staff",
-          "as": "last"
-        }
-      ],
-      "groupby": [
-        "state"
-      ],
-      "sort": [
-        {
-          "field": "year"
-        }
-      ],
-      "frame": [
-        null,
-        null
-      ]
-    },
-    {
-      "calculate": "datum.staff / datum.first * 100",
-      "as": "index"
-    },
-    {
-      "calculate": "datum.last / datum.first - 1",
-      "as": "growth"
-    },
-    {
-      "calculate": "datum.growth < 0 ? 'Fell' : datum.growth < 0.3 ? 'Up to 30%' : datum.growth < 0.5 ? '30 to 50%' : 'More than 50%'",
-      "as": "growth_class"
-    },
-    {
-      "calculate": "replace(datum.state, 'W.P. ', '')",
-      "as": "name"
-    },
-    {
-      "lookup": "state",
-      "from": {
-        "data": {
-          "url": "geo/malaysia_states.topojson",
-          "format": {
-            "type": "topojson",
-            "feature": "states"
-          }
-        },
-        "key": "properties.state"
-      },
-      "as": "geo"
+     "op": "last_value",
+     "field": "staff",
+     "as": "last"
     }
-  ],
-  "params": [
+   ],
+   "groupby": [
+    "state"
+   ],
+   "sort": [
     {
-      "name": "pick",
-      "select": {
-        "type": "point",
-        "fields": [
-          "state"
+     "field": "year"
+    }
+   ],
+   "frame": [
+    null,
+    null
+   ]
+  },
+  {
+   "calculate": "datum.staff / datum.first * 100",
+   "as": "index"
+  },
+  {
+   "calculate": "datum.last / datum.first - 1",
+   "as": "growth"
+  },
+  {
+   "calculate": "datum.growth < 0 ? 'Fell' : datum.growth < 0.3 ? 'Up to 30%' : datum.growth < 0.5 ? '30 to 50%' : 'More than 50%'",
+   "as": "growth_class"
+  },
+  {
+   "calculate": "replace(datum.state, 'W.P. ', '')",
+   "as": "name"
+  },
+  {
+   "lookup": "state",
+   "from": {
+    "data": {
+     "url": "geo/malaysia_states.topojson",
+     "format": {
+      "type": "topojson",
+      "feature": "states"
+     }
+    },
+    "key": "properties.state"
+   },
+   "as": "geo"
+  }
+ ],
+ "params": [
+  {
+   "name": "pick",
+   "select": {
+    "type": "point",
+    "fields": [
+     "state"
+    ],
+    "on": "pointerover",
+    "clear": "pointerout"
+   },
+   "views": [
+    "map"
+   ]
+  },
+  {
+   "name": "legend_pick",
+   "select": {
+    "type": "point",
+    "fields": [
+     "growth_class"
+    ]
+   },
+   "bind": "legend",
+   "views": [
+    "map"
+   ]
+  },
+  {
+   "name": "focus_state",
+   "value": null
+  }
+ ],
+ "vconcat": [
+  {
+   "width": 540,
+   "height": 255,
+   "projection": {
+    "type": "mercator"
+   },
+   "layer": [
+    {
+     "name": "map",
+     "transform": [
+      {
+       "filter": "datum.year === 2022"
+      }
+     ],
+     "mark": {
+      "type": "geoshape",
+      "stroke": "#E2EAD8",
+      "strokeWidth": 1,
+      "cursor": "pointer"
+     },
+     "encoding": {
+      "shape": {
+       "field": "geo",
+       "type": "geojson"
+      },
+      "color": {
+       "field": "growth_class",
+       "type": "ordinal",
+       "title": "Change in staff, 2014 to 2022",
+       "scale": {
+        "domain": [
+         "Fell",
+         "Up to 30%",
+         "30 to 50%",
+         "More than 50%"
         ],
-        "on": "pointerover",
-        "clear": "pointerout"
-      },
-      "views": [
-        "map"
-      ]
-    },
-    {
-      "name": "legend_pick",
-      "select": {
-        "type": "point",
-        "fields": [
-          "growth_class"
+        "range": [
+         "#7B8794",
+         "#C4B8E6",
+         "#9A88CC",
+         "#5E4FA2"
         ]
+       },
+       "legend": {
+        "orient": "none",
+        "legendX": 180,
+        "legendY": 0,
+        "symbolType": "square",
+        "symbolSize": 180
+       }
       },
-      "bind": "legend",
-      "views": [
-        "map"
-      ]
+      "opacity": {
+       "condition": {
+        "param": "pick",
+        "empty": true,
+        "value": 1
+       },
+       "value": 0.4
+      },
+      "tooltip": [
+       {
+        "field": "name",
+        "type": "nominal",
+        "title": "State"
+       },
+       {
+        "field": "first",
+        "type": "quantitative",
+        "title": "Staff in 2014",
+        "format": ","
+       },
+       {
+        "field": "last",
+        "type": "quantitative",
+        "title": "Staff in 2022",
+        "format": ","
+       },
+       {
+        "field": "growth",
+        "type": "quantitative",
+        "title": "Change",
+        "format": "+.0%"
+       }
+      ],
+      "fillOpacity": {
+       "condition": {
+        "param": "legend_pick",
+        "value": 1
+       },
+       "value": 0.2
+      },
+      "stroke": {
+       "condition": {
+        "test": "focus_state != null && datum.state === focus_state",
+        "value": "#1F2933"
+       },
+       "value": "#E2EAD8"
+      },
+      "strokeWidth": {
+       "condition": {
+        "test": "focus_state != null && datum.state === focus_state",
+        "value": 3
+       },
+       "value": 1
+      }
+     }
     },
     {
-      "name": "focus_state",
-      "value": null
-    }
-  ],
-  "vconcat": [
-    {
-      "width": 540,
-      "height": 255,
-      "projection": {
-        "type": "mercator"
+     "transform": [
+      {
+       "filter": "datum.year === 2022 && (datum.name === 'Kuala Lumpur' || datum.name === 'Putrajaya')"
       },
-      "layer": [
-        {
-          "name": "map",
-          "transform": [
-            {
-              "filter": "datum.year === 2022"
-            }
-          ],
-          "mark": {
-            "type": "geoshape",
-            "stroke": "#E2EAD8",
-            "strokeWidth": 1,
-            "cursor": "pointer"
-          },
-          "encoding": {
-            "shape": {
-              "field": "geo",
-              "type": "geojson"
-            },
-            "color": {
-              "field": "growth_class",
-              "type": "ordinal",
-              "title": "Change in staff, 2014 to 2022",
-              "scale": {
-                "domain": [
-                  "Fell",
-                  "Up to 30%",
-                  "30 to 50%",
-                  "More than 50%"
-                ],
-                "range": [
-                  "#7B8794",
-                  "#C4B8E6",
-                  "#9A88CC",
-                  "#5E4FA2"
-                ]
-              },
-              "legend": {
-                "orient": "none",
-                "legendX": 180,
-                "legendY": 0,
-                "symbolType": "square",
-                "symbolSize": 180
-              }
-            },
-            "opacity": {
-              "condition": {
-                "param": "pick",
-                "empty": true,
-                "value": 1
-              },
-              "value": 0.4
-            },
-            "tooltip": [
-              {
-                "field": "name",
-                "type": "nominal",
-                "title": "State"
-              },
-              {
-                "field": "first",
-                "type": "quantitative",
-                "title": "Staff in 2014",
-                "format": ","
-              },
-              {
-                "field": "last",
-                "type": "quantitative",
-                "title": "Staff in 2022",
-                "format": ","
-              },
-              {
-                "field": "growth",
-                "type": "quantitative",
-                "title": "Change",
-                "format": "+.0%"
-              }
-            ],
-            "fillOpacity": {
-              "condition": {
-                "param": "legend_pick",
-                "value": 1
-              },
-              "value": 0.2
-            },
-            "stroke": {
-              "condition": {
-                "test": "focus_state != null && datum.state === focus_state",
-                "value": "#1F2933"
-              },
-              "value": "#E2EAD8"
-            },
-            "strokeWidth": {
-              "condition": {
-                "test": "focus_state != null && datum.state === focus_state",
-                "value": 3
-              },
-              "value": 1
-            }
+      {
+       "lookup": "state",
+       "from": {
+        "data": {
+         "url": "geo/malaysia_state_label_points.csv",
+         "format": {
+          "type": "csv",
+          "parse": {
+           "longitude": "number",
+           "latitude": "number"
           }
+         }
         },
-        {
-          "transform": [
-            {
-              "filter": "datum.year === 2022 && (datum.name === 'Kuala Lumpur' || datum.name === 'Putrajaya')"
-            },
-            {
-              "lookup": "state",
-              "from": {
-                "data": {
-                  "url": "geo/malaysia_state_label_points.csv",
-                  "format": {
-                    "type": "csv",
-                    "parse": {
-                      "longitude": "number",
-                      "latitude": "number"
-                    }
-                  }
-                },
-                "key": "state",
-                "fields": [
-                  "longitude",
-                  "latitude"
-                ]
-              }
-            },
-            {
-              "calculate": "datum.name + ' ' + format(datum.growth, '+.0%')",
-              "as": "label"
-            }
-          ],
-          "layer": [
-            {
-              "mark": {
-                "type": "circle",
-                "size": 22,
-                "color": "#1F2933"
-              },
-              "encoding": {
-                "longitude": {
-                  "field": "longitude",
-                  "type": "quantitative"
-                },
-                "latitude": {
-                  "field": "latitude",
-                  "type": "quantitative"
-                }
-              }
-            },
-            {
-              "mark": {
-                "type": "text",
-                "align": "left",
-                "dx": 12,
-                "dy": -14,
-                "fontSize": 12,
-                "fontWeight": 600,
-                "color": "#1F2933"
-              },
-              "transform": [
-                {
-                  "filter": "datum.name === 'Kuala Lumpur'"
-                }
-              ],
-              "encoding": {
-                "longitude": {
-                  "field": "longitude",
-                  "type": "quantitative"
-                },
-                "latitude": {
-                  "field": "latitude",
-                  "type": "quantitative"
-                },
-                "text": {
-                  "field": "label"
-                }
-              }
-            },
-            {
-              "mark": {
-                "type": "text",
-                "align": "left",
-                "dx": 12,
-                "dy": 8,
-                "fontSize": 12,
-                "fontWeight": 600,
-                "color": "#1F2933"
-              },
-              "transform": [
-                {
-                  "filter": "datum.name === 'Putrajaya'"
-                }
-              ],
-              "encoding": {
-                "longitude": {
-                  "field": "longitude",
-                  "type": "quantitative"
-                },
-                "latitude": {
-                  "field": "latitude",
-                  "type": "quantitative"
-                },
-                "text": {
-                  "field": "label"
-                }
-              }
-            }
-          ]
+        "key": "state",
+        "fields": [
+         "longitude",
+         "latitude"
+        ]
+       }
+      },
+      {
+       "calculate": "datum.name + ' ' + format(datum.growth, '+.0%')",
+       "as": "label"
+      }
+     ],
+     "layer": [
+      {
+       "mark": {
+        "type": "circle",
+        "size": 22,
+        "color": "#1F2933"
+       },
+       "encoding": {
+        "longitude": {
+         "field": "longitude",
+         "type": "quantitative"
         },
-        {
-          "transform": [
-            {
-              "filter": "datum.year === 2022"
-            },
-            {
-              "filter": "focus_state != null && datum.state === focus_state"
-            },
-            {
-              "calculate": "[datum.name, 'Staff ' + format(datum.growth, '+.0%') + ' since 2014']",
-              "as": "focus_label"
-            },
-            {
-              "calculate": "max(length(datum.focus_label[0]), length(datum.focus_label[1])) * 6.4",
-              "as": "box_w"
-            },
-            {
-              "calculate": "'M' + (0 - 6) + ',-5 H' + (0 + datum.box_w + 6) + ' V40 H' + (0 - 6) + ' Z'",
-              "as": "box_path"
-            }
-          ],
-          "mark": {
-            "type": "point",
-            "filled": true,
-            "size": 4,
-            "fill": "#FFFFFF",
-            "fillOpacity": 0.95,
-            "stroke": "#BFCBB0",
-            "strokeWidth": 0.8
-          },
-          "encoding": {
-            "x": {
-              "value": 0
-            },
-            "y": {
-              "value": 0
-            },
-            "shape": {
-              "field": "box_path",
-              "type": "nominal",
-              "scale": null,
-              "legend": null
-            }
-          }
-        },
-        {
-          "transform": [
-            {
-              "filter": "datum.year === 2022"
-            },
-            {
-              "filter": "focus_state != null && datum.state === focus_state"
-            },
-            {
-              "calculate": "[datum.name, 'Staff ' + format(datum.growth, '+.0%') + ' since 2014']",
-              "as": "focus_label"
-            }
-          ],
-          "mark": {
-            "type": "text",
-            "align": "left",
-            "baseline": "top",
-            "fontSize": 13,
-            "fontWeight": 700,
-            "lineHeight": 17,
-            "color": "#1F2933"
-          },
-          "encoding": {
-            "x": {
-              "value": 0
-            },
-            "y": {
-              "value": 0
-            },
-            "text": {
-              "field": "focus_label"
-            }
-          }
+        "latitude": {
+         "field": "latitude",
+         "type": "quantitative"
         }
-      ]
+       }
+      },
+      {
+       "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 12,
+        "dy": -14,
+        "fontSize": 12,
+        "fontWeight": 600,
+        "color": "#1F2933"
+       },
+       "transform": [
+        {
+         "filter": "datum.name === 'Kuala Lumpur'"
+        }
+       ],
+       "encoding": {
+        "longitude": {
+         "field": "longitude",
+         "type": "quantitative"
+        },
+        "latitude": {
+         "field": "latitude",
+         "type": "quantitative"
+        },
+        "text": {
+         "field": "label"
+        }
+       }
+      },
+      {
+       "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 12,
+        "dy": 8,
+        "fontSize": 12,
+        "fontWeight": 600,
+        "color": "#1F2933"
+       },
+       "transform": [
+        {
+         "filter": "datum.name === 'Putrajaya'"
+        }
+       ],
+       "encoding": {
+        "longitude": {
+         "field": "longitude",
+         "type": "quantitative"
+        },
+        "latitude": {
+         "field": "latitude",
+         "type": "quantitative"
+        },
+        "text": {
+         "field": "label"
+        }
+       }
+      }
+     ]
     },
     {
-      "width": 540,
-      "height": 230,
-      "layer": [
-        {
-          "mark": {
-            "type": "line",
-            "color": "#5E4FA2"
-          },
-          "encoding": {
-            "x": {
-              "field": "year",
-              "type": "quantitative",
-              "title": null,
-              "axis": {
-                "format": "d",
-                "values": [
-                  2014,
-                  2016,
-                  2018,
-                  2020,
-                  2022
-                ],
-                "grid": false
-              }
-            },
-            "y": {
-              "field": "index",
-              "type": "quantitative",
-              "title": "% of 2014 level",
-              "scale": {
-                "zero": false
-              }
-            },
-            "detail": {
-              "field": "state"
-            },
-            "strokeWidth": {
-              "condition": [
-                {
-                  "test": "focus_state != null && datum.state === focus_state",
-                  "value": 3.5
-                },
-                {
-                  "param": "pick",
-                  "empty": false,
-                  "value": 3.5
-                }
-              ],
-              "value": 1.5
-            },
-            "opacity": {
-              "condition": [
-                {
-                  "test": "focus_state != null && datum.state === focus_state",
-                  "value": 1
-                },
-                {
-                  "test": "focus_state != null",
-                  "value": 0.2
-                },
-                {
-                  "param": "pick",
-                  "empty": false,
-                  "value": 1
-                }
-              ],
-              "value": 0.45
-            }
-          }
-        },
-        {
-          "transform": [
-            {
-              "filter": "datum.year === 2020"
-            }
-          ],
-          "mark": {
-            "type": "point",
-            "shape": "diamond",
-            "size": 90,
-            "filled": true,
-            "fill": "#E2EAD8",
-            "stroke": "#1F2933",
-            "strokeWidth": 1.5
-          },
-          "encoding": {
-            "x": {
-              "field": "year",
-              "type": "quantitative"
-            },
-            "y": {
-              "field": "index",
-              "type": "quantitative"
-            },
-            "tooltip": [
-              {
-                "field": "name",
-                "type": "nominal",
-                "title": "State"
-              },
-              {
-                "field": "staff",
-                "type": "quantitative",
-                "title": "Staff in 2020 (use with care)",
-                "format": ","
-              }
-            ]
-          }
-        },
-        {
-          "transform": [
-            {
-              "filter": "datum.year === 2020 && (datum.name === 'Perlis' || datum.name === 'Perak')"
-            },
-            {
-              "calculate": "datum.name + (datum.name === 'Perlis' ? ': 1,994 \u2192 10,665' : ': 11,995 \u2192 6,566')",
-              "as": "lab"
-            }
-          ],
-          "mark": {
-            "type": "text",
-            "align": "left",
-            "dx": 9,
-            "fontSize": 12,
-            "fontWeight": 600,
-            "color": "#1F2933"
-          },
-          "encoding": {
-            "x": {
-              "field": "year",
-              "type": "quantitative"
-            },
-            "y": {
-              "field": "index",
-              "type": "quantitative"
-            },
-            "text": {
-              "field": "lab"
-            }
-          }
-        }
-      ]
+     "transform": [
+      {
+       "filter": "datum.year === 2022"
+      },
+      {
+       "filter": "focus_state != null && datum.state === focus_state"
+      },
+      {
+       "calculate": "[datum.name, 'Staff ' + format(datum.growth, '+.0%') + ' since 2014']",
+       "as": "focus_label"
+      },
+      {
+       "calculate": "max(length(datum.focus_label[0]), length(datum.focus_label[1])) * 6.4",
+       "as": "box_w"
+      },
+      {
+       "calculate": "'M' + (0 - 6) + ',-5 H' + (0 + datum.box_w + 6) + ' V40 H' + (0 - 6) + ' Z'",
+       "as": "box_path"
+      }
+     ],
+     "mark": {
+      "type": "point",
+      "filled": true,
+      "size": 4,
+      "fill": "#FFFFFF",
+      "fillOpacity": 0.95,
+      "stroke": "#BFCBB0",
+      "strokeWidth": 0.8
+     },
+     "encoding": {
+      "x": {
+       "value": 0
+      },
+      "y": {
+       "value": 0
+      },
+      "shape": {
+       "field": "box_path",
+       "type": "nominal",
+       "scale": null,
+       "legend": null
+      }
+     }
+    },
+    {
+     "transform": [
+      {
+       "filter": "datum.year === 2022"
+      },
+      {
+       "filter": "focus_state != null && datum.state === focus_state"
+      },
+      {
+       "calculate": "[datum.name, 'Staff ' + format(datum.growth, '+.0%') + ' since 2014']",
+       "as": "focus_label"
+      }
+     ],
+     "mark": {
+      "type": "text",
+      "align": "left",
+      "baseline": "top",
+      "fontSize": 13,
+      "fontWeight": 700,
+      "lineHeight": 17,
+      "color": "#1F2933"
+     },
+     "encoding": {
+      "x": {
+       "value": 0
+      },
+      "y": {
+       "value": 0
+      },
+      "text": {
+       "field": "focus_label"
+      }
+     }
     }
-  ],
-  "spacing": 24
+   ]
+  }
+ ],
+ "spacing": 24
 }

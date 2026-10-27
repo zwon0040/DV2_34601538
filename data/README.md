@@ -50,7 +50,7 @@ Blank cells mean "n/a" in the report (for example rehabilitative care 2013–202
 
 1. **State spending is counted where the hospital is, not where patients live** (report section 4.3). Kuala Lumpur and Putrajaya look high because people from nearby states use their hospitals. The m1 caption says so.
 2. **"hospital_non_moh" beds are other government hospitals** (university and military), not private hospitals. Private beds are not in the dataset, so m2 is labelled "public hospital beds".
-3. **Staff figures for 2020 look broken for several states** (for example Perak nurses drop, then Perlis jumps). The staff chart marks 2020 and uses 2014 and 2022 for the map.
+3. **Staff figures for 2020 look broken for several states** (for example Perak nurses drop, then Perlis jumps). The staff map therefore compares only 2014 and 2022.
 4. **MOH programme names change between years.** In 2021 some hospital support costs moved to the development budget, so 2021 operating figures are lower. c10 groups small programmes and says so in its caption.
 5. **Two different "totals" exist.** The National Health Accounts total includes buildings and training. The World Bank "current health expenditure" leaves those out. The World Bank file is used only to compare countries (m4); everything about Malaysia comes from the National Health Accounts.
 6. `population_state_2022.csv` is 2022 only, to match the 2022 bed counts. The 2024 per-person figures use the population column in `mnha_state_2024.csv`.

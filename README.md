@@ -37,7 +37,7 @@ The page ends with three takeaways: care keeps costing more, the government's sh
 | c10 | c10_programme_shift | diverging bar chart | change in each programme's share of the budget, 2020 to 2025 |
 | m1 | m1_state_spending | Dorling cartogram | spending per person (colour) and population (circle area) by state, 2024 |
 | m2 | m2_beds_symbols | graduated symbol map | public hospital beds (size) and beds per 10,000 people (colour), 2022 |
-| m3 | m3_staff_map | choropleth + linked line chart | change in public health staff by state, 2014 to 2022 |
+| m3 | m3_staff_map | choropleth map | change in public health staff by state, 2014 to 2022 |
 | m4 | m4_asean_priority | choropleth + year slider + linked line chart | health's share of government spending in ASEAN, 2000 to 2023 |
 
 ## Interaction
@@ -107,7 +107,7 @@ tools/*.py            scripts that build the data and the cartogram positions
 
 - State spending is counted where the hospital is, not where patients live, so Kuala Lumpur and Putrajaya look high.
 - Hospital beds are public-sector only; private hospitals are not in the dataset.
-- Staff figures for 2020 look disrupted for several states and are marked on the staff chart.
+- Staff figures for 2020 look disrupted for several states, so the staff map compares only 2014 and 2022.
 - Ministry programme names changed between years, and in 2021 some hospital costs moved to the development budget.
   The programme-share chart (c10) groups the small programmes and says so in its caption.
 
