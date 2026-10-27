@@ -266,50 +266,10 @@
               }
             },
             {
-              "transform": [
-                {
-                  "filter": "datum.name === 'Kuala Lumpur'"
-                },
-                {
-                  "calculate": "length(datum.label) * 5.4",
-                  "as": "box_w"
-                },
-                {
-                  "calculate": "'M' + (34 - 6) + ',-25 H' + (34 + datum.box_w + 6) + ' V-3 H' + (34 - 6) + ' Z'",
-                  "as": "box_path"
-                }
-              ],
-              "mark": {
-                "type": "point",
-                "filled": true,
-                "size": 4,
-                "fill": "#FFFFFF",
-                "fillOpacity": 0.95,
-                "stroke": "#BFCBB0",
-                "strokeWidth": 0.8
-              },
-              "encoding": {
-                "longitude": {
-                  "field": "longitude",
-                  "type": "quantitative"
-                },
-                "latitude": {
-                  "field": "latitude",
-                  "type": "quantitative"
-                },
-                "shape": {
-                  "field": "box_path",
-                  "type": "nominal",
-                  "scale": null,
-                  "legend": null
-                }
-              }
-            },
-            {
               "mark": {
                 "type": "text",
                 "align": "left",
-                "dx": 34,
+                "dx": 12,
                 "dy": -14,
                 "fontSize": 12,
                 "fontWeight": 600,
@@ -335,50 +295,10 @@
               }
             },
             {
-              "transform": [
-                {
-                  "filter": "datum.name === 'Putrajaya'"
-                },
-                {
-                  "calculate": "length(datum.label) * 5.4",
-                  "as": "box_w"
-                },
-                {
-                  "calculate": "'M' + (34 - 6) + ',-3 H' + (34 + datum.box_w + 6) + ' V19 H' + (34 - 6) + ' Z'",
-                  "as": "box_path"
-                }
-              ],
-              "mark": {
-                "type": "point",
-                "filled": true,
-                "size": 4,
-                "fill": "#FFFFFF",
-                "fillOpacity": 0.95,
-                "stroke": "#BFCBB0",
-                "strokeWidth": 0.8
-              },
-              "encoding": {
-                "longitude": {
-                  "field": "longitude",
-                  "type": "quantitative"
-                },
-                "latitude": {
-                  "field": "latitude",
-                  "type": "quantitative"
-                },
-                "shape": {
-                  "field": "box_path",
-                  "type": "nominal",
-                  "scale": null,
-                  "legend": null
-                }
-              }
-            },
-            {
               "mark": {
                 "type": "text",
                 "align": "left",
-                "dx": 34,
+                "dx": 12,
                 "dy": 8,
                 "fontSize": 12,
                 "fontWeight": 600,
