@@ -192,8 +192,8 @@ pv, pvp = table(prov, TEH, pct=provp)
 pb, _ = table(provpub, PUB)
 pbd = {k[0]: v for k, v in pb.items()}
 short = {'MHP.1': 'Hospitals', 'MHP.2': 'Nursing homes', 'MHP.3': 'Clinics', 'MHP.4': 'Labs, imaging, ambulance',
-         'MHP.5': 'Pharmacies and medical shops', 'MHP.6': 'Public health programmes', 'MHP.7': 'Administration and insurers',
-         'MHP.8': 'Other industries', 'MHP.9': 'Overseas providers'}
+         'MHP.5': 'Pharmacies and medical shops', 'MHP.6': 'Public health programmes', 'MHP.7': 'Running the system and insurance',
+         'MHP.8': 'Other organisations', 'MHP.9': 'Overseas providers'}
 rows = []
 for (code, name), vals in pv.items():
     for i, y in enumerate(Y):
