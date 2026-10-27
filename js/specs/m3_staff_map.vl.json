@@ -126,7 +126,7 @@
           ],
           "mark": {
             "type": "geoshape",
-            "stroke": "#FBE9EA",
+            "stroke": "#E2EAD8",
             "strokeWidth": 1,
             "cursor": "pointer"
           },
@@ -206,7 +206,7 @@
                 "test": "focus_state != null && datum.state === focus_state",
                 "value": "#1F2933"
               },
-              "value": "#FBE9EA"
+              "value": "#E2EAD8"
             },
             "strokeWidth": {
               "condition": {
@@ -285,7 +285,7 @@
                 "size": 4,
                 "fill": "#FFFFFF",
                 "fillOpacity": 0.95,
-                "stroke": "#CDB8B6",
+                "stroke": "#BFCBB0",
                 "strokeWidth": 0.8
               },
               "encoding": {
@@ -354,7 +354,7 @@
                 "size": 4,
                 "fill": "#FFFFFF",
                 "fillOpacity": 0.95,
-                "stroke": "#CDB8B6",
+                "stroke": "#BFCBB0",
                 "strokeWidth": 0.8
               },
               "encoding": {
@@ -432,7 +432,7 @@
             "size": 4,
             "fill": "#FFFFFF",
             "fillOpacity": 0.95,
-            "stroke": "#CDB8B6",
+            "stroke": "#BFCBB0",
             "strokeWidth": 0.8
           },
           "encoding": {
@@ -568,7 +568,7 @@
             "shape": "diamond",
             "size": 90,
             "filled": true,
-            "fill": "#FBE9EA",
+            "fill": "#E2EAD8",
             "stroke": "#1F2933",
             "strokeWidth": 1.5
           },

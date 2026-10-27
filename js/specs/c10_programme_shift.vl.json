@@ -1,0 +1,265 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "C10. Diverging bar chart: change in each Ministry of Health programme's share of the operating budget, 2020 to 2025. Blue bars rose, grey bars fell.",
+  "width": 420,
+  "height": 280,
+  "data": {
+    "url": "data/moh_programme_budget_2020_2025.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "year": "number",
+        "allocation_rm": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.year === 2020 || datum.year === 2025"
+    },
+    {
+      "calculate": "indexof(['Oral Health','Pharmaceutical Services','Research and Technical Support','Food Safety and Quality'], datum.group) >= 0 ? 'Four small programmes' : datum.group === 'Other (special, new policy, commitments)' ? 'Special and new items' : datum.group",
+      "as": "pgroup"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "sum",
+          "field": "allocation_rm",
+          "as": "alloc"
+        }
+      ],
+      "groupby": [
+        "pgroup",
+        "year"
+      ]
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "sum",
+          "field": "alloc",
+          "as": "total"
+        }
+      ],
+      "groupby": [
+        "year"
+      ]
+    },
+    {
+      "calculate": "100 * datum.alloc / datum.total",
+      "as": "share"
+    },
+    {
+      "calculate": "'y' + datum.year",
+      "as": "yk"
+    },
+    {
+      "pivot": "yk",
+      "value": "share",
+      "groupby": [
+        "pgroup"
+      ]
+    },
+    {
+      "calculate": "datum.y2025 - datum.y2020",
+      "as": "change"
+    },
+    {
+      "calculate": "datum.pgroup",
+      "as": "name"
+    },
+    {
+      "calculate": "(datum.y2020 < 10 ? format(datum.y2020, '.1f') : format(datum.y2020, '.0f')) + '% to ' + (datum.y2025 < 10 ? format(datum.y2025, '.1f') : format(datum.y2025, '.0f')) + '%'",
+      "as": "label"
+    },
+    {
+      "calculate": "abs(datum.change) > 5",
+      "as": "big"
+    },
+    {
+      "calculate": "datum.change > 0 ? 'Share increased' : 'Share decreased'",
+      "as": "direction"
+    }
+  ],
+  "encoding": {
+    "y": {
+      "field": "name",
+      "type": "nominal",
+      "sort": [
+        "Special and new items",
+        "Medical",
+        "Public Health",
+        "Four small programmes",
+        "Management"
+      ],
+      "title": null,
+      "axis": {
+        "domain": false,
+        "ticks": false,
+        "labelFontSize": 12,
+        "labelPadding": 8,
+        "labelLimit": 260
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "height": 16,
+        "cornerRadiusEnd": 3
+      },
+      "encoding": {
+        "x": {
+          "field": "change",
+          "type": "quantitative",
+          "title": "Change in share of the budget, 2020 to 2025 (percentage points)",
+          "scale": {
+            "domain": [
+              -26,
+              26
+            ]
+          },
+          "axis": {
+            "values": [
+              -20,
+              -10,
+              0,
+              10,
+              20
+            ],
+            "format": "+d",
+            "tickCount": 5,
+            "grid": true
+          }
+        },
+        "color": {
+          "field": "direction",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": [
+              "Share increased",
+              "Share decreased"
+            ],
+            "range": [
+              "#3A5FCD",
+              "#7B8794"
+            ]
+          },
+          "legend": {
+            "orient": "top",
+            "direction": "horizontal",
+            "symbolType": "square",
+            "symbolSize": 140,
+            "labelFontSize": 12,
+            "padding": 6
+          }
+        },
+        "opacity": {
+          "condition": {
+            "param": "legend_pick",
+            "value": 1
+          },
+          "value": 0.2
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "type": "nominal",
+            "title": "Programme"
+          },
+          {
+            "field": "y2020",
+            "type": "quantitative",
+            "title": "Share in 2020 (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "y2025",
+            "type": "quantitative",
+            "title": "Share in 2025 (%)",
+            "format": ".1f"
+          }
+        ]
+      },
+      "params": [
+        {
+          "name": "legend_pick",
+          "select": {
+            "type": "point",
+            "fields": [
+              "direction"
+            ]
+          },
+          "bind": "legend"
+        }
+      ]
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.change < 0"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -6,
+        "fontSize": 12,
+        "color": "#3E4C59"
+      },
+      "encoding": {
+        "x": {
+          "field": "change",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.change >= 0"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 6,
+        "fontSize": 12,
+        "color": "#3E4C59"
+      },
+      "encoding": {
+        "x": {
+          "field": "change",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#1F2933"
+      },
+      "encoding": {
+        "x": {
+          "datum": 0,
+          "type": "quantitative"
+        }
+      }
+    }
+  ],
+  "padding": {
+    "left": 10,
+    "right": 10,
+    "top": 5,
+    "bottom": 5
+  }
+}

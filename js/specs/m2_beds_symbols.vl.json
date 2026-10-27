@@ -18,7 +18,7 @@
       "mark": {
         "type": "geoshape",
         "fill": "#CAD6E2",
-        "stroke": "#FBE9EA",
+        "stroke": "#E2EAD8",
         "strokeWidth": 1
       }
     },
@@ -108,7 +108,7 @@
           "mark": {
             "type": "circle",
             "opacity": 0.9,
-            "stroke": "#FBE9EA",
+            "stroke": "#E2EAD8",
             "strokeWidth": 1.5,
             "cursor": "pointer"
           },
@@ -147,7 +147,7 @@
                 "direction": "horizontal",
                 "symbolFillColor": "#9AA5B1",
                 "symbolOpacity": 0.85,
-                "symbolStrokeColor": "#FBE9EA",
+                "symbolStrokeColor": "#E2EAD8",
                 "titleFontSize": 11,
                 "labelFontSize": 11,
                 "rowPadding": 2,
@@ -225,7 +225,7 @@
                 "test": "focus_state != null && datum.state === focus_state",
                 "value": "#1F2933"
               },
-              "value": "#FBE9EA"
+              "value": "#E2EAD8"
             },
             "strokeWidth": {
               "condition": {
@@ -279,7 +279,7 @@
             "size": 4,
             "fill": "#FFFFFF",
             "fillOpacity": 0.95,
-            "stroke": "#CDB8B6",
+            "stroke": "#BFCBB0",
             "strokeWidth": 0.8
           },
           "encoding": {
@@ -355,7 +355,7 @@
             "size": 4,
             "fill": "#FFFFFF",
             "fillOpacity": 0.95,
-            "stroke": "#CDB8B6",
+            "stroke": "#BFCBB0",
             "strokeWidth": 0.8
           },
           "encoding": {
@@ -432,7 +432,7 @@
             "size": 4,
             "fill": "#FFFFFF",
             "fillOpacity": 0.95,
-            "stroke": "#CDB8B6",
+            "stroke": "#BFCBB0",
             "strokeWidth": 0.8
           },
           "encoding": {

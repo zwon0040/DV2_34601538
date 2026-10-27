@@ -4,10 +4,10 @@
   --ink: #1F2933;          /* headings, key numbers */
   --ink-2: #3E4C59;        /* body text */
   --muted: #52606D;        /* captions, axis-style text */
-  --rule: #CDB8B6;         /* thin dividers (a darker rose so they show on the cards) */
-  --page: #F0EEE9;         /* page background: warm off-white */
-  --card: #FBE9EA;         /* chart cards: light pink */
-  --spine-node: #820007;   /* story spine crosses: deep red */
+  --rule: #BFCBB0;         /* thin dividers (a darker sage so they show on the cards) */
+  --page: #F4F3EC;         /* page background: warm cream */
+  --card: #E2EAD8;         /* chart cards: pale sage */
+  --spine-node: #3F5D2C;   /* story spine crosses: deep green */
 
   /* Data colours: one colour = one meaning on every chart */
   --total: #3A5FCD;        /* total health spending (all payers) */
@@ -25,7 +25,8 @@
   --prevention: #1B3A4B;   /* prevention */
 
   /* Type */
-  --font-head: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-head: "Plus Jakarta Sans", system-ui, sans-serif;   /* small labels */
+  --font-display: "Archivo", "Plus Jakarta Sans", system-ui, sans-serif;   /* titles and big numbers */
   --font-body: "Source Sans 3", system-ui, sans-serif;
 
   /* Spacing scale (multiples of 8px) */
@@ -45,10 +46,10 @@ body {
   font-variant-numeric: tabular-nums;
   text-align: left;              /* never centred paragraphs */
 }
-h1, h2, h3 { font-family: var(--font-head); color: var(--ink); margin: 0; }
-h1 { font-size: 48px; line-height: 1.1; font-weight: 800; letter-spacing: -0.02em; }
-h2 { font-size: 30px; line-height: 1.2; font-weight: 700; letter-spacing: -0.01em; }
-h3 { font-size: 19px; line-height: 1.35; font-weight: 700; }
+h1, h2, h3 { font-family: var(--font-display); font-optical-sizing: auto; color: var(--ink); margin: 0; }
+h1 { font-size: clamp(38px, 4.6vw, 64px); line-height: 1.08; font-weight: 800; letter-spacing: -0.03em; }
+h2 { font-size: 32px; line-height: 1.2; font-weight: 700; letter-spacing: -0.015em; }
+h3 { font-size: 20px; line-height: 1.3; font-weight: 700; }
 p { margin: 0 0 var(--s2); max-width: 37ch; }   /* keeps lines to 10 words or fewer */
 strong { color: var(--ink); font-weight: 700; }
 a { color: var(--total); }
@@ -79,17 +80,17 @@ a { color: var(--total); }
 
 /* ---------- 4. Header ---------- */
 .masthead { padding: var(--s12) 0 var(--s6); border-bottom: 1px solid var(--rule); }
-.masthead h1 { max-width: 14em; margin-bottom: var(--s3); }
+.masthead h1 { max-width: 12em; margin-bottom: var(--s3); }
 .masthead-grid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--s4); align-items: center; }
 .masthead-text { grid-column: 1 / span 7; }
-.dek { font-size: 21px; line-height: 1.5; color: var(--ink-2); max-width: 40ch; }
+.dek { font-size: 24px; line-height: 1.5; color: var(--ink-2); max-width: 40ch; }
 .byline { font-size: 14px; color: var(--muted); margin-top: var(--s3); max-width: 44ch; }
 
 .kpis { grid-column: 9 / span 4; display: grid; grid-template-columns: 1fr; gap: var(--s3); }   /* KPIs stacked on the right */
-.kpi { border-top: 3px solid var(--total); padding-top: var(--s2); }
+.kpi { background: var(--card); border: 1px solid var(--rule); border-radius: 8px; border-top: 4px solid var(--total); padding: var(--s3) var(--s3); }   /* boxed like the chart cards */
 .kpi.households { border-top-color: var(--households); }
-.kpi-value { font-family: var(--font-head); font-size: 36px; font-weight: 800; color: var(--ink); line-height: 1.1; font-variant-numeric: proportional-nums; }
-.kpi-label { font-size: 15px; color: var(--muted); margin-top: var(--s1); max-width: 18em; }
+.kpi-value { font-family: var(--font-display); font-size: 36px; font-weight: 800; color: var(--ink); line-height: 1.1; font-variant-numeric: proportional-nums; }
+.kpi-label { font-size: 15px; color: var(--ink-2); margin-top: var(--s1); max-width: 18em; }
 
 /* ---------- 5. Acts (story sections) ---------- */
 .act { padding: var(--s12) 0 0; }
@@ -142,7 +143,7 @@ a { color: var(--total); }
 .stat.households { border-top-color: var(--households); }
 .stat.prevention { border-top-color: var(--prevention); }
 .stat.ink { border-top-color: var(--ink); }
-.stat-value { display: block; font-family: var(--font-head); font-size: 40px; font-weight: 800; line-height: 1.1; color: var(--ink); font-variant-numeric: proportional-nums; }
+.stat-value { display: block; font-family: var(--font-display); font-size: 40px; font-weight: 800; line-height: 1.1; color: var(--ink); font-variant-numeric: proportional-nums; }
 .stat-label { display: block; margin-top: var(--s1); font-size: 15px; color: var(--muted); max-width: 22ch; line-height: 1.4; }
 
 /* ---------- 8. Notes: glossary and data caution ---------- */
@@ -167,13 +168,13 @@ details.glossary dd { margin: 0 0 var(--s2); max-width: 40ch; }
 
 /* ---------- 9. Closing and footer ---------- */
 .takeaways { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s4); }
-.takeaways li { border-top: 3px solid var(--ink); padding-top: var(--s2); }
+.takeaways li { background: var(--card); border: 1px solid var(--rule); border-radius: 8px; border-top: 4px solid var(--ink); padding: var(--s3) var(--s3); }   /* boxed like the chart cards */
 .takeaways h3 { margin-bottom: var(--s1); }
 .takeaways p { font-size: 17px; }
 
 footer .grid { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--s4); }
 footer { margin-top: var(--s12); padding: var(--s6) 0 var(--s9); border-top: 1px solid var(--rule); font-size: 14px; color: var(--muted); }
-footer h3 { font-size: 15px; margin-bottom: var(--s1); }
+footer h3 { font-family: var(--font-head); font-size: 15px; margin-bottom: var(--s1); }
 footer p, footer li { max-width: 42ch; }
 footer ul { padding-left: 1.1em; margin: 0 0 var(--s2); }
 
@@ -190,14 +191,14 @@ footer ul { padding-left: 1.1em; margin: 0 0 var(--s2); }
   .kpis, .takeaways { grid-template-columns: 1fr; }
   .masthead-text, .kpis { grid-column: 1 / -1; }
   .kpis { margin-top: var(--s6); }
-  h1 { font-size: 36px; }
+  h1 { font-size: 40px; }
   .vis { overflow-x: auto; }
 }
 
 /* ================= v2.0 layout: chapter bands, hero charts, pairs ================= */
 /* Chapter band: big Part number + title + one headline figure. Band colour = the Part's main attribute colour. */
 .chapter { display: flex; align-items: center; gap: var(--s4); padding: var(--s4) var(--s4); border-radius: 12px; color: #FFFFFF; margin-bottom: var(--s6); }
-.chapter-num { font-family: var(--font-head); font-size: 72px; font-weight: 800; line-height: 1; opacity: 0.9; font-variant-numeric: proportional-nums; }
+.chapter-num { font-family: var(--font-display); font-size: 72px; font-weight: 800; line-height: 1; opacity: 0.9; font-variant-numeric: proportional-nums; }
 .chapter h2 { color: inherit; margin: 0 0 4px; }
 .chapter-kicker { font-family: var(--font-head); font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 4px; opacity: 0.85; }
 .chapter-sub { margin: 0; font-size: 18px; opacity: 0.95; max-width: 46ch; }
@@ -220,7 +221,7 @@ footer ul { padding-left: 1.1em; margin: 0 0 var(--s2); }
 
 /* Pull quote between sections */
 .pull { margin: 0; padding: var(--s3) var(--s4); border-left: 6px solid var(--households); background: rgba(255,255,255,0.45); border-radius: 0 12px 12px 0;
-        font-family: var(--font-head); font-size: 26px; font-weight: 700; line-height: 1.35; color: var(--ink); max-width: 30em; }
+        font-family: var(--font-display); font-size: 26px; font-weight: 700; line-height: 1.35; color: var(--ink); max-width: 30em; }
 
 @media (max-width: 900px) {
   .hero-text, .pair { grid-template-columns: 1fr; }
@@ -271,15 +272,13 @@ h1, h2, h3 { text-wrap: balance; }
 /* The question that opens a block sits just above its answer: readable, but regular weight, so the bold answer still leads. */
 .narrative .q { font-size: 18px; line-height: 1.4; color: var(--ink-2); margin-bottom: 6px; }
 
-/* Closing line under the three takeaways: same size as a lead line, so the page ends on one clear sentence. */
-.closing-line { margin-top: var(--s4); font-size: 19px; line-height: 1.4; color: var(--ink); }
 
 /* Keep "COVID-19" on one line so it never breaks at the hyphen. */
 .nowrap { white-space: nowrap; }
 
 /* One sentence that closes each Part. It sits after the story spine ends, starting at the spine's own edge
    so it breaks out of the text column, and uses the heading typeface so readers notice it as the Part's takeaway. */
-.part-close { font-family: var(--font-head); font-size: 28px; line-height: 1.3; font-weight: 700; color: var(--ink);
+.part-close { font-family: var(--font-display); font-size: 28px; line-height: 1.3; font-weight: 700; color: var(--ink);
               max-width: 26ch; margin: var(--s6) 0 0; }
 @media (max-width: 900px) { .part-close { font-size: 23px; } }
 

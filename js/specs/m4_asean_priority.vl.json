@@ -51,7 +51,7 @@
           "mark": {
             "type": "geoshape",
             "fill": "#CAD6E2",
-            "stroke": "#FBE9EA",
+            "stroke": "#E2EAD8",
             "strokeWidth": 0.8
           }
         },
@@ -81,7 +81,7 @@
           ],
           "mark": {
             "type": "geoshape",
-            "stroke": "#FBE9EA",
+            "stroke": "#E2EAD8",
             "strokeWidth": 0.8
           },
           "encoding": {
@@ -121,7 +121,7 @@
               "value": 0.8
             },
             "stroke": {
-              "value": "#FBE9EA"
+              "value": "#E2EAD8"
             },
             "tooltip": [
               {

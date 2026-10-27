@@ -5,7 +5,7 @@
 // so each spec file only describes its data and encodings.
 
 const theme = {
-  background: "#FBE9EA",
+  background: "#E2EAD8",
   font: "'Source Sans 3', sans-serif",
   padding: 4,
   view: { stroke: null },
@@ -19,7 +19,7 @@ const theme = {
     titleColor: "#52606D",
     domainColor: "#CBD2D9",
     tickColor: "#CBD2D9",
-    gridColor: "#D9C6C4"
+    gridColor: "#BFCBB0"
   },
   legend: {
     labelFont: "'Source Sans 3', sans-serif",
@@ -47,6 +47,7 @@ const charts = [
   ["#c7", "js/specs/c7_bullet_programmes.vl.json"],
   ["#c8", "js/specs/c8_waterfall_real_spending.vl.json"],
   ["#c9", "js/specs/c9_budget_types.vl.json"],
+  ["#c10", "js/specs/c10_programme_shift.vl.json"],
   ["#m1", "js/specs/m1_state_spending.vl.json"],
   ["#m2", "js/specs/m2_beds_symbols.vl.json"],
   ["#m3", "js/specs/m3_staff_map.vl.json"],
