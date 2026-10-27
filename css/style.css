@@ -19,6 +19,13 @@
 
   /* Services (streamgraph): an earth-tone family used nowhere else, so services never share a colour with payers, totals or maps.
      Sand shades = background services; strong colours = the three services the story is about. */
+  /* Part colours: decorative only (title blocks and the line above each callout). Dark earthy tones that sit with the sage cards, kept apart from the data colours. */
+  --part1: #3B4D2F;        /* olive green */
+  --part2: #6B4A3A;        /* clay brown */
+  --part3: #5E5430;        /* dark olive-gold */
+  --part4: #2F4A47;        /* deep slate teal */
+  --part5: #4B3E36;        /* dark taupe */
+
   --illness: #E8D9BC;      /* treating illness */
   --medicines: #C0563A;    /* medicines and medical goods */
   --buildings: #6B4429;    /* buildings and equipment */
@@ -292,3 +299,19 @@ h1, h2, h3 { text-wrap: balance; }
 
 /* Charts scale with their card on wide screens (see main.js), keeping their proportions. */
 .vis svg { display: block; height: auto; }
+
+
+/* ================= v2.2: earthy Part colours ================= */
+/* One earthy colour per Part colours its title block and the line above every callout in it.
+   The lines no longer encode what the callout is about, so the page uses far fewer colours. */
+.chapter { background: var(--part-colour, var(--part1)) !important; }
+.chapter::before { display: none; }
+#act1 { --part-colour: var(--part1); }
+#act2 { --part-colour: var(--part2); }
+#act3 { --part-colour: var(--part3); }
+#act4 { --part-colour: var(--part4); }
+#act5 { --part-colour: var(--part5); }
+#act1 .chapter, #act2 .chapter, #act3 .chapter, #act4 .chapter, #act5 .chapter { background: var(--part-colour) !important; }
+.act .stat, .act .stat.total, .act .stat.moh, .act .stat.households, .act .stat.prevention, .act .stat.ink { border-top-color: var(--part-colour); }
+.kpi, .kpi.households, .takeaways li { border-top-color: var(--part1); }
+.stat-value.long { font-size: 32px; }   /* one line for longer callout numbers */
